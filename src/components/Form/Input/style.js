@@ -7,23 +7,27 @@ export const InputContainer = styled.div`
 
   input:focus + label, input:valid + label {
     top: -10px;
-    font-size: 11px;
+    left: 0px;
+    font-size: 14px;
     color: #44CF6C;
+    font-weight: bold;
   }
 `;
 
 export const Input = styled.input`
-  border: 1px solid #ddd;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid #ddd;
   width: 300px;
   height: 50px;
-  border-radius: 5px;
   position: absolute;
   transition: .1s;
   outline: none;
-  padding: 0 16px;
+  padding: 0px 5px;
+  padding-top: 10px;
 
   &:focus {
-    border: 2px solid #44CF6C;
+    border-bottom: 2px solid #44CF6C;
   }
 `
 
@@ -31,10 +35,10 @@ export const Label = styled.label`
   z-index: 10;
   position: absolute;
   top: 12px;
-  left: 13px;
-  background-color: #fff;
+  background-color: transparent;
   padding: 5px;
-  left: 13px;
+  padding-bottom: 5px;
+  left: 0px;
   font-size: 15px;
   color: #aaa;
   pointer-events: none;

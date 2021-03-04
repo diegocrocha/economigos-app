@@ -36,6 +36,7 @@ export default createGlobalStyle`
         height: 100%;
     }
 
+
     img {
         display: block;
         /* max-width: 100%; */
@@ -51,4 +52,13 @@ export default createGlobalStyle`
         margin: 0 auto;
         padding-bottom: 5rem;
     }
+
+    .select:after {
+      content: "";
+      display: block;
+      width: 100%;
+      background-color: #44CF6C;
+      height: 2px;
+    }
+
 `;

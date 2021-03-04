@@ -6,13 +6,12 @@ export const ButtonMain = styled.button`
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   padding: .35rem 1.2rem;
-  border-radius: 20px;
-  border: #44CF6C solid 3.5px;
+  border-radius: 7px;
+  border: #F1FFE7 solid 2px;
   font-size: 1.3rem;
   min-width: 7rem;
   cursor: pointer;
-  text-shadow: black 3px 3px 5px;
-  box-shadow: black 2px 2px 4px;
+  text-shadow: black 0px 0px 3px;
   outline: none;
   transition: 0.1s;
 
