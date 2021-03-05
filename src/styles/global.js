@@ -10,7 +10,7 @@ export default createGlobalStyle`
     }
     body {
       font-family: 'Poppins', sans-serif;
-        background-color: #F1FFE7;
+        background-color: #312F2F;
         color: #312F2F;
     }
   ::-webkit-scrollbar {

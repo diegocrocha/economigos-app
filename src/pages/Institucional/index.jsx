@@ -14,6 +14,12 @@ function Institucional() {
         <S.TextHome>A facilidade, organização e melhora financeira que você precisa!</S.TextHome>
         <ButtonMain style={{width: '196px', height: '47px'}}>Cadastre-se</ButtonMain>
       </S.Home>
+      <S.Diferencial>
+
+      </S.Diferencial>
+      <S.Diferencial2>
+
+      </S.Diferencial2>
     </>
   )
 }

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import BcgHome from '../../assets/bcgHome.png'
+import BcgDiferencial from '../../assets/bcgDiferencial.svg'
 
 export const Home = styled.section`
   height: 100vh;
   padding: 0 49px;
   background-image: url(${BcgHome});
+  background-position: center center;
 `;
 
 export const TitleHome = styled.h1`
@@ -21,4 +23,19 @@ export const TextHome = styled.p`
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 22px;
+`
+
+export const Diferencial = styled.section`
+
+  height: 118vh;
+  background-size: 100%;
+  background-position: center center;
+  background-image: url(${BcgDiferencial});
+`
+
+export const Diferencial2 = styled.section`
+
+  min-height: 150vh;
+  background-size: 100%;
+  background-color: transparent;
 `
