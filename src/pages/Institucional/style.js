@@ -26,15 +26,30 @@ export const TextHome = styled.p`
 `
 
 export const Diferencial = styled.section`
-
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
   height: 118vh;
   background-size: 100%;
   background-position: center center;
   background-image: url(${BcgDiferencial});
+
+  h1 {
+    width: 100%;
+    margin-top: 2rem;
+  }
+`
+
+export const ContainerDiferencial = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: 255px 255px 255px;
+  justify-content: center;
+  align-items: center;
+  column-gap: 150px;
 `
 
 export const Diferencial2 = styled.section`
-
   min-height: 150vh;
   background-size: 100%;
   background-color: transparent;
