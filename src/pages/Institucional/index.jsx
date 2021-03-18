@@ -1,5 +1,6 @@
 import React from 'react'
 import * as S from './style'
+import api from '../../services/api';
 import Header from '../../components/Header/Header';
 import { Input } from '../../components/Form/Input/Input';
 import ButtonMain from '../../components/ButtonMain/ButtonMain';
@@ -13,13 +14,31 @@ import IconD6 from '../../assets/creative-idea.svg'
 
 
 function Institucional() {
+  const [form, setForm] = React.useState({
+    email: "",
+    senha: ""
+  });
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await api.post('economigos/sessao/login', {
+        email: form.email,
+        senha: form.senha
+    }).then(function () {
+      localStorage.setItem("autenticado", true)
+    }).catch(function (error) {
+      setForm("");
+      console.log(error);
+    })
+  }
+
   return (
     <>
       <S.Home>
         <Header />
         <S.TitleHome><span style={{color: '#44CE6C'}}>Econo</span>migos</S.TitleHome>
         <S.TextHome>A facilidade, organização e melhora financeira que você precisa!</S.TextHome>
-        <ButtonMain style={{width: '196px', height: '47px'}}>Cadastre-se</ButtonMain>
+        <ButtonMain onClick={handleSubmit} style={{width: '196px', height: '47px'}}>Cadastre-se</ButtonMain>
       </S.Home>
       <S.Diferencial>
         <h1>Conheça nosso diferencial</h1>
