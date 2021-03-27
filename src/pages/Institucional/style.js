@@ -49,8 +49,12 @@ export const ContainerDiferencial = styled.div`
   column-gap: 150px;
 `
 
-export const Diferencial2 = styled.section`
+export const Meta = styled.section`
   min-height: 150vh;
   background-size: 100%;
   background-color: transparent;
+
+  h1 {
+    color: #F1FFE7;
+  }
 `

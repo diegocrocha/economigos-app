@@ -43,35 +43,35 @@ function Institucional() {
       <S.Diferencial>
         <h1>Conheça nosso diferencial</h1>
         <S.ContainerDiferencial>
-          <CardDiferencial
-            icon={IconD1}
-            title="Cadastre seus gastos pelo telegram"
-            text="Utilize o telegram para cadastrar suas despesas e receitas em nosso aplicativo."/>
+        <CardDiferencial
+            icon={IconD3}
+            title="Crie metas para atingir seus objetivos financeiros"
+            text="Com a Economigos você poderá criar metas para alcançar um objetivo que envolva suas finanças. E não se preocupe, nós iremos te ajudar a realizar seus sonhos."/>
           <CardDiferencial
             icon={IconD2}
             title="Crie contas compartilhadas com seus companheiros"
             text="Com a nossa aplicação você poderá criar uma conta compartilhada com quantas pessoas quiser. Podendo compartilhar os gastos e as despesas de forma justa."/>
           <CardDiferencial
-            icon={IconD3}
-            title="Crie metas para atingir seus objetivos financeiros"
-            text="Com a Economigos você poderá criar metas para alcançar um objetivo que envolva suas finanças. E não se preocupe, nós iremos te ajudar a realizar seus sonhos."/>
-          <CardDiferencial
-            icon={IconD4}
-            title="Separe suas contas do jeito que for mais fácil"
-            text="Com a nossa aplicação você irá criar quantas contas quiser e conseguirá separar de qual conta seus gastos são."/>
+            icon={IconD6}
+            title="Tenha nosso auxílio para lembrar de alimentar o app"
+            text="Nossa aplicação será responsável por te lembrar de cadastrar suas receitas e despesas diárias, claro, com a frequência que você desejar."/>
           <CardDiferencial
             icon={IconD5}
             title="Tenha dashboards que irão te auxiliar constantemente"
             text="Nossa aplicação conta com dashboards que pretendem trazer informações claras e objetivas para você poder otimizar seu tempo no momento de tomar uma decisão."/>
           <CardDiferencial
-            icon={IconD6}
-            title="Tenha nosso auxílio para lembrar de alimentar o app"
-            text="Nossa aplicação será responsável por te lembrar de cadastrar suas receitas e despesas diárias, claro, com a frequência que você desejar."/>
+            icon={IconD4}
+            title="Separe suas contas do jeito que for mais fácil"
+            text="Com a nossa aplicação você irá criar quantas contas quiser e conseguirá separar de qual conta seus gastos são."/>
+          <CardDiferencial
+            icon={IconD1}
+            title="Cadastre seus gastos pelo telegram"
+            text="Utilize o telegram para cadastrar suas despesas e receitas em nosso aplicativo."/>
         </S.ContainerDiferencial>
       </S.Diferencial>
-      <S.Diferencial2>
-
-      </S.Diferencial2>
+      <S.Meta>
+        <h1>Utilizando nossas metas</h1>
+      </S.Meta>
     </>
   )
 }
