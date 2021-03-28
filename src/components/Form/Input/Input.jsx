@@ -1,11 +1,13 @@
 import React from 'react'
 import * as S from './style'
 
-export const Input = () => {
+const Input = ({label, id, ...props}) => {
   return (
     <S.InputContainer>
-      <S.Input type="text" required/>
-      <S.Label htmlFor="">E-mail  ou telefone</S.Label>
+      <S.Input id={id} name={id} type="text" required/>
+      <S.Label htmlFor={id}>{label}</S.Label>
     </S.InputContainer>
   )
 }
+
+export default Input;

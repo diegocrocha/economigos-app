@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const InputContainer = styled.div`
   position: relative;
-  width: 300px;
+  width: 100%;
   height: 50px;
+  margin: 1rem 0;
 
   input:focus + label, input:valid + label {
     top: -10px;
@@ -17,8 +18,8 @@ export const InputContainer = styled.div`
 export const Input = styled.input`
   border: none;
   background-color: transparent;
-  border-bottom: 2px solid #ddd;
-  width: 300px;
+  border-bottom: 2px solid #bbbbbb;
+  width: 100%;
   height: 50px;
   position: absolute;
   transition: .1s;

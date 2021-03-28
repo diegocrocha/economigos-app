@@ -3,7 +3,8 @@ import * as S from './style'
 import Logo from '../../assets/logo.svg'
 import ButtonMain from '../ButtonMain/ButtonMain'
 import ButtonS from '../ButtonS/ButtonS'
-import { NavBar } from '../NavBar/NavBar'
+import NavBar from '../NavBar/NavBar'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -11,8 +12,12 @@ const Header = () => {
       <S.Logo src={Logo} alt=''/>
       <NavBar />
       <div>
-        <ButtonS>Login</ButtonS>
-        <ButtonMain>Cadastre-se</ButtonMain>
+        <Link to="/login">
+          <ButtonS>Login</ButtonS>
+        </Link>
+        <Link to="/cadastro">
+          <ButtonMain>Cadastre-se</ButtonMain>
+        </Link>
       </div>
     </S.Header>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './style'
 
-export const NavBar = () => {
+const NavBar = () => {
   return (
     <S.NavBar>
       <S.ListHeader>
@@ -14,3 +14,6 @@ export const NavBar = () => {
     </S.NavBar>
   )
 }
+
+
+export default NavBar;

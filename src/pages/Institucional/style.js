@@ -7,6 +7,7 @@ export const Home = styled.section`
   padding: 0 49px;
   background-image: url(${BcgHome});
   background-position: center center;
+  background-repeat: no-repeat;
 `;
 
 export const TitleHome = styled.h1`
@@ -21,7 +22,7 @@ export const TextHome = styled.p`
   color: #F1FFE7;
   line-height: 1.3;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 22px;
 `
 
