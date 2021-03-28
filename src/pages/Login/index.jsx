@@ -6,6 +6,25 @@ import { Link } from 'react-router-dom'
 
 
 function Login() {
+  const [form, setForm] = React.useState({
+    email: "",
+    senha: ""
+  });
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await api.post('economigos/sessao/login', {
+        email: form.email,
+        senha: form.senha
+    }).then(function () {
+      localStorage.setItem("autenticado", true)
+    }).catch(function (error) {
+      setForm("");
+      console.log(error);
+    })
+  }
+
+
   return (
     <S.Login>
       <HeaderSign />
@@ -19,10 +38,10 @@ function Login() {
           <h1>Login</h1>
           <form>
             <Input label="E-mail"/>
-            <Input label="Senha" />
+            <Input label="Senha" type="password"/>
           </form>
           <S.ContainerButtons>
-              <S.ButtonSignIn>Entrar</S.ButtonSignIn>
+              <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn>
               <Link to="/cadastro">
                 <S.ButtonSignUp>Cadastre-se</S.ButtonSignUp>
               </Link>

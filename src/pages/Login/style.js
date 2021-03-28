@@ -19,6 +19,8 @@ export const ContainerSign = styled.div`
   height: 70vh;
   margin: 0vh 10vw;
   grid-template-columns: 50% 50%;
+  box-shadow: rgba(0,0,0, 0.8) 0px 0px 20px;
+  overflow: hidden;
 
   @media only screen and (max-width: 900px) {
     & {
@@ -38,13 +40,15 @@ export const Bloob = styled.div`
 
   background-image: url(${BloobImage});
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
+  height: 100%;
+  width: 100%;
 
   @media only screen and (max-width: 900px) {
     & {
       display: none;
   }
-  
+
 }
 `
 
@@ -69,7 +73,13 @@ export const FormSign = styled.div`
 export const ContainerButtons = styled.div`
   margin: 3.5rem 25% 0 25%;
 
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: 960px) {
+    & {
+      margin: 3.5rem 22.5% 0 22.5%;
+    }
+  }
+
+  @media only screen and (max-width: 420px) {
     & {
       margin: 3.5rem 20% 0 20%;
     }

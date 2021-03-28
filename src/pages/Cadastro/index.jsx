@@ -6,27 +6,46 @@ import { Link } from 'react-router-dom'
 import Input from '../../components/Form/Input/Input'
 
 export default function Cadastro() {
+  const [form, setForm] = React.useState({
+    email: "",
+    senha: "",
+    confirmaSenha: ""
+  });
 
-  
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await api.post('economigos/sessao/login', {
+        email: form.email,
+        senha: form.senha
+    }).then(function () {
+      localStorage.setItem("autenticado", true)
+    }).catch(function (error) {
+      setForm("");
+      console.log(error);
+    })
+  }
+
 
   return (
     <S.Cadastro>
       <HeaderSign />
       <L.DivAux>
       <L.ContainerSign>
-        <L.Bloob>
-          {/* bloob */}
-        </L.Bloob>
+        <S.DivAux2>
+          <S.Bloob>
+            {/* bloob */}
+          </S.Bloob>
+        </S.DivAux2>
         <L.FormSign>
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Cadastro</h1>
           <form>
             <Input label="E-mail"/>
-            <Input label="Senha" />
-            <Input label="Confirme a senha" />
+            <Input label="Senha" type="password"/>
+            <Input label="Confirme a senha" type="password"/>
           </form>
           <L.ContainerButtons>
-              <L.ButtonSignUp>Cadastre-se</L.ButtonSignUp>
+              <L.ButtonSignUp onClick={handleSubmit}>Cadastre-se</L.ButtonSignUp>
               <Link to="/login">
                 <L.ButtonSignIn>Login</L.ButtonSignIn>
               </Link>
