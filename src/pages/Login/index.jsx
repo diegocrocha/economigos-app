@@ -2,13 +2,14 @@ import React from 'react'
 import HeaderSign from '../../components/HeaderSign/HeaderSign'
 import * as S from './style'
 import Input from '../../components/Form/Input/Input'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import api from '../../services/api'
 
 
 function Login() {
   const [form, setForm] = React.useState({
-    email: "",
-    senha: ""
+    email: "vitormarques@email.com",
+    senha: "senha@123"
   });
 
   async function handleSubmit(event) {
@@ -16,8 +17,9 @@ function Login() {
     await api.post('economigos/sessao/login', {
         email: form.email,
         senha: form.senha
-    }).then(function () {
-      localStorage.setItem("autenticado", true)
+    }).then(function (response) {
+      console.log(response.data);
+      // <Redirect to
     }).catch(function (error) {
       setForm("");
       console.log(error);
