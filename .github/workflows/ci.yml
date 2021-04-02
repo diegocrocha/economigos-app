@@ -19,8 +19,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        RUN npm install --silent
-        RUN npm install react-scripts@3.3.1 -g --silent
+        npm install --silent
+        npm install react-scripts@3.3.1 -g --silent
         npm run build --if-present
         npm start & npx wait-on http://localhost:3000
       env:
