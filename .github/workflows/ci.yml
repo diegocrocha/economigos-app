@@ -34,12 +34,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download target
-      uses: actions/download-artifact@v2
-      with:
-        name: target-files
-        path: target
-
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag economigos/economigos-app:latest
 
