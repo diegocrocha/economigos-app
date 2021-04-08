@@ -13,7 +13,7 @@ export default createGlobalStyle`
         background-color: white;
         color: #312F2F;
     }
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     width:10px;
     height: 10px;
   }
@@ -25,7 +25,7 @@ export default createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: #44CF6C;
     border-radius: 10px;
-  }
+  } */
 
     a{
         text-decoration: none;
@@ -65,6 +65,16 @@ export default createGlobalStyle`
       width: 100%;
       background-color: #44CF6C;
       height: 2px;
+    }
+
+    .app-config {
+      background-color: #e4e4e4;
+      min-height: 100vh;
+    }
+
+    .container-app {
+      background-color: white;
+      border-radius: 10px 4px 4px 4px;
     }
 
 `;

@@ -19,7 +19,7 @@ function Login() {
         senha: form.senha
     }).then(function (response) {
       console.log(response.data);
-      // <Redirect to
+      // <Redirect to={{ pathname: "/painel" }} />
     }).catch(function (error) {
       console.log(error);
     })
