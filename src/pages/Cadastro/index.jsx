@@ -4,6 +4,7 @@ import * as S from './style'
 import * as L from '../Login/style'
 import { Link } from 'react-router-dom'
 import Input from '../../components/Form/Input/Input'
+import api from '../../services/api'
 
 export default function Cadastro() {
   const [form, setForm] = React.useState({
@@ -14,15 +15,22 @@ export default function Cadastro() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await api.post('economigos/sessao/login', {
+    await api.post('economigos/usuarios', {
         email: form.email,
         senha: form.senha
-    }).then(function () {
-      localStorage.setItem("autenticado", true)
+    }).then(function (response) {
+      console.log(response.data)
     }).catch(function (error) {
-      setForm("");
       console.log(error);
     })
+  }
+
+  function handleChange({ target }) {
+    const { id, value } = target;
+    setForm({
+      ...form,
+      [id]: value,
+    });
   }
 
 
@@ -40,9 +48,26 @@ export default function Cadastro() {
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Cadastro</h1>
           <form>
-            <Input label="E-mail"/>
-            <Input label="Senha" type="password"/>
-            <Input label="Confirme a senha" type="password"/>
+            <Input 
+              onChange={handleChange}
+              value={form.email}
+              id="email"
+              label="E-mail"
+              required/>
+            <Input
+              onChange={handleChange}
+              value={form.senha}
+              id="senha"
+              label="Senha"
+              type="password" 
+              required/>
+            <Input
+              onChange={handleChange}
+              value={form.confirmaSenha}
+              id="confirmaSenha" 
+              label="Confirme a senha" 
+              type="password"
+              required/>
           </form>
           <L.ContainerButtons>
               <L.ButtonSignUp onClick={handleSubmit}>Cadastre-se</L.ButtonSignUp>

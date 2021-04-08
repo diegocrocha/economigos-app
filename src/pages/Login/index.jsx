@@ -8,8 +8,8 @@ import api from '../../services/api'
 
 function Login() {
   const [form, setForm] = React.useState({
-    email: "vitormarques@email.com",
-    senha: "senha@123"
+    email: "",
+    senha: ""
   });
 
   async function handleSubmit(event) {
@@ -21,9 +21,16 @@ function Login() {
       console.log(response.data);
       // <Redirect to
     }).catch(function (error) {
-      setForm("");
       console.log(error);
     })
+  }
+
+  function handleChange({ target }) {
+    const { id, value } = target;
+    setForm({
+      ...form,
+      [id]: value,
+    });
   }
 
 
@@ -39,8 +46,19 @@ function Login() {
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Login</h1>
           <form>
-            <Input label="E-mail"/>
-            <Input label="Senha" type="password"/>
+            <Input 
+            onChange={handleChange}
+            value={form.email}
+            id="email"
+            label="E-mail"
+            required/>
+            <Input
+            onChange={handleChange}
+            value={form.senha}
+            id="senha"
+            label="Senha"
+            type="password" 
+            required/>
           </form>
           <S.ContainerButtons>
               <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn>
