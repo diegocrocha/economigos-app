@@ -42,7 +42,7 @@ function Login() {
         <S.Bloob>
           {/* bloob */}
         </S.Bloob>
-        <S.FormSign>
+        <S.FormSign className="animeLeft">
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Login</h1>
           <form>

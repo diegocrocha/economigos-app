@@ -67,14 +67,21 @@ export default createGlobalStyle`
       height: 2px;
     }
 
-    .app-config {
-      background-color: #e4e4e4;
-      min-height: 100vh;
-    }
-
     .container-app {
       background-color: white;
       border-radius: 10px 4px 4px 4px;
     }
 
+    .animeLeft {
+        opacity: 0;
+        transform:translateX(-20px);
+        animation: animeLeft .35s forwards;
+    }
+
+    @keyframes animeLeft {
+        to {
+            opacity: 1;
+            transform: initial;
+        }
+    }
 `;
