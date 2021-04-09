@@ -1,45 +1,51 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import * as S from './style'
 
-export default function NavBarApp() {
+export default function NavBarApp({name}) {
   return (
     <S.Nav>
+      <S.Ola>Olá, {name}!</S.Ola>
       <ul>
         <S.BackItemNav>
-          <Link to="/painel">
+          <NavLink to="/app/painel" activeClassName="active-nav">
           <S.ItemNav>
             Painel
           </S.ItemNav>
-          </Link>
+          </NavLink>
         </S.BackItemNav>
         <S.BackItemNav>
-          <Link to="/cartoes">
+          <NavLink to="/app/cartoes">
             <S.ItemNav>
             Cartões
             </S.ItemNav>
-          </Link>
+          </NavLink>
         </S.BackItemNav>
         <S.BackItemNav active>
-          <Link to="/metas">
+          <NavLink to="/app/metas">
             <S.ItemNav active>
             Metas
           </S.ItemNav>
-          </Link>
+          </NavLink>
         </S.BackItemNav>
         <S.BackItemNav>
-          <Link to="/contas">
+          <NavLink to="/app/contas">
           <S.ItemNav>
             Contas
           </S.ItemNav>
-          </Link>
+          </NavLink>
         </S.BackItemNav>
         <S.BackItemNav>
-          <Link to="/econopontos">
+          <NavLink to="/app/econopontos">
           <S.ItemNav>
             Econopontos
           </S.ItemNav>
-          </Link>
+          </NavLink>
+        </S.BackItemNav>
+        <S.BackItemNav>
+        <S.ItemNav>
+          Sair
+        </S.ItemNav>
         </S.BackItemNav>
       </ul>
     </S.Nav>

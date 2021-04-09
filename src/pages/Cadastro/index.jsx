@@ -44,7 +44,7 @@ export default function Cadastro() {
             {/* bloob */}
           </S.Bloob>
         </S.DivAux2>
-        <L.FormSign>
+        <L.FormSign className="animeLeft">
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Cadastro</h1>
           <form>
