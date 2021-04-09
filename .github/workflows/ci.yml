@@ -2,7 +2,7 @@ name: Node CI
 
 on: 
   push:
-    branches: [ pipeline-teste ]
+    branches: [ main ]
 jobs:
   node:
     runs-on: ubuntu-latest
