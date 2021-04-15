@@ -4,6 +4,7 @@ import * as S from './style'
 import Input from '../../components/Form/Input/Input'
 import { Link, Redirect } from 'react-router-dom'
 import api from '../../services/api'
+import { UserContext } from '../../UserContext'
 
 
 function Login() {
@@ -12,17 +13,11 @@ function Login() {
     senha: ""
   });
 
+  const {userLogin} = React.useContext(UserContext);
+
   async function handleSubmit(event) {
     event.preventDefault();
-    await api.post('economigos/sessao/login', {
-        email: form.email,
-        senha: form.senha
-    }).then(function (response) {
-      console.log(response.data);
-      // <Redirect to={{ pathname: "/painel" }} />
-    }).catch(function (error) {
-      console.log(error);
-    })
+    userLogin(form.email, form.senha);
   }
 
   function handleChange({ target }) {
