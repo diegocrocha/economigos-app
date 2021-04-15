@@ -51,6 +51,7 @@ export const ImgSearch = styled.img`
     height: 45%;
     &:hover{
         cursor: pointer;
+        text-shadow: 0px 1px 2px grey;
     }
-
+    
 `;

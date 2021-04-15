@@ -1,19 +1,15 @@
 import React from 'react'
-import HeaderApp from '../../components/HeaderApp/HeaderApp';
-import NavBarApp from '../../components/NavBarApp/NavBarApp';
 import * as S from './style'
+import TelaCentralApp from "../../components/TelaCentralApp/TelaCentralApp";
+import TelaLateralApp from "../../components/TelaLateralApp/TelaLateralApp";
 
 function Painel() {
   return (
-    <div>
-      <div className="container-app">
-        <S.DivA>
-          
-        </S.DivA>
-      </div>
-    </div>
+    <>
+      <TelaCentralApp/>
+      <TelaLateralApp/>
+    </>
   )
 }
-
 
 export default Painel;

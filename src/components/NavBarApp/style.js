@@ -1,18 +1,20 @@
 import styled from 'styled-components';
+import SelecionadoMenuLateral from "../../assets/SelecionadoMenuLateral.svg";
 
 export const Nav = styled.nav`
-    height: 90vh;
+    height: 85vh;
     width: 20%;
-    padding-top: 5rem;
+    margin-top: 5vh;
 `;
 
 let active;
 
 export const BackItemNav = styled.div`
     background-color: #e4e4e4;
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
     padding-bottom: 1rem;
     text-align: center;
+    /* background-image: url(${SelecionadoMenuLateral}); */
 
     &:nth-child(n + 2) {
         padding-top: 0.7rem;
