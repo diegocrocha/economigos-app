@@ -5,7 +5,7 @@ import Input from '../../components/Form/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../UserContext'
 import useForm from '../../hooks/useForm'
-import { StyleSheetManager } from 'styled-components'
+import Tooltip from '../../components/Helper/Tooltip/Tooltip'
 
 
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     if (email.validate() && password.validate()) {
-      userLogin(email, password);
+      userLogin(email.value, password.value);
     }
   }
 
