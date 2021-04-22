@@ -2,35 +2,28 @@ import React from 'react'
 import HeaderSign from '../../components/HeaderSign/HeaderSign'
 import * as S from './style'
 import Input from '../../components/Form/Input/Input'
-import { Link, Redirect } from 'react-router-dom'
-import api from '../../services/api'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
+import useForm from '../../hooks/useForm'
+import Tooltip from '../../components/Helper/Tooltip/Tooltip'
 
 
 function Login() {
-  const [form, setForm] = React.useState({
-    email: "",
-    senha: ""
-  });
+  const navigate = useNavigate();
+  const email = useForm()
+  const password = useForm();
+
+  const {userLogin, erro, loading, login} = React.useContext(UserContext);
+
+  // if (login) {
+  //   console.log("autenticação realizada com sucesso")
+  // }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await api.post('economigos/sessao/login', {
-        email: form.email,
-        senha: form.senha
-    }).then(function (response) {
-      console.log(response.data);
-      // <Redirect to={{ pathname: "/painel" }} />
-    }).catch(function (error) {
-      console.log(error);
-    })
-  }
-
-  function handleChange({ target }) {
-    const { id, value } = target;
-    setForm({
-      ...form,
-      [id]: value,
-    });
+    if (email.validate() && password.validate()) {
+      userLogin(email.value, password.value);
+    }
   }
 
 
@@ -42,30 +35,33 @@ function Login() {
         <S.Bloob>
           {/* bloob */}
         </S.Bloob>
-        <S.FormSign>
+        <S.FormSign className="animeLeft">
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Login</h1>
           <form>
             <Input 
-            onChange={handleChange}
-            value={form.email}
             id="email"
             label="E-mail"
+            {... email}
             required/>
             <Input
-            onChange={handleChange}
-            value={form.senha}
             id="senha"
             label="Senha"
+            {... password}
             type="password" 
             required/>
-          </form>
-          <S.ContainerButtons>
-              <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn>
+            <S.ContainerButtons>
+            {!loading ? ( 
+              <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn> 
+              ) : (
+                <S.ButtonSignIn disabled>Carregando...</S.ButtonSignIn>
+              )}
+            
               <Link to="/cadastro">
                 <S.ButtonSignUp>Cadastre-se</S.ButtonSignUp>
               </Link>
           </S.ContainerButtons>
+          </form>
         </S.FormSign>
       </S.ContainerSign>
       </S.DivAux>

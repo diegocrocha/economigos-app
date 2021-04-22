@@ -1,21 +1,29 @@
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-    height: 100%;
+    height: 90vh;
     width: 20%;
-    padding-top: 8rem;
+    padding-top: 5rem;
 `;
 
-let active = false;
+let active;
 
 export const BackItemNav = styled.div`
-    background-color: ${props => props.active ? "white" : "#e4e4e4"};
+    background-color: #e4e4e4;
     padding: 0 1rem;
     padding-bottom: 1rem;
     text-align: center;
 
     &:nth-child(n + 2) {
         padding-top: 0.7rem;
+    }
+
+    &:nth-last-child(1) {
+        margin-top: 6.5rem;
+    }
+
+    a {
+        ${props => props.className == "active-nav" ? active = true : active = false};
     }
 `
 
@@ -25,12 +33,17 @@ export const ItemNav = styled.li`
     cursor: pointer;
     font-weight: bold;
     list-style: none;
-    background-color: ${props => props.active ? "#32A287" : "white"};
-    color: ${props => props.active ? "white" : "#32A287"};
+    background-color: ${active ? "#32A287" : "white"};
+    color: ${active ? "white" : "#32A287"};
     padding: 0.5rem;
 
     &:hover {
         background-color: #32A287;
         color: white;
     }
+`
+export const Ola = styled.h2`
+    font-weight: 500;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
 `
