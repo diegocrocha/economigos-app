@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound/NotFound.jsx';
 import Login from './pages/Login/index.jsx';
 import Cadastro from './pages/Cadastro/index.jsx';
 import Appi from './pages/App/Appi.jsx';
+import { ToastContainer } from 'react-toastify';
 // import Dashboard from './pages/Dashboard/index.jsx';
 // import Painel from './pages/Painel/index.jsx';
 
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <UserStorage>
       <GlobalStyle />
+      <ToastContainer />
       <Routes>
         <Route path="/" exact element={<Institucional />} />
         <Route path="/login" exact element={<Login />} />

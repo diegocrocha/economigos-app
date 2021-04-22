@@ -15,9 +15,9 @@ function Login() {
 
   const {userLogin, erro, loading, login} = React.useContext(UserContext);
 
-  if (login) {
-    return navigate('/app/painel');
-  }
+  // if (login) {
+  //   console.log("autenticação realizada com sucesso")
+  // }
 
   async function handleSubmit(event) {
     event.preventDefault();
