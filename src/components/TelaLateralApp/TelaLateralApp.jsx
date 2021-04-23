@@ -1,9 +1,10 @@
 import React from 'react'
 import * as S from './style'
 
+let fechado = true;
+
 export default function TelaLateralApp() {
 
-    let fechado;
 
     function fecharTelaLateral() {
         if (!fechado) {
@@ -27,3 +28,5 @@ export default function TelaLateralApp() {
         </>
     )
 }
+
+export {fechado}

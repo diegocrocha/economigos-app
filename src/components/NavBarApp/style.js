@@ -1,31 +1,26 @@
 import styled from 'styled-components';
-import SelecionadoMenuLateral from "../../assets/SelecionadoMenuLateral.svg";
 
 export const Nav = styled.nav`
-    height: 85vh;
+    height: 90vh;
     width: 20%;
-    margin-top: 5vh;
 `;
 
 let active;
 
 export const BackItemNav = styled.div`
-    background-color: #e4e4e4;
-    /* padding: 0 1rem; */
-    padding-bottom: 1rem;
+    background-color: ${props => props.className == "active-nav" ? "white" : "#e4e4e4"};
     text-align: center;
-    /* background-image: url(${SelecionadoMenuLateral}); */
-
-    &:nth-child(n + 2) {
-        padding-top: 0.7rem;
-    }
+    height: 9vh;
+    display: flex;
+    align-items: center;
 
     &:nth-last-child(1) {
-        margin-top: 6.5rem;
+        margin-top: 40%;
     }
 
     a {
         ${props => props.className == "active-nav" ? active = true : active = false};
+        width: 100%
     }
 `
 
@@ -35,8 +30,10 @@ export const ItemNav = styled.li`
     cursor: pointer;
     font-weight: bold;
     list-style: none;
-    background-color: ${active ? "#32A287" : "white"};
-    color: ${active ? "white" : "#32A287"};
+    background-color: ${props => props.className == "active" ?  "#32A287" : "white"};
+    color: ${props => props.className == "active" ? "white" : "#32A287"};
+    /* background-color: ${active ? "#32A287" : "white"}; */
+    /* color: ${active ? "white" : "#32A287"}; */
     padding: 0.5rem;
 
     &:hover {
@@ -46,6 +43,7 @@ export const ItemNav = styled.li`
 `
 export const Ola = styled.h2`
     font-weight: 500;
-    margin-bottom: 3rem;
+    margin-bottom: 5vh;
     padding-left: 2rem;
+    margin-top: 5vh;
 `

@@ -7,9 +7,9 @@ export default function NavBarApp({ name }) {
     <S.Nav>
       <S.Ola>Olá, {name}!</S.Ola>
       <ul>
-        <S.BackItemNav>
+        <S.BackItemNav className="active-nav">
           <NavLink to="/app/painel" activeClassName="active-nav">
-            <S.ItemNav>
+            <S.ItemNav className = "active">
               Painel
             </S.ItemNav>
           </NavLink>

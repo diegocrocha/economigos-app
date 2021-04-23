@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import IconeProximo from "../../assets/iconeProximo.svg";
 
+
+
 export const TelaLateralApp = styled.div`
     width: 19.5%;
     height: 90vh;
@@ -25,5 +27,5 @@ export const BtnFecharTela = styled.button`
     &:hover{
         cursor:pointer;
         box-shadow: 0px 0px 7px 0px grey;
-    }
+    };
 `
