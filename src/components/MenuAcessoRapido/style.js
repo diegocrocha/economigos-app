@@ -5,7 +5,7 @@ export const MenuAcessoRapido = styled.div`
     height: 15%;
     margin-top: 5%;
     margin-left: 15%;
-    border: 3px solid #C4C4C4;
+    border: 3px solid #E4E4E4;
     border-radius: 14px;
     display: flex;
     align-items: center;

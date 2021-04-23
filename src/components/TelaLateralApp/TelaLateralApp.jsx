@@ -1,20 +1,20 @@
 import React from 'react'
 import * as S from './style'
 
-let fechado = true;
 
 export default function TelaLateralApp() {
+    const [nav, setNav] = React.useState(true);
 
 
     function fecharTelaLateral() {
-        if (!fechado) {
+        if (!nav) {
             telaLateral.style.width = "0%";
             telaLateral.style.marginLeft = "-2%";
-            fechado = true;
+            setNav(true)
         }else{
             telaLateral.style.width = "19.5%";
             telaLateral.style.marginLeft = "0.5%";
-            fechado = false
+            setNav(true)
         }
     }
 
@@ -28,5 +28,3 @@ export default function TelaLateralApp() {
         </>
     )
 }
-
-export {fechado}
