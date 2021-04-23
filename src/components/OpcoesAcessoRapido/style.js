@@ -4,7 +4,7 @@ export const OpcoesAcessoRapido = styled.button`
     height: 80%;
     width: 24%;
     font-weight: bold;
-    background-color: #C4C4C4;
+    background-color: #E4E4E4;
     border: none;
     color: ${props => props.color};
     border-radius: 7px;
