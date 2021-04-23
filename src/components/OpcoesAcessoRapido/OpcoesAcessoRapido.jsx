@@ -9,13 +9,13 @@ export default function OpcoesAcessoRapido({ nome, cor }) {
     function icone() {
         switch (nome) {
             case "Receitas":
-                return <IconeDinheiro cor={"#32A287"}/>;
+                return <IconeDinheiro cor={cor}/>;
             case "Gastos":
-                return <IconeDinheiro cor={"#A23232"}/>;
+                return <IconeDinheiro cor={cor}/>;
             case "Relatórios":
-                return <IconeRelatorio/>;
+                return <IconeRelatorio cor={cor}/>;
             case "Extratos": 
-                return <IconeExtrato/>;
+                return <IconeExtrato cor={cor}/>;
         }
     }
 

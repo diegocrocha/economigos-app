@@ -13,7 +13,7 @@ export const OpcoesAcessoRapido = styled.button`
     display: flex;
 
     &:hover, &:active{
-        background-color: rgb(50, 162, 135);
+        background-color: ${props => props.color};
         cursor: pointer;
         color: #FFFFFF;
         filter: drop-shadow(0px 1px 2px grey);
