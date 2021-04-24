@@ -2,12 +2,12 @@ import React from 'react'
 import * as S from './style'
 import MenuAcessoRapido from "../../components/MenuAcessoRapido/MenuAcessoRapido";
 
-export default function TelaCentralApp() {
+export default function TelaCentralApp({children}) {
     return (
         <S.TelaCentralApp>
             <MenuAcessoRapido/>
             <S.InfoPages>
-
+                {children}
             </S.InfoPages>
         </S.TelaCentralApp>
     )

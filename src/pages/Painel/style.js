@@ -1,17 +1,10 @@
 import styled from "styled-components";
 
-export const DivA = styled.div`
-    width: 60%;
-    height: 90vh;
-    background-color: white;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-`
-
-export const DivB = styled.div`
-    width: 19.5%;
-    height: 90vh;
-    margin-left: 0.5%;
-    background-color: white;
-    border-top-left-radius: 30px;
+export const SaldoTotal = styled.div`
+    width: 49.5%;
+    height: 35%;
+    background-color: #32A287;
+    border: 3px solid #32A287;
+    border-radius: 14px;
+    margin-right: 1%;
 `

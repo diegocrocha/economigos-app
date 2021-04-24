@@ -2,18 +2,18 @@ import React from 'react'
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryTheme } from 'victory';
 
 export default function GroupBarChart() {
-
-
     return (
-        <VictoryChart domainPadding={{ x: 35 }} 
+        <VictoryChart domainPadding={{ x: 125 }} 
           animate={{duration: 350}}
           labelComponent={<VictoryTooltip/>} 
+          width={1700}
+          height={600}
           >
             <VictoryAxis 
             key="x-axis"
             style={{
                 tickLabels: {
-                    fontSize: 6,
+                    fontSize: 44,
                     fontFamily: "Poppins",
                     fontWeight: "bold",
                     fill: "#4d4d4d"
@@ -24,18 +24,24 @@ export default function GroupBarChart() {
                 orientation="left"
                 style={{
                 tickLabels: {
-                    fontSize: 5,
+                    fontSize: 50,
                     fontFamily: "Poppins",
                     fontWeight: "bold",
                     fill: "#4d4d4d"
                 }}}/>
           <VictoryGroup offset={12}>
             <VictoryBar 
-                style={{data: { fill: "rgb(50, 162, 135)", width: 10 }}}
+                cornerRadius={{topLeft: 35, topRight: 35}}
+                alignment="end"
+                style={{data: { fill: "rgb(50, 162, 135)", width: 70 }}}
                 data={[{ x: "Janeiro", y: 400}, { x: "Fevereiro", y: 120.0 }, { x: "Março", y: 502.0 }, { x: "Abril", y: 690.0 }, { x: "Maio", y: 340.0 }]}/>
-            <VictoryBar style={{data: { fill: "#A23232", width: 10 }}}
-              data={[{ x: "Janeiro", y: 110.0 }, { x: "Fevereiro", y: 240.0 }, { x: "Março", y: 200.0 }, { x: "Abril", y: 500.0 }, { x: "Maio", y: 100.0 }]} />
+            <VictoryBar 
+                cornerRadius={{topLeft: 35, topRight: 35}}
+                alignment="start"
+                style={{data: { fill: "#A23232", width: 70 }}}
+                data={[{ x: "Janeiro", y: 110.0 }, { x: "Fevereiro", y: 240.0 }, { x: "Março", y: 200.0 }, { x: "Abril", y: 500.0 }, { x: "Maio", y: 100.0 }]} />
           </VictoryGroup>
+          
         </VictoryChart>
     )
 }

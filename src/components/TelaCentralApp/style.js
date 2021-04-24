@@ -13,5 +13,6 @@ export const InfoPages = styled.div`
     height: 70%;
     margin-left: 15%;
     margin-top: 2%;
-    background-color: red;
+    display: flex;
+    flex-wrap: wrap;
 `
