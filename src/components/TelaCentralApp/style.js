@@ -8,9 +8,9 @@ export const TelaCentralApp = styled.div`
     border-top-right-radius: 14px;
 `
 
-export const InfoPages = styled.div`
+export const Pages = styled.div`
     width: 70%;
-    height: 70%;
+    height: 75%;
     margin-left: 15%;
     margin-top: 2%;
     display: flex;

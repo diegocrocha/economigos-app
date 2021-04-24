@@ -4,11 +4,13 @@ import MenuAcessoRapido from "../../components/MenuAcessoRapido/MenuAcessoRapido
 
 export default function TelaCentralApp({children}) {
     return (
+        <>
         <S.TelaCentralApp>
             <MenuAcessoRapido/>
-            <S.InfoPages>
+            <S.Pages>
                 {children}
-            </S.InfoPages>
+            </S.Pages>
         </S.TelaCentralApp>
+        </>
     )
 }

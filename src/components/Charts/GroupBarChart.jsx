@@ -26,19 +26,19 @@ export default function GroupBarChart() {
                 tickLabels: {
                     fontSize: 50,
                     fontFamily: "Poppins",
-                    fontWeight: "bold",
+                    fontWeight: 500,
                     fill: "#4d4d4d"
                 }}}/>
           <VictoryGroup offset={12}>
             <VictoryBar 
-                cornerRadius={{topLeft: 35, topRight: 35}}
+                cornerRadius={{topLeft: 20, topRight: 20}}
                 alignment="end"
-                style={{data: { fill: "rgb(50, 162, 135)", width: 70 }}}
+                style={{data: { fill: "rgb(50, 162, 135)", width: 40 }}}
                 data={[{ x: "Janeiro", y: 400}, { x: "Fevereiro", y: 120.0 }, { x: "Março", y: 502.0 }, { x: "Abril", y: 690.0 }, { x: "Maio", y: 340.0 }]}/>
             <VictoryBar 
-                cornerRadius={{topLeft: 35, topRight: 35}}
+                cornerRadius={{topLeft: 20, topRight: 20}}
                 alignment="start"
-                style={{data: { fill: "#A23232", width: 70 }}}
+                style={{data: { fill: "#A23232", width: 40 }}}
                 data={[{ x: "Janeiro", y: 110.0 }, { x: "Fevereiro", y: 240.0 }, { x: "Março", y: 200.0 }, { x: "Abril", y: 500.0 }, { x: "Maio", y: 100.0 }]} />
           </VictoryGroup>
           

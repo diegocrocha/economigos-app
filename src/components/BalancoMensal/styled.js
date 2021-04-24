@@ -22,11 +22,12 @@ export const BalancoMensal = styled.div`
         align-items: center;
 
         img{
+            height: calc( 20px + (12 - 6) * ( (100vw - 400px) / ( 800 - 400) ));
             margin: 0% 2%;
         }
 
         .titleChart{
-            font-size: 1.5rem;
+            font-size: calc( 12px + (12 - 6) * ( (100vw - 400px) / ( 800 - 400) ));
             font-weight: 600;
             color: #32A287;
         }
