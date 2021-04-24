@@ -1,5 +1,5 @@
 import React from 'react'
-import api from './services/api'
+import api from '../services/api'
 import { toast } from 'react-toastify';
 
 export const UserContext = React.createContext();
@@ -30,7 +30,6 @@ export const UserStorage = ({children}) => {
             const {data} = userData;
             setDados(data);
             setLogin(true);
-            toast.success("Economigo autenticado com sucesso!");
             console.log(data);
         } catch (err) {
             setError(err.message)
