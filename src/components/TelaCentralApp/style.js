@@ -10,7 +10,7 @@ export const TelaCentralApp = styled.div`
 
 export const Pages = styled.div`
     width: 70%;
-    height: 75%;
+    height: 70%;
     margin-left: 15%;
     margin-top: 2%;
     display: flex;

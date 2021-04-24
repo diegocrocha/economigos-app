@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from './styled'
+import * as S from './style'
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../Charts/GroupBarChart'
 
