@@ -6,6 +6,7 @@ import ContasFundoRedondo from '../../components/LogosSVGComponentes/ContasFundo
 import CartoesFundoRedondo from '../../components/LogosSVGComponentes/CartoesFundoRedondo/CartoesFundoRedondo'
 import MetasFundoRedondo from '../../components/LogosSVGComponentes/MetasFundoRedondo/MetasFundoRedondo'
 import EconopontosFundoRedondo from '../../components/LogosSVGComponentes/EconopontosFundoRedondo/EconopontosFundoRedondo'
+import Sair from '../../components/LogosSVGComponentes/Sair/Sair'
 
 export default function NavBarApp({ name }) {
   return (
@@ -53,9 +54,10 @@ export default function NavBarApp({ name }) {
           </NavLink>
         </S.BackItemNav>
         <S.BackItemNav>
+          <Sair/>
           <S.ItemNav>
             Sair
-        </S.ItemNav>
+          </S.ItemNav>
         </S.BackItemNav>
       </ul>
     </S.Nav>
