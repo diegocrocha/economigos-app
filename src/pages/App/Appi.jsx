@@ -13,7 +13,7 @@ export default function Appi() {
             <TelaCentralApp>
             <Routes>
                 <Route path="painel" element={<Painel />} />
-                <Route path="contas" elesment={<Contas />} />
+                <Route path="contas" element={<Contas />} />
             </Routes>
             </TelaCentralApp>
         </S.Appi>

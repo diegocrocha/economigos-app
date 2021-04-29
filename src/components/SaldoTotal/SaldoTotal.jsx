@@ -3,7 +3,7 @@ import * as S from './style'
 import eyeOpen from '../../assets/eye-open.svg'
 import visualizacaoSaldoFechado from '../../assets/visualizacaoSaldoFechado.svg'
 
-function SaldoTotal(saldo) {
+function SaldoTotal() {
     const [olho, setOlho] = React.useState(true);
 
     return (

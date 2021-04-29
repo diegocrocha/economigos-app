@@ -21,7 +21,8 @@ export const BackItemNav = styled.div`
     a {
         ${props => props.className == "active-nav" ? active = true : active = false};
         display: flex;
-        width: 100%
+        width: 100%;
+        align-items: center;
     }
 `
 
