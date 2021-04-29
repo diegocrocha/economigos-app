@@ -59,7 +59,7 @@ export default function Contas() {
     let number = 0
 
     return (
-        <>
+        <S.Contas className="animeRight">
             <S.GroupMenu>
                 <S.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <S.TabLayout id="TabLayout">
@@ -97,6 +97,6 @@ export default function Contas() {
                     download
                 </div>
             </S.UltimasAtividades>
-        </>
+        </S.Contas>
     )
 }

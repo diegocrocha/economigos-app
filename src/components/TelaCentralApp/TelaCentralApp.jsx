@@ -7,7 +7,7 @@ export default function TelaCentralApp({children}) {
         <>
         <S.TelaCentralApp>
             <MenuAcessoRapido/>
-            <S.Pages>
+            <S.Pages className="animeLeft">
                 {children}
             </S.Pages>
         </S.TelaCentralApp>

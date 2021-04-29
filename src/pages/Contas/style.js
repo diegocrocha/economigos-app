@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Contas = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%
+`;
+
 export const TabLayout = styled.div`
   width: 75%;
   height: 100%;

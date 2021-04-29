@@ -85,4 +85,17 @@ export default createGlobalStyle`
             transform: initial;
         }
     }
+
+    .animeRight {
+        opacity: 0;
+        transform:translateX(20px);
+        animation: animeRight .55s forwards;
+    }
+
+    @keyframes animeRight {
+        to {
+            opacity: 1;
+            transform: initial;
+        }
+    }
 `;
