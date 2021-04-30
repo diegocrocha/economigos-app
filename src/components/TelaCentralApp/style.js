@@ -11,7 +11,7 @@ export const TelaCentralApp = styled.div`
 export const Pages = styled.div`
     align-content: flex-start;
     width: 70%;
-    height: 70%;
+    height: 73.5%;
     margin-left: 15%;
     margin-top: 2%;
     display: flex;
