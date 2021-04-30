@@ -3,7 +3,7 @@ import HeaderSign from '../../components/HeaderSign/HeaderSign'
 import * as S from './style'
 import Input from '../../components/Form/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserContext } from '../../UserContext'
+import { UserContext } from '../../hooks/UserContext'
 import useForm from '../../hooks/useForm'
 import Tooltip from '../../components/Helper/Tooltip/Tooltip'
 
@@ -15,9 +15,9 @@ function Login() {
 
   const {userLogin, erro, loading, login} = React.useContext(UserContext);
 
-  // if (login) {
-  //   console.log("autenticação realizada com sucesso")
-  // }
+  if (login) {
+    navigate('../app/painel', { replace: true })
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();

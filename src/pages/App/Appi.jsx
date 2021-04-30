@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import NavBarApp from '../../components/NavBarApp/NavBarApp'
+import MenusApp from "../../components/MenusConjuntoApp/MenusApp";
+import TelaCentralApp from '../../components/TelaCentralApp/TelaCentralApp';
 import Contas from '../Contas'
 import Painel from '../Painel'
 import * as S from './style'
@@ -8,11 +9,13 @@ import * as S from './style'
 export default function Appi() {
     return (
         <S.Appi>
-            <NavBarApp name="Matheus"/>
+            <MenusApp />
+            <TelaCentralApp>
             <Routes>
-                <Route path="painel" element={<Painel />}/>
-                <Route path="contas" elesment={<Contas />} />
+                <Route path="painel" element={<Painel />} />
+                <Route path="contas" element={<Contas />} />
             </Routes>
+            </TelaCentralApp>
         </S.Appi>
     )
 }

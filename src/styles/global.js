@@ -3,14 +3,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
 
-    * {
-        margin: 0;
-        padding: 0;
-        outline: 0;
-        box-sizing: border-box;
+  * {
+      margin: 0;
+      padding: 0;
+      outline: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
     body {
-      font-family: 'Poppins', sans-serif;
         background-color: white;
         color: #312F2F;
     }
@@ -80,6 +80,19 @@ export default createGlobalStyle`
     }
 
     @keyframes animeLeft {
+        to {
+            opacity: 1;
+            transform: initial;
+        }
+    }
+
+    .animeRight {
+        opacity: 0;
+        transform:translateX(20px);
+        animation: animeRight .55s forwards;
+    }
+
+    @keyframes animeRight {
         to {
             opacity: 1;
             transform: initial;

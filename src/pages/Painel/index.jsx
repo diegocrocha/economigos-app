@@ -1,19 +1,18 @@
 import React from 'react'
-import HeaderApp from '../../components/HeaderApp/HeaderApp';
-import NavBarApp from '../../components/NavBarApp/NavBarApp';
-import * as S from './style'
+import * as S from "./style";
+import SaldoTotal from "../../components/SaldoTotal/SaldoTotal"
+import GastosPorCategoria from "../../components/GastosPorCategoria/GastosPorCategoria"
+import BalancoMensal from "../../components/BalancoMensal/BalancoMensal"
+
 
 function Painel() {
   return (
-    <div>
-      <div className="container-app">
-        <S.DivA>
-          
-        </S.DivA>
-      </div>
-    </div>
+    <S.Painel className="animeRight">
+        <SaldoTotal/>
+        <GastosPorCategoria/>
+        <BalancoMensal/>
+    </S.Painel>
   )
 }
-
 
 export default Painel;
