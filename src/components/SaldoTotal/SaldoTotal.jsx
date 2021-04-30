@@ -3,7 +3,7 @@ import * as S from './style'
 import eyeOpen from '../../assets/eye-open.svg'
 import visualizacaoSaldoFechado from '../../assets/visualizacaoSaldoFechado.svg'
 
-function SaldoTotal() {
+function SaldoTotal({saldo}) {
     const [olho, setOlho] = React.useState(true);
 
     return (
@@ -12,7 +12,7 @@ function SaldoTotal() {
                 <img onClick={() => setOlho(!olho)} src={olho ? visualizacaoSaldoFechado : eyeOpen} alt="" />
             </div>
             <div className="textSaldoTotal">Saldo Total</div>
-            <div className="saldoTotal">R$<span>{olho ? "450.934" : "*******"}</span></div>
+            <div className="saldoTotal">R$<span>{olho ? "1.755,60" : "*******"}</span></div>
         </S.SaldoTotal>
     );
 }
