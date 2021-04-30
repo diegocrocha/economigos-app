@@ -3,7 +3,7 @@ import * as S from './style'
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../Charts/GroupBarChart'
 
-export default function BalancoMensal() {
+export default function BalancoMensal({dataReceitas, dataGastos}) {
     return (
         <S.BalancoMensal>
             <div>
@@ -16,7 +16,10 @@ export default function BalancoMensal() {
             </ul>
 
             <div className="barChart">
-                <GroupBarChart/>
+                <GroupBarChart
+                dataReceitas={dataReceitas}
+                dataGastos={dataGastos}
+                />
             </div>
         </S.BalancoMensal>
     )

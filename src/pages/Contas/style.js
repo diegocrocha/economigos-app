@@ -168,11 +168,11 @@ export const BalancoMensalContas = styled.div`
   border-radius: 14px;
 
   .tituloBalanco{
-    width: 93%;
+    width: 97%;
     height: 18%;
     display: flex;
     align-items: flex-end;
-    margin-left: 7%;
+    margin-left: 3%;
     
     img{
       height: 80%;
@@ -187,7 +187,11 @@ export const BalancoMensalContas = styled.div`
   }
 
   .chartBalanco{
-    height: 82%;
+    height: 68%;
+  }
+
+  .chartDescription{
+    
   }
 `;
 

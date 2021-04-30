@@ -9,7 +9,7 @@ import Alimentacao from "../../assets/alimentacao-fundo-redondo.svg";
 import Download from "../../assets/download.svg";
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'
-
+import * as G from "../../styles/globalComponents";
 
 export default function Contas() {
     const componente = [
@@ -67,15 +67,15 @@ export default function Contas() {
 
     return (
         <S.Contas className="animeRight">
-            <S.GroupMenu>
-                <S.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
-                <S.TabLayout id="TabLayout">
+            <G.GroupMenu>
+                <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
+                <G.TabLayout id="TabLayout">
                     {componente.map(comp => (
                         <ItemTab id={number++} active key={comp.id} nome={comp.nome} />
                     ))}
-                </S.TabLayout>
-                <S.ImgBtnProximo src={SetaProximo} alt="" />
-            </S.GroupMenu>
+                </G.TabLayout>
+                <G.ImgBtnProximo src={SetaProximo} alt="" />
+            </G.GroupMenu>
 
             <S.InfoItemSelected>
                 <S.GroupInfosConta>
@@ -116,10 +116,19 @@ export default function Contas() {
                     <span className="titleChart">Balanço Mensal</span>
                 </div>
                 <div className="chartBalanco" >
-                    <GroupBarChart/>
+                    <GroupBarChart 
+                        dataReceitas={[{ x: "Janeiro", y: 400 },
+                        { x: "Fevereiro", y: 120.0 },
+                        { x: "Março", y: 502.0 }
+                        ]}
+                        dataGastos={[{ x: "Janeiro", y: 110.0 },
+                        { x: "Fevereiro", y: 240.0 },
+                        { x: "Março", y: 200.0 },
+                        ]}
+                    />
                 </div>
-                <div>
-
+                <div className="chartDescription">
+                    
                 </div>
             </S.BalancoMensalContas>
         </S.Contas>
