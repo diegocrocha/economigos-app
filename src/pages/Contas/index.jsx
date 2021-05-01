@@ -8,6 +8,7 @@ import SetaProximo from "../../assets/seta-proximo.svg";
 import Lancamento from "../../components/Lancamento/Lancamento";
 import Cifrao from "../../assets/cifrao-fundo-redondo.svg";
 import Alimentacao from "../../assets/alimentacao-fundo-redondo.svg";
+import PorcoEconomigos from "../../assets/porco-economigos-cinza.svg";
 import Download from "../../assets/download.svg";
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'
@@ -65,34 +66,54 @@ export default function Contas() {
             gastos: "R$200.00 "
         }
     ]
-
+    
     const {dados} = React.useContext(UserContext);
     const [ativo, setAtivo] = React.useState(null);
     const [contas, setContas] = React.useState(null);
     const [detalheConta, setDetalheConta] = React.useState(null);
+    const [listaOrdenada, setListaOrdenada] = React.useState([]);
     
     React.useEffect(() => {
         fetchContas();
-    }, []);
+        ordenarLista();
+    }, [dados]);
+    
+    React.useEffect(() => {
+        if (contas != null) {
+            setAtivo(contas[0].id)
+        }
+    }, [contas]);
 
+    React.useEffect(() => {
+        fetchData();
+    }, [ativo]);
+    
     async function fetchContas() {
         if (dados) {
             const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-            setContas(response.data.contaDtos);
-            setAtivo(contas[0].id)
-            console.log(response.data.contaDtos);
-            fetchData()
+            setContas(await response.data.contaDtos);
         }
     }
     
     async function fetchData() {
-        if (dados) {
-            const response = await api.get(`/economigos/contas/${ativo}`);
-            setDetalheConta(response.data.contaDtos);
-            console.log(response.data.contaDtos);
+        if (ativo) {
+            const response = await api.get(`/economigos/contas/${ativo}/usuario/${dados.usuario.id}`);
+            setDetalheConta(response.data);
+            console.log(response.data);
         }
     }
 
+    function ordenarLista() {
+        let listaOrdenada = [];
+        
+        if (detalheConta != null) {
+            listaOrdenada.push(detalheConta.rendas);
+            listaOrdenada.push(detalheConta.gastos);
+        }
+
+        setListaOrdenada(listaOrdenada);
+        console.log(listaOrdenada);
+    }
 
     return (
         <S.Contas className="animeRight">
@@ -109,11 +130,11 @@ export default function Contas() {
             <S.InfoItemSelected>
                 <S.GroupInfosConta>
                     <p>Saldo da Conta</p>
-                    <div style={{ color: "#32A287" }}>R$<span>450,93</span></div>
+                    <div style={{ color: "#32A287" }}>R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', {minimumFractionDigits: 2}) : "0,00"}</span></div>
                 </S.GroupInfosConta>
                 <S.GroupInfosConta>
                     <p>Gasto da Conta</p>
-                    <div style={{ color: "#A23232" }}>R$<span>250,94</span></div>
+                    <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? detalheConta.totalGastos.toLocaleString('pt-br', {minimumFractionDigits: 2}) : "0,00"}</span></div>
                 </S.GroupInfosConta>
             </S.InfoItemSelected>
 
@@ -121,22 +142,31 @@ export default function Contas() {
                 <div className="Titulo">
                     <p>Últimas Atividades</p>
                 </div>
-                <div className="GroupAtividades">
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="2000,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="300,00" />
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="1500,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="50,00" />
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="500,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="800,00" />
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="985,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="30,00" />
-                </div>
-                <div className="DownloadUltimasAtividades">
-                    <div>
-                        Download Histórico
-                        <img src={Download} alt="" />
-                    </div>
-                </div>
+                
+                {detalheConta != null && listaOrdenada.length != 0 ? 
+                    (
+                        <S.GroupAtividades style={{overflowY: "none"}}>
+                            <img src={PorcoEconomigos} alt=""/>
+                            <p>Esta conta não possui atividades!</p>
+                        </S.GroupAtividades>
+                    )
+                    :
+                    (
+                        <>    
+                            <S.GroupAtividades style={{overflowY: "scroll"}}>
+                                {listaOrdenada.map(itemList => (
+                                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="300,00" />    
+                                ))}
+                            </S.GroupAtividades>
+                            <div className="DownloadUltimasAtividades">
+                                <div>
+                                    Download Histórico
+                                    <img src={Download} alt="" />
+                                </div>
+                            </div>
+                        </>
+                    ) 
+                }
             </S.UltimasAtividades>
 
             <S.BalancoMensalContas>
