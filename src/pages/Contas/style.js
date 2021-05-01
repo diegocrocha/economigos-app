@@ -1,4 +1,12 @@
 import styled from 'styled-components';
+import BalancoMensal from "../../components/BalancoMensal/BalancoMensal"
+
+export const Contas = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+`;
 
 export const TabLayout = styled.div`
   width: 75%;
@@ -89,20 +97,37 @@ export const UltimasAtividades = styled.div`
   border-radius: 14px;
 
   .Titulo{
-    width: 100%;
+    margin-left: 7%;
+    width: 93%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-content: center;
-    align-items: center;
-    height: 15%;
+    align-items: flex-end;
+    height: 18%;
     font-weight: 600;
     color: #32A287;
   }
 
   .GroupAtividades{
-    height: 70%;
+    height: 63%;
     width: 100%;
     overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .GroupAtividades::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .GroupAtividades::-webkit-scrollbar-track {
+    background: #C4C4C4;
+    border-radius: 14px;        /* color of the tracking area */
+  }
+
+  .GroupAtividades::-webkit-scrollbar-thumb {
+    background-color: #32A287;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #32A287;  /* creates padding around scroll thumb */
   }
 
   .DownloadUltimasAtividades{
@@ -111,7 +136,58 @@ export const UltimasAtividades = styled.div`
     justify-content: flex-end;
     align-content: center;
     align-items: center;
-    height: 15%;
+    height: 19%;
     margin-right: 2%;
+
+    div{
+      font-size: 0.6rem;
+      width: 45%;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      border: 1.5px solid #32A287;
+      padding: 2px;
+      border-radius: 7px;
+      font-weight: 500;
+      color: #32A287;
+
+      &:hover{
+        cursor: pointer;
+        box-shadow: 0px 0px 2px grey;
+      }
+    }
   }
-`
+`;
+
+export const BalancoMensalContas = styled.div`
+  width: 49.5%;
+  margin-left: 1%;
+  margin-top: 2%;
+  height: 48%;
+  border: 3px solid #E4E4E4;
+  border-radius: 14px;
+
+  .tituloBalanco{
+    width: 93%;
+    height: 18%;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 7%;
+    
+    img{
+      height: 80%;
+      margin-right: 2%;
+    }
+
+    .titleChart{
+      font-size: 1rem;
+      font-weight: 700;
+      color: #32A287;
+    }
+  }
+
+  .chartBalanco{
+    height: 82%;
+  }
+`;
+

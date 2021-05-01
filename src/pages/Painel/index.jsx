@@ -1,4 +1,5 @@
 import React from 'react'
+import * as S from "./style";
 import SaldoTotal from "../../components/SaldoTotal/SaldoTotal"
 import GastosPorCategoria from "../../components/GastosPorCategoria/GastosPorCategoria"
 import BalancoMensal from "../../components/BalancoMensal/BalancoMensal"
@@ -29,11 +30,16 @@ function Painel() {
   }
   
   return (
+<<<<<<< HEAD
     <>
         <SaldoTotal saldo={saldo != null && saldo}/>
+=======
+    <S.Painel className="animeRight">
+        <SaldoTotal/>
+>>>>>>> main
         <GastosPorCategoria/>
         <BalancoMensal/>
-    </>
+    </S.Painel>
   )
 }
 
