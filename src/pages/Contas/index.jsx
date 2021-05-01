@@ -1,4 +1,6 @@
 import React from 'react'
+import api from "../../services/api";
+import { UserContext } from '../../hooks/UserContext'
 import * as S from "./style";
 import ItemTab from "../../components/ItemTab/ItemTab";
 import BotaoAdicionar from "../../assets/botao-adicionar.svg";
@@ -10,6 +12,7 @@ import Download from "../../assets/download.svg";
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'
 import * as G from "../../styles/globalComponents";
+import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
 
 export default function Contas() {
     const componente = [
@@ -63,15 +66,41 @@ export default function Contas() {
         }
     ]
 
-    let number = 0
+    const {dados} = React.useContext(UserContext);
+    const [ativo, setAtivo] = React.useState(null);
+    const [contas, setContas] = React.useState(null);
+    const [detalheConta, setDetalheConta] = React.useState(null);
+    
+    React.useEffect(() => {
+        fetchContas();
+    }, []);
+
+    async function fetchContas() {
+        if (dados) {
+            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
+            setContas(response.data.contaDtos);
+            setAtivo(contas[0].id)
+            console.log(response.data.contaDtos);
+            fetchData()
+        }
+    }
+    
+    async function fetchData() {
+        if (dados) {
+            const response = await api.get(`/economigos/contas/${ativo}`);
+            setDetalheConta(response.data.contaDtos);
+            console.log(response.data.contaDtos);
+        }
+    }
+
 
     return (
         <S.Contas className="animeRight">
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <G.TabLayout id="TabLayout">
-                    {componente.map(comp => (
-                        <ItemTab id={number++} active key={comp.id} nome={comp.nome} />
+                    {contas && contas.map(conta => (
+                        <ItemTab setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
                 <G.ImgBtnProximo src={SetaProximo} alt="" />
@@ -116,7 +145,7 @@ export default function Contas() {
                     <span className="titleChart">Balanço Mensal</span>
                 </div>
                 <div className="chartBalanco" >
-                    <GroupBarChart 
+                    <GroupBarChart
                         dataReceitas={[{ x: "Janeiro", y: 400 },
                         { x: "Fevereiro", y: 120.0 },
                         { x: "Março", y: 502.0 }
@@ -128,7 +157,8 @@ export default function Contas() {
                     />
                 </div>
                 <div className="chartDescription">
-                    
+                    <ItemListaCategoria nome="Receitas" cor="#32A287" />
+                    <ItemListaCategoria nome="Gastos" cor="#A23232" />
                 </div>
             </S.BalancoMensalContas>
         </S.Contas>

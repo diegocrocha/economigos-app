@@ -153,7 +153,7 @@ export const UltimasAtividades = styled.div`
 
       &:hover{
         cursor: pointer;
-        box-shadow: 0px 0px 2px grey;
+        box-shadow: 0px 0px 5px grey;
       }
     }
   }
@@ -191,7 +191,13 @@ export const BalancoMensalContas = styled.div`
   }
 
   .chartDescription{
-    
+    height: 14%;
+    width: 75%;
+    margin-left: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
   }
 `;
 
