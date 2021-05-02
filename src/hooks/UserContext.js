@@ -32,7 +32,7 @@ export const UserStorage = ({ children }) => {
             setLogin(true);
             localStorage.setItem("email", email);
             localStorage.setItem("senha", password);
-            console.log(data);
+            // console.log(data);
         } catch (err) {
             setError(err.message)
             setLogin(false);
