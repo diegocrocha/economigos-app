@@ -27,6 +27,7 @@ export const Lancamento = styled.div`
             color: #312F2F;
             opacity: 0.5;
             width: 100%;
+            overflow: hidden;
             font-weight: 600;
             font-size: 0.6rem;
         }
@@ -34,8 +35,8 @@ export const Lancamento = styled.div`
         p:nth-child(odd){
             color: #312F2F;
             opacity: 1;
-            height: 20px;
-            font-size: 0.9rem;
+            height: 16px;
+            font-size: 0.8rem;
         }
     }
 
