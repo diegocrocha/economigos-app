@@ -23,8 +23,8 @@ export default function Contas() {
     const [contas, setContas] = React.useState(null);
     const [detalheConta, setDetalheConta] = React.useState(null);
     const [listaOrdenada, setListaOrdenada] = React.useState([]);
-    const [mesesAnterioresContaReceitas, setMesesAnterioresContaReceitas] = React.useState([]);
-    const [mesesAnterioresContaGastos, setMesesAnterioresContaGastos] = React.useState([]);
+    const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
+    const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
 
     React.useEffect(() => {
         fetchContas();
@@ -77,8 +77,8 @@ export default function Contas() {
                     y: response.data[1].valorMensalDtos[j].valor
                 })
             }
-            setMesesAnterioresContaReceitas(receitas);
-            setMesesAnterioresContaGastos(gastos);
+            setMesesAnterioresReceitas(receitas);
+            setMesesAnterioresGastos(gastos);
         }
     }
 
@@ -86,17 +86,14 @@ export default function Contas() {
         let listaOrdenada = [];
 
         if (detalheConta != null) {
-            console.log(detalheConta)
             for (const renda in detalheConta.rendas) {
                 listaOrdenada.push(detalheConta.rendas[Number(renda)]);
             }
             for (const gasto in detalheConta.gastos) {
-                listaOrdenada.push(gasto);
+                listaOrdenada.push(detalheConta.gastos[Number(gasto)]);
             }
         }
-
         setListaOrdenada(listaOrdenada);
-        console.log(listaOrdenada)
     }
 
     return (
@@ -127,7 +124,7 @@ export default function Contas() {
                     <p>Últimas Atividades</p>
                 </div>
 
-                {detalheConta != null && listaOrdenada.length == 0 ?
+                {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
                             <GreyPig/>
@@ -139,9 +136,9 @@ export default function Contas() {
                             <S.GroupAtividades style={{ overflowY: "scroll" }}>
                                 {listaOrdenada.map(itemList => (
                                     itemList.recebido ?
-                                        <Lancamento urlImage={Cifrao} titulo={itemList.descricao} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
                                         :
-                                        <Lancamento urlImage={Alimentacao} titulo={itemList.descricao} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
@@ -160,7 +157,7 @@ export default function Contas() {
                     <img src={barChart} alt="" />
                     <span className="titleChart">Balanço Mensal</span>
                 </div>
-                {detalheConta != null && listaOrdenada.length == 0 ?
+                {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
@@ -172,8 +169,8 @@ export default function Contas() {
                     (<>
                         <div className="chartBalanco" >
                             <GroupBarChart
-                                dataReceitas={mesesAnterioresContaReceitas}
-                                dataGastos={mesesAnterioresContaGastos}
+                                dataReceitas={mesesAnterioresReceitas}
+                                dataGastos={mesesAnterioresGastos}
                             />
                         </div>
                         <div className="chartDescription">
