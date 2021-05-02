@@ -1,4 +1,6 @@
 import React from 'react'
+import api from "../../services/api";
+import { UserContext } from '../../hooks/UserContext'
 import * as S from "./style";
 import ItemTab from "../../components/ItemTab/ItemTab";
 import BotaoAdicionar from "../../assets/botao-adicionar.svg";
@@ -6,85 +8,118 @@ import SetaProximo from "../../assets/seta-proximo.svg";
 import Lancamento from "../../components/Lancamento/Lancamento";
 import Cifrao from "../../assets/cifrao-fundo-redondo.svg";
 import Alimentacao from "../../assets/alimentacao-fundo-redondo.svg";
+import PorcoEconomigos from "../../assets/porco-economigos-cinza.svg";
 import Download from "../../assets/download.svg";
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'
-
+import * as G from "../../styles/globalComponents";
+import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
 
 export default function Contas() {
-    const componente = [
-        {
-            id: 1,
-            nome: "contaC6",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 2,
-            nome: "nubank",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 3,
-            nome: "Inter",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 4,
-            nome: "Santander",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 5,
-            nome: "contaC6",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 6,
-            nome: "nubank",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 7,
-            nome: "Inter",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        },
-        {
-            id: 8,
-            nome: "Santander",
-            saldo: "R$450.00",
-            gastos: "R$200.00 "
-        }
-    ]
 
-    let number = 0
+    const { dados } = React.useContext(UserContext);
+    const [ativo, setAtivo] = React.useState(null);
+    const [contas, setContas] = React.useState(null);
+    const [detalheConta, setDetalheConta] = React.useState(null);
+    const [listaOrdenada, setListaOrdenada] = React.useState([]);
+    const [mesesAnterioresContaReceitas, setMesesAnterioresContaReceitas] = React.useState([]);
+    const [mesesAnterioresContaGastos, setMesesAnterioresContaGastos] = React.useState([]);
+
+    React.useEffect(() => {
+        fetchContas();
+    }, [dados]);
+
+    React.useEffect(() => {
+        if (contas != null) {
+            setAtivo(contas[0].id)
+        }
+    }, [contas]);
+
+    React.useEffect(() => {
+        fetchData();
+    }, [ativo]);
+
+    React.useEffect(() => {
+        ordenarLista();
+        fetchDataDash();
+    }, [detalheConta, ativo]);
+
+    async function fetchContas() {
+        if (dados) {
+            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
+            setContas(await response.data.contaDtos);
+        }
+    }
+
+    async function fetchData() {
+        if (ativo) {
+            const response = await api.get(`/economigos/contas/${ativo}/usuario/${dados.usuario.id}`);
+            setDetalheConta(response.data);
+        }
+    }
+
+    async function fetchDataDash() {
+        if (ativo) {
+            const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`);
+            console.log("aqui ó")
+            console.log(response.data)
+            let gastos = []
+            let receitas = []
+
+            for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
+                gastos.push({
+                    x: response.data[0].valorMensalDtos[j].mes,
+                    y: response.data[0].valorMensalDtos[j].valor
+                })
+            }
+            for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
+                receitas.push({
+                    x: response.data[1].valorMensalDtos[j].mes,
+                    y: response.data[1].valorMensalDtos[j].valor
+                })
+            }
+            setMesesAnterioresContaReceitas(receitas);
+            setMesesAnterioresContaGastos(gastos);
+        }
+    }
+
+    function ordenarLista() {
+        let listaOrdenada = [];
+
+        if (detalheConta != null) {
+            console.log(detalheConta)
+            for (const renda in detalheConta.rendas) {
+                listaOrdenada.push(detalheConta.rendas[Number(renda)]);
+            }
+            for (const gasto in detalheConta.gastos) {
+                listaOrdenada.push(gasto);
+            }
+        }
+
+        setListaOrdenada(listaOrdenada);
+        console.log(listaOrdenada)
+    }
 
     return (
         <S.Contas className="animeRight">
-            <S.GroupMenu>
-                <S.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
-                <S.TabLayout id="TabLayout">
-                    {componente.map(comp => (
-                        <ItemTab id={number++} active key={comp.id} nome={comp.nome} />
+            <G.GroupMenu>
+                <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
+                <G.TabLayout id="TabLayout">
+                    {contas && contas.map(conta => (
+                        <ItemTab setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
                     ))}
-                </S.TabLayout>
-                <S.ImgBtnProximo src={SetaProximo} alt="" />
-            </S.GroupMenu>
+                </G.TabLayout>
+                <G.ImgBtnProximo src={SetaProximo} alt="" />
+            </G.GroupMenu>
 
             <S.InfoItemSelected>
                 <S.GroupInfosConta>
                     <p>Saldo da Conta</p>
-                    <div style={{ color: "#32A287" }}>R$<span>450,93</span></div>
+                    <div style={{ color: "#32A287" }}>R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
                 </S.GroupInfosConta>
                 <S.GroupInfosConta>
                     <p>Gasto da Conta</p>
-                    <div style={{ color: "#A23232" }}>R$<span>250,94</span></div>
+                    <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? detalheConta.totalGastos.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
                 </S.GroupInfosConta>
             </S.InfoItemSelected>
 
@@ -92,22 +127,34 @@ export default function Contas() {
                 <div className="Titulo">
                     <p>Últimas Atividades</p>
                 </div>
-                <div className="GroupAtividades">
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="2000,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="300,00" />
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="1500,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="50,00" />
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="500,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="800,00" />
-                    <Lancamento urlImage={Cifrao} titulo="Salario" data="20/10/20" valor="985,00" receita />
-                    <Lancamento urlImage={Alimentacao} titulo="Salario" data="20/10/20" valor="30,00" />
-                </div>
-                <div className="DownloadUltimasAtividades">
-                    <div>
-                        Download Histórico
-                        <img src={Download} alt="" />
-                    </div>
-                </div>
+
+                {detalheConta != null && listaOrdenada.length == 0 ?
+                    (
+                        <S.GroupAtividades style={{ overflowY: "none" }}>
+                            <img className="porcoCinza" src={PorcoEconomigos} alt="" />
+                            <p className="textoSemLancamentos">Esta conta não possui atividades!</p>
+                        </S.GroupAtividades>
+                    )
+                    :
+                    (
+                        <>
+                            <S.GroupAtividades style={{ overflowY: "scroll" }}>
+                                {listaOrdenada.map(itemList => (
+                                    itemList.recebido ?
+                                        <Lancamento urlImage={Cifrao} titulo={itemList.descricao} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        :
+                                        <Lancamento urlImage={Alimentacao} titulo={itemList.descricao} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                ))}
+                            </S.GroupAtividades>
+                            <div className="DownloadUltimasAtividades">
+                                <div>
+                                    Download Histórico
+                                    <img src={Download} alt="" />
+                                </div>
+                            </div>
+                        </>
+                    )
+                }
             </S.UltimasAtividades>
 
             <S.BalancoMensalContas>
@@ -115,12 +162,49 @@ export default function Contas() {
                     <img src={barChart} alt="" />
                     <span className="titleChart">Balanço Mensal</span>
                 </div>
-                <div className="chartBalanco" >
-                    <GroupBarChart/>
-                </div>
-                <div>
+                {detalheConta != null && listaOrdenada.length == 0 ?
+                    (
+                        <>
+                            <S.GroupAtividades style={{ overflowY: "none" }}>
+                                <img className="porcoCinza" src={PorcoEconomigos} alt="" />
+                                <p className="textoSemLancamentos">Esta conta não possui atividades!</p>
+                            </S.GroupAtividades>
+                        </>
+                    )
+                    :
+                    (<>
+                        <div className="chartBalanco" >
+                            <GroupBarChart
+                                // dataReceitas={[{ x: "Janeiro", y: 400 },
+                                // { x: "Fevereiro", y: 120.0 },
+                                // { x: "Março", y: 502.0 }
+                                // ]}
+                                // dataGastos={[{ x: "Janeiro", y: 110.0 },
+                                // { x: "Fevereiro", y: 240.0 },
+                                // { x: "Março", y: 200.0 },
+                                // ]}
 
-                </div>
+
+                                dataReceitas={mesesAnterioresContaReceitas}
+                                dataGastos={mesesAnterioresContaGastos}
+
+                            // dataReceitas={[{ x: mesesAnterioresConta[1].valorMensalDtos[2].mes, y: mesesAnterioresConta[1].valorMensalDtos[2].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
+                            // { x: mesesAnterioresConta[1].valorMensalDtos[1].mes, y: mesesAnterioresConta[1].valorMensalDtos[1].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
+                            // { x: mesesAnterioresConta[1].valorMensalDtos[0].mes, y: mesesAnterioresConta[1].valorMensalDtos[0].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }
+                            // ]}
+                            // dataGastos={[{ x: mesesAnterioresConta[0].valorMensalDtos[2].mes, y: mesesAnterioresConta[0].valorMensalDtos[2].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
+                            // { x: mesesAnterioresConta[0].valorMensalDtos[1].mes, y: mesesAnterioresConta[0].valorMensalDtos[1].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
+                            // { x: mesesAnterioresConta[0].valorMensalDtos[0].mes, y: mesesAnterioresConta[0].valorMensalDtos[0].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
+                            // ]}
+
+                            />
+                        </div>
+                        <div className="chartDescription">
+                            <ItemListaCategoria nome="Receitas" cor="#32A287" />
+                            <ItemListaCategoria nome="Gastos" cor="#A23232" />
+                        </div>
+                    </>)
+                }
             </S.BalancoMensalContas>
         </S.Contas>
 
