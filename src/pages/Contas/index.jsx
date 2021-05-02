@@ -78,14 +78,14 @@ export default function Contas() {
             </S.GroupMenu>
 
             <S.InfoItemSelected>
-                <S.GroupInfosConta>
+                <S.GroupInfosContaCartao>
                     <p>Saldo da Conta</p>
                     <div style={{ color: "#32A287" }}>R$<span>450,93</span></div>
-                </S.GroupInfosConta>
-                <S.GroupInfosConta>
+                </S.GroupInfosContaCartao>
+                <S.GroupInfosContaCartao>
                     <p>Gasto da Conta</p>
                     <div style={{ color: "#A23232" }}>R$<span>250,94</span></div>
-                </S.GroupInfosConta>
+                </S.GroupInfosContaCartao>
             </S.InfoItemSelected>
 
             <S.UltimasAtividades>

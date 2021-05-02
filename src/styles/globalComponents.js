@@ -40,3 +40,43 @@ export const ImgBtnProximo = styled.img`
       filter: drop-shadow(1px 0px 3px grey);
     }
 `;
+
+export const InfoItemSelected = styled.div`
+    margin-top: -5px;
+    height: 23%;
+    width: 100%;
+    background-color: #E4E4E4;
+    border: 3px solid #E4E4E4;
+    border-bottom: none;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+`;
+
+export const GroupInfosContaCartao = styled.div`
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    p{
+      width: 100%;
+      font-weight: 600;
+    }
+
+    div{
+      width: 100%;
+      font-weight: 700;
+      font-size: 0.9rem;
+
+      span{
+        font-size: 1.9rem;
+      }
+    }
+`

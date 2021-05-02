@@ -30,13 +30,8 @@ function Painel() {
   }
   
   return (
-<<<<<<< HEAD
-    <>
-        <SaldoTotal saldo={saldo != null && saldo}/>
-=======
     <S.Painel className="animeRight">
         <SaldoTotal/>
->>>>>>> main
         <GastosPorCategoria/>
         <BalancoMensal/>
     </S.Painel>
