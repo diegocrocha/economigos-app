@@ -7,7 +7,8 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
     let fontSizeLabelY = dataReceitas.length == 3 ? 35 : 50;
 
     return (
-        <VictoryChart domainPadding={{ x: 125 }}
+        <VictoryChart 
+            domainPadding={{ x: 225}}
             animate={{ duration: 350 }}
             labelComponent={<VictoryTooltip />}
             width={dataReceitas.length == 3 ? 750 : 1700}
@@ -25,6 +26,7 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
                 }}
                 theme={VictoryTheme.material} />
             <VictoryAxis
+                // tickFormat={(t) => `${Math.round(t)}k`}
                 dependentAxis
                 orientation="left"
                 style={{

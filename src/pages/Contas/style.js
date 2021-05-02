@@ -142,19 +142,6 @@ export const GroupAtividades = styled.div`
   width: 100%;
   overflow: hidden;
 
-  .porcoCinza{
-    height: 80%;
-    margin: auto;
-  }
-
-  .textoSemLancamentos{
-    font-size: 0.7rem;
-    width: 100%;
-    text-align: center;
-    margin-top: 0.2rem;
-    color: #ababab;
-  }
-
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -214,6 +201,7 @@ export const BalancoMensalContas = styled.div`
 
   .chartBalanco{
     height: 68%;
+    width: 108%;
   }
 
   .chartDescription{

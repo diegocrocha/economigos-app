@@ -14,6 +14,7 @@ import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'
 import * as G from "../../styles/globalComponents";
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
+import GreyPig from "../../components/GreyPig/GreyPig";
 
 export default function Contas() {
 
@@ -61,8 +62,6 @@ export default function Contas() {
     async function fetchDataDash() {
         if (ativo) {
             const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`);
-            console.log("aqui ó")
-            console.log(response.data)
             let gastos = []
             let receitas = []
 
@@ -131,8 +130,7 @@ export default function Contas() {
                 {detalheConta != null && listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <img className="porcoCinza" src={PorcoEconomigos} alt="" />
-                            <p className="textoSemLancamentos">Esta conta não possui atividades!</p>
+                            <GreyPig/>
                         </S.GroupAtividades>
                     )
                     :
@@ -166,8 +164,7 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <img className="porcoCinza" src={PorcoEconomigos} alt="" />
-                                <p className="textoSemLancamentos">Esta conta não possui atividades!</p>
+                                <GreyPig/>
                             </S.GroupAtividades>
                         </>
                     )
@@ -175,28 +172,8 @@ export default function Contas() {
                     (<>
                         <div className="chartBalanco" >
                             <GroupBarChart
-                                // dataReceitas={[{ x: "Janeiro", y: 400 },
-                                // { x: "Fevereiro", y: 120.0 },
-                                // { x: "Março", y: 502.0 }
-                                // ]}
-                                // dataGastos={[{ x: "Janeiro", y: 110.0 },
-                                // { x: "Fevereiro", y: 240.0 },
-                                // { x: "Março", y: 200.0 },
-                                // ]}
-
-
                                 dataReceitas={mesesAnterioresContaReceitas}
                                 dataGastos={mesesAnterioresContaGastos}
-
-                            // dataReceitas={[{ x: mesesAnterioresConta[1].valorMensalDtos[2].mes, y: mesesAnterioresConta[1].valorMensalDtos[2].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
-                            // { x: mesesAnterioresConta[1].valorMensalDtos[1].mes, y: mesesAnterioresConta[1].valorMensalDtos[1].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
-                            // { x: mesesAnterioresConta[1].valorMensalDtos[0].mes, y: mesesAnterioresConta[1].valorMensalDtos[0].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }
-                            // ]}
-                            // dataGastos={[{ x: mesesAnterioresConta[0].valorMensalDtos[2].mes, y: mesesAnterioresConta[0].valorMensalDtos[2].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
-                            // { x: mesesAnterioresConta[0].valorMensalDtos[1].mes, y: mesesAnterioresConta[0].valorMensalDtos[1].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
-                            // { x: mesesAnterioresConta[0].valorMensalDtos[0].mes, y: mesesAnterioresConta[0].valorMensalDtos[0].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 }) },
-                            // ]}
-
                             />
                         </div>
                         <div className="chartDescription">
