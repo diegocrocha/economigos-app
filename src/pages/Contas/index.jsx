@@ -55,7 +55,6 @@ export default function Contas() {
         if (ativo) {
             const response = await api.get(`/economigos/contas/${ativo}/usuario/${dados.usuario.id}`);
             setDetalheConta(response.data);
-            console.log(response.data)
         }
     }
 
@@ -79,9 +78,6 @@ export default function Contas() {
             }
             setMesesAnterioresReceitas(receitas);
             setMesesAnterioresGastos(gastos);
-            if (listaOrdenada) {
-                console.log(listaOrdenada)
-            }
         }
     }
 
@@ -140,9 +136,9 @@ export default function Contas() {
                             <S.GroupAtividades style={{ overflowY: "scroll" }}>
                                 {listaOrdenada.map(itemList => (
                                     itemList.recebido ?
-                                        <Lancamento urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
                                         :
-                                        <Lancamento urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
