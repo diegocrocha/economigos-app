@@ -9,13 +9,21 @@ import api from '../../services/api'
 
 function Painel() {
   const { dados } = React.useContext(UserContext);
-  const { saldo, setSaldo } = React.useState(null);
+  const [ saldo, setSaldo ] = React.useState(null);
   const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
   const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
 
   React.useEffect(() => {
     fetchDataDash()
+    fetchSaldo()
   }, [dados])
+
+  async function fetchSaldo() {
+    if (dados) {
+      const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
+      setSaldo(response.data.valorAtual)
+    }
+  }
 
   async function fetchDataDash() {
     if (!(dados == null)) {
@@ -43,10 +51,13 @@ function Painel() {
 
   return (
     <S.Painel className="animeRight">
-      <SaldoTotal />
+      <SaldoTotal  saldo={saldo}/>
       <GastosPorCategoria />
       <BalancoMensal
-        isEmpty={mesesAnterioresReceitas.length > 0 && mesesAnterioresGastos.length > 0 && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) + mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
+        isEmpty={mesesAnterioresReceitas.length > 0 
+          && mesesAnterioresGastos.length > 0 
+          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) + 
+          mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
         dataReceitas={mesesAnterioresReceitas}
         dataGastos={mesesAnterioresGastos}
       />
