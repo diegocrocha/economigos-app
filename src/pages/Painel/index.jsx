@@ -9,36 +9,57 @@ import api from '../../services/api'
 
 function Painel() {
   const { dados } = React.useContext(UserContext);
-  const { saldo, setSaldo } = React.useState(null);
+  const [ saldo, setSaldo ] = React.useState(null);
+  const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
+  const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
 
-  // React.useEffect(() => {
-  //   async function fetchData() {
-  //     if (dados) {
-  //       const response = await api.get(`/economigos/u/${dados.id}`);
-  //       setData(await );
-  //     }
-  //   }
-  //   fetchData();
-  // }, [dados]);
+  React.useEffect(() => {
+    fetchDataDash()
+    fetchSaldo()
+  }, [dados])
 
+  async function fetchSaldo() {
+    if (dados) {
+      const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
+      setSaldo(response.data.valorAtual)
+    }
+  }
+
+  async function fetchDataDash() {
+    if (!(dados == null)) {
+      const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
+      
+      let gastos = []
+      let receitas = []
+
+      for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
+        gastos.push({
+          x: response.data[0].valorMensalDtos[j].mes,
+          y: response.data[0].valorMensalDtos[j].valor
+        })
+      }
+      for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
+        receitas.push({
+          x: response.data[1].valorMensalDtos[j].mes,
+          y: response.data[1].valorMensalDtos[j].valor
+        })
+      }
+      setMesesAnterioresReceitas(receitas);
+      setMesesAnterioresGastos(gastos);
+    }
+  }
 
   return (
     <S.Painel className="animeRight">
-      <SaldoTotal />
+      <SaldoTotal  saldo={saldo}/>
       <GastosPorCategoria />
       <BalancoMensal
-        dataReceitas={[{ x: "Janeiro", y: 400 },
-        { x: "Fevereiro", y: 120.0 },
-        { x: "Março", y: 502.0 },
-        { x: "Abril", y: 690.0 },
-        { x: "Maio", y: 340.0 }]
-        }
-        dataGastos={[{ x: "Janeiro", y: 110.0 },
-        { x: "Fevereiro", y: 240.0 },
-        { x: "Março", y: 200.0 },
-        { x: "Abril", y: 500.0 },
-        { x: "Maio", y: 100.0 }]
-        }
+        isEmpty={mesesAnterioresReceitas.length > 0 
+          && mesesAnterioresGastos.length > 0 
+          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) + 
+          mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
+        dataReceitas={mesesAnterioresReceitas}
+        dataGastos={mesesAnterioresGastos}
       />
     </S.Painel>
   )

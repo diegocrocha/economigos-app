@@ -14,6 +14,7 @@ import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'
 import * as G from "../../styles/globalComponents";
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
+import GreyPig from "../../components/GreyPig/GreyPig";
 
 export default function Contas() {
 
@@ -126,8 +127,7 @@ export default function Contas() {
                 {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <img className="porcoCinza" src={PorcoEconomigos} alt="" />
-                            <p className="textoSemLancamentos">Esta conta não possui atividades!</p>
+                            <GreyPig/>
                         </S.GroupAtividades>
                     )
                     :
@@ -161,8 +161,7 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <img className="porcoCinza" src={PorcoEconomigos} alt="" />
-                                <p className="textoSemLancamentos">Esta conta não possui atividades!</p>
+                                <GreyPig/>
                             </S.GroupAtividades>
                         </>
                     )

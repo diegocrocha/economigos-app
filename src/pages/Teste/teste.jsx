@@ -1,5 +1,4 @@
 import React from 'react'
-// import Carousel from 'react-elastic-carousel';
 // import ItemTab from "../../components/ItemTab/ItemTab";
 
 
@@ -15,14 +14,14 @@ export default function teste() {
     // // }
     // // const { items } = this.state;
 
-    // return (
-    //     <Carousel>
-    //         <ItemTab/>
-    //         <ItemTab/>
-    //         <ItemTab/>
-    //         <ItemTab/>
-    //         <ItemTab/>
-    //     </Carousel>
+    return (<></>
+        // <Carousel>
+        //     <ItemTab/>
+        //     <ItemTab/>
+        //     <ItemTab/>
+        //     <ItemTab/>
+        //     <ItemTab/>
+        // </Carousel>
 
-    // )
+    )
 }

@@ -2,8 +2,9 @@ import React from 'react'
 import * as S from './style'
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../Charts/GroupBarChart'
+import GreyPig from "../../components/GreyPig/GreyPig";
 
-export default function BalancoMensal({dataReceitas, dataGastos}) {
+export default function BalancoMensal({isEmpty, dataReceitas, dataGastos}) {
     return (
         <S.BalancoMensal>
             <div>
@@ -14,13 +15,16 @@ export default function BalancoMensal({dataReceitas, dataGastos}) {
                 <S.DescricaoBalancoMensal cor={"#32A287"} nome={"Receitas"}/>
                 <S.DescricaoBalancoMensal cor={"#A23232"} nome={"Gastos"}/>
             </ul>
-
-            <div className="barChart">
-                <GroupBarChart
-                dataReceitas={dataReceitas}
-                dataGastos={dataGastos}
-                />
-            </div>
+            {isEmpty ?
+                <GreyPig height={40}/>
+                : 
+                <div className="barChart">
+                    <GroupBarChart
+                    dataReceitas={dataReceitas}
+                    dataGastos={dataGastos}
+                    />
+                </div>
+            }
         </S.BalancoMensal>
     )
 }
