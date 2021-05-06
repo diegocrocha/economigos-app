@@ -1,19 +1,24 @@
 import React from 'react'
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryTheme } from 'victory';
 
-export default function GroupBarChart() {
+export default function GroupBarChart({dataReceitas, dataGastos}) {
+    
+    let fontSizeLabelX = dataReceitas.length == 3 ? 30 : 44;
+    let fontSizeLabelY = dataReceitas.length == 3 ? 35 : 50;
+
     return (
-        <VictoryChart domainPadding={{ x: 125 }}
+        <VictoryChart 
+            domainPadding={{ x: 225}}
             animate={{ duration: 350 }}
             labelComponent={<VictoryTooltip />}
-            width={1700}
-            height={600}
+            width={dataReceitas.length == 3 ? 750 : 1700}
+            height={dataReceitas.length == 3 ? 400 : 600}
         >
             <VictoryAxis
                 key="x-axis"
                 style={{
                     tickLabels: {
-                        fontSize: 44,
+                        fontSize: fontSizeLabelX,
                         fontFamily: "Poppins",
                         fontWeight: "bold",
                         fill: "#4d4d4d"
@@ -21,11 +26,12 @@ export default function GroupBarChart() {
                 }}
                 theme={VictoryTheme.material} />
             <VictoryAxis
+                // tickFormat={(t) => `${Math.round(t)}k`}
                 dependentAxis
                 orientation="left"
                 style={{
                     tickLabels: {
-                        fontSize: 50,
+                        fontSize: fontSizeLabelY,
                         fontFamily: "Poppins",
                         fontWeight: "bold",
                         fill: "#4d4d4d"
@@ -35,13 +41,13 @@ export default function GroupBarChart() {
                 <VictoryBar
                     cornerRadius={{ topLeft: 20, topRight: 20 }}
                     alignment="end"
-                    style={{ data: { fill: "rgb(50, 162, 135)", width: 40 } }}
-                    data={[{ x: "Janeiro", y: 400 }, { x: "Fevereiro", y: 120.0 }, { x: "Março", y: 502.0 }, { x: "Abril", y: 690.0 }, { x: "Maio", y: 340.0 }]} />
+                    style={{ data: { fill: "rgb(50, 162, 135)", width: 35 } }}
+                    data={dataReceitas} />
                 <VictoryBar
                     cornerRadius={{ topLeft: 20, topRight: 20 }}
                     alignment="start"
-                    style={{ data: { fill: "#A23232", width: 40 } }}
-                    data={[{ x: "Janeiro", y: 110.0 }, { x: "Fevereiro", y: 240.0 }, { x: "Março", y: 200.0 }, { x: "Abril", y: 500.0 }, { x: "Maio", y: 100.0 }]} />
+                    style={{ data: { fill: "#A23232", width: 35 } }}
+                    data={dataGastos} />
             </VictoryGroup>
 
         </VictoryChart>

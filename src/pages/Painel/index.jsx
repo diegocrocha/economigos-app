@@ -8,32 +8,59 @@ import api from '../../services/api'
 
 
 function Painel() {
-  const {dados} = React.useContext(UserContext);
-  const [saldo, setSaldo] = React.useState(null);
-  const [info, setInfo] = React.useState(null);
+  const { dados } = React.useContext(UserContext);
+  const [ saldo, setSaldo ] = React.useState(null);
+  const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
+  const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
 
   React.useEffect(() => {
-    fetchData();
-  }, []);
+    fetchDataDash()
+    fetchSaldo()
+  }, [dados])
 
-  React.useEffect(() => {
-    if (info != null) {
-      setSaldo(info.valorAtual)
-    }
-  }, [info])
-  
-  async function fetchData() {
+  async function fetchSaldo() {
     if (dados) {
-      const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-      setInfo(await response.data);
+      const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
+      setSaldo(response.data.valorAtual)
     }
   }
-  
+
+  async function fetchDataDash() {
+    if (!(dados == null)) {
+      const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
+      
+      let gastos = []
+      let receitas = []
+
+      for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
+        gastos.push({
+          x: response.data[0].valorMensalDtos[j].mes,
+          y: response.data[0].valorMensalDtos[j].valor
+        })
+      }
+      for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
+        receitas.push({
+          x: response.data[1].valorMensalDtos[j].mes,
+          y: response.data[1].valorMensalDtos[j].valor
+        })
+      }
+      setMesesAnterioresReceitas(receitas);
+      setMesesAnterioresGastos(gastos);
+    }
+  }
+
   return (
     <S.Painel className="animeRight">
-        <SaldoTotal/>
-        <GastosPorCategoria/>
-        <BalancoMensal/>
+      <SaldoTotal  saldo={saldo}/>
+      <GastosPorCategoria />
+      <BalancoMensal
+        isEmpty={mesesAnterioresReceitas.length > 0 
+          && mesesAnterioresGastos.length > 0 
+          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) + 
+          mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
+        dataReceitas={mesesAnterioresReceitas}
+        dataGastos={mesesAnterioresGastos}
+      />
     </S.Painel>
   )
 }
