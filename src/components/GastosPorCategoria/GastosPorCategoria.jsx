@@ -2,6 +2,7 @@ import React from 'react'
 import * as S from './style'
 import moedaGasto from '../../assets/moeda-gasto.svg'
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria"
+import GroupPieChart from "../../components/Charts/GroupPieChart";
 
 export default function GastosPorCategoria() {
     return (
@@ -18,7 +19,7 @@ export default function GastosPorCategoria() {
                 </ul>
             </div>
             <div className="graficoDeCategorias">
-                
+                <GroupPieChart/>
             </div>
         </S.GastosPorCategoria>
     )
