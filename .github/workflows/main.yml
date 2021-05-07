@@ -20,7 +20,7 @@ jobs:
         
     - name: List dir
       run: |
-        ls
+        ls ./public
 
     - name: npm install, build and test
       run: |
