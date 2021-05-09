@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Meta = styled.div`
-    height: 50%;
+    height: 49.5%;
     width: 275px;
     margin-top: 0%;
     border: 3px solid #E4E4E4;
@@ -10,6 +10,7 @@ export const Meta = styled.div`
 
     .nome{
         width: 100%;
+        font-size: 1vw;
         border-bottom: 1.5px solid #32A287;
         display: flex;
         align-content: center;
@@ -36,7 +37,7 @@ export const Meta = styled.div`
 
     .progresso{
         width: 100%;
-        height: 20%;
+        height: 23%;
         display: flex;
         justify-content: space-around;
         align-content: center;
@@ -67,14 +68,14 @@ export const Meta = styled.div`
 
         img{
             width: 10%;
-            height: 70%;
+            height: 67%;
         }
     }
 
     .alteracoes{
         width: 100%;
         height: 10%;
-        margin-top: 1%;
+        margin-top: 2%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -84,7 +85,7 @@ export const Meta = styled.div`
             width: 100%;
             height: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             transition: filter 0.2s ease;
 
@@ -93,8 +94,7 @@ export const Meta = styled.div`
                 filter: drop-shadow(0px 0.2px 0.5px grey);
             }
 
-            &:nth-child(even){
-                justify-content: center;
+            &:nth-child(odd){
                 margin-left: -10%;
             }
 

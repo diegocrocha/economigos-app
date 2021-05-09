@@ -2,7 +2,6 @@ import React from 'react'
 import * as S from "./style";
 import Bandeira from "../../assets/bandeira.svg";
 import Edit from "../../assets/edit.svg";
-import Compartilhar from "../../assets/compartilhar.svg";
 import CifraoFundoRedondo from "../../assets/cifrao-fundo-redondo.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 
@@ -18,7 +17,7 @@ export default function CardMetas({ nome, urlImage, descricao, valorInicial, val
             <div className="progresso">
                 <div className="textBarra">
                     <p className="textProgress">R${Number(valorInicial).toLocaleString('pt-br', { minimumFractionDigits: 2 })} de R${Number(valorFinal).toLocaleString('pt-br', { minimumFractionDigits: 2 })}</p>
-                    <ProgressBar completed={((Number(valorInicial) * 100) / Number(valorFinal)).toFixed(0)} height="10px" bgColor="#32A287" labelSize="0px" isLabelVisible="false" />
+                    <ProgressBar completed={((Number(valorInicial) * 100) / Number(valorFinal)).toFixed(0)} height="10px" bgColor="#32A287" labelSize="0px" labelAlignment="center"/>
                 </div>
                 <img src={Bandeira} alt="" />
             </div>
@@ -30,10 +29,6 @@ export default function CardMetas({ nome, urlImage, descricao, valorInicial, val
                 <div>
                     <img src={Edit} alt="" />
                     <p>Editar</p>
-                </div>
-                <div>
-                    <img src={Compartilhar} alt="" />
-                    <p>Compartilhar</p>
                 </div>
             </div>
         </S.Meta>
