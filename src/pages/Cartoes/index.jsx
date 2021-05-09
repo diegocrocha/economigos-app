@@ -14,10 +14,10 @@ export default function Cartoes() {
                     {/* {componente.map(comp => (
                         <ItemTab id={number++} active key={comp.id} nome={comp.nome} />
                     ))} */}
-                    <ItemTab active nome={"nubank"} />
-                    <ItemTab nome={"c6 Bank"} />
-                    <ItemTab nome={"Itaú"} />
-                    <ItemTab nome={"Inter"} />
+                    <ItemTab nome={"nubank"} />
+                    <ItemTab active nome={"c6 Bank"} />
+                    <ItemTab active nome={"Itaú"} />
+                    <ItemTab active nome={"Inter"} />
                 </G.TabLayout>
                 <G.ImgBtnProximo src={SetaProximo} alt="" />
             </G.GroupMenu>

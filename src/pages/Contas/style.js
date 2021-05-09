@@ -200,8 +200,8 @@ export const BalancoMensalContas = styled.div`
   }
 
   .chartBalanco{
-    height: 68%;
-    width: 108%;
+    max-width: 100%;
+    padding: 10px;
   }
 
   .chartDescription{
