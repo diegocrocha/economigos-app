@@ -21,6 +21,7 @@ export const OpcoesAcessoRapido = styled.button`
 `
 
 export const NomeOpcaoDinheiro = styled.div`
+    font-size: clamp(0.8vw,1.1vw, 2vw);
     height: 100%;
     width: 70%;
     display: flex;
