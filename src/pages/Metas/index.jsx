@@ -26,7 +26,7 @@ export default function Metas() {
     console.log(metas)
 
     return (
-        <>
+        <S.Metas className="animeRight">
             <S.NavMetas>
                 <BotaoMenuMetas nome="Metas Ativas" active />
                 <BotaoMenuMetas nome="Metas Inativas" />
@@ -42,6 +42,6 @@ export default function Metas() {
                     ))
                 }
             </S.Cards>
-        </>
+        </S.Metas>
     )
 }

@@ -1,26 +1,34 @@
 import styled from 'styled-components';
 
 export const NavMetas = styled.div`
-    height: 15%;
+    height: 11%;
     width: 80%;
     border: 3px solid #E4E4E4;
-    border-radius: 14px;
+    border-radius: 10px;
     display: flex;
     align-content: center;
     align-items: center;
     justify-content: space-between;
 `;
 
+export const Metas = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+`
+
 export const AdicionarMeta = styled.div`
-    height: 15%;
-    width: 20%;
+    height: 11%;
+    width: 17%;
     display: flex;
     align-content: center;
     align-items: center;
     justify-content: center;
 
     img{
-        height: 60%;
+        height: 80%;
 
         &:hover{
             cursor: pointer;
@@ -30,8 +38,7 @@ export const AdicionarMeta = styled.div`
 `;
 
 export const Cards = styled.div`
-    margin-top: 3%;
-    height: 82%;
+    height: 85%;
     display: flex;
     grid-gap: 3px;
     overflow-x: hidden;
