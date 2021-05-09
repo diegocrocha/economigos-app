@@ -127,7 +127,7 @@ export default function Contas() {
                 {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <GreyPig/>
+                            <GreyPig mensagem="Esta conta não possui atividades!"/>
                         </S.GroupAtividades>
                     )
                     :
@@ -161,7 +161,7 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <GreyPig/>
+                                <GreyPig mensagem="Esta conta não pussui lançamentos!"/>
                             </S.GroupAtividades>
                         </>
                     )
