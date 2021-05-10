@@ -14,7 +14,7 @@ export const ItemTab = styled.div`
 
     img{
         margin-top: 10%;
-        height: 4rem;
+        height: 60%;
         width: 100%;
         margin-bottom: 3%;
     }
