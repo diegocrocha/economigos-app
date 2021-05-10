@@ -6,6 +6,7 @@ import BotaoMenuMetas from "../../components/BotaoMenuMetas/BotaoMenuMetas";
 import BotaoAdicionar from "../../assets/botao-adicionar.svg";
 import Aviao from "../../assets/aviao.svg";
 import CardMetas from "../../components/CardMetas/CardMetas";
+import GreyPig from "../../components/GreyPig/GreyPig";
 
 export default function Metas() {
 
@@ -35,13 +36,18 @@ export default function Metas() {
             <S.AdicionarMeta>
                 <img src={BotaoAdicionar} alt="" />
             </S.AdicionarMeta>
-            <S.Cards style={metas.length > 2 ? {overflowY: "scroll"} : {overflowY: "hidden"}}>
-                {
-                    metas.map(itemMeta => (
-                        <CardMetas nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorInicial + 1000} />
-                    ))
-                }
-            </S.Cards>
+            {
+                metas.length == 0 ?
+                    <GreyPig height="50" mensagem="Esta conta não possui metas!"/>
+                    :
+                    <S.Cards style={metas.length > 2 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
+                        {
+                            metas.map(itemMeta => (
+                                <CardMetas nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorInicial + 1000} />
+                            ))
+                        }
+                    </S.Cards>
+            }
         </S.Metas>
     )
 }
