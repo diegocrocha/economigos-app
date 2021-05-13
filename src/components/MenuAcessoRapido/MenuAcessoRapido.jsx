@@ -1,14 +1,27 @@
 import React from 'react'
 import * as S from './style'
 import OpcoesAcessoRapido from "../../components/OpcoesAcessoRapido/OpcoesAcessoRapido";
+import ModalContabil from '../ModalContabil/ModalContabil';
 
 export default function MenuAcessoRapido() {
+  const [modalR, setModalR] = React.useState(false);
+  const [modalG, setModalG] = React.useState(false);
+
+
+
     return (
         <S.MenuAcessoRapido>
-            <OpcoesAcessoRapido nome={"Receitas"} cor={"rgb(50, 162, 135)"} />
-            <OpcoesAcessoRapido nome={"Gastos"} cor={"#A23232"} />
+            <OpcoesAcessoRapido click={() => setModalR(true)} nome={"Receitas"} cor={"rgb(50, 162, 135)"} />
+            <ModalContabil
+              modal={modalR}
+              setModal={setModalR} />
+            <OpcoesAcessoRapido click={() => setModalG(true)} nome={"Gastos"} cor={"#A23232"} />
+            <ModalContabil
+              modal={modalG}
+              setModal={setModalG} />
             <OpcoesAcessoRapido nome={"Relatórios"} cor={"#312f2f"} />
-            <OpcoesAcessoRapido nome={"Extratos"} cor={"#312F2F"} />
+            <OpcoesAcessoRapido click={() => setModalG(true)} nome={"Extratos"} cor={"#312F2F"} />
+            {/* <ModalContabil modal={modal} setModal={setModal} /> */}
         </S.MenuAcessoRapido>
     )
 }

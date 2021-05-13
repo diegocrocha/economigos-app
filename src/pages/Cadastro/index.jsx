@@ -48,24 +48,27 @@ export default function Cadastro() {
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Cadastro</h1>
           <form>
-            <Input 
+            <Input
+              primary={true}
               onChange={handleChange}
               value={form.email}
               id="email"
               label="E-mail"
               required/>
             <Input
+              primary={true}
               onChange={handleChange}
               value={form.senha}
               id="senha"
               label="Senha"
-              type="password" 
+              type="password"
               required/>
             <Input
+              primary={true}
               onChange={handleChange}
               value={form.confirmaSenha}
-              id="confirmaSenha" 
-              label="Confirme a senha" 
+              id="confirmaSenha"
+              label="Confirme a senha"
               type="password"
               required/>
           </form>

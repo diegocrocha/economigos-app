@@ -10,7 +10,7 @@ export const InputContainer = styled.div`
     top: -10px;
     left: 0px;
     font-size: 14px;
-    color: #44CF6C;
+    color: ${props => props.primary ? "#44CF6C" : "black"};
     font-weight: bold;
   }
 `;
@@ -28,7 +28,7 @@ export const Input = styled.input`
   padding-top: 10px;
 
   &:focus {
-    border-bottom: 2px solid #44CF6C;
+    border-bottom: 2px solid ${props => props.primary ? "#44CF6C" : "black"};
   }
 `
 

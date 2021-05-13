@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MenuAcessoRapido = styled.div`
+  z-index: 99;
     width: 70%;
     height: 15%;
     margin-top: 5%;

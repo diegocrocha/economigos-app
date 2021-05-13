@@ -39,24 +39,26 @@ function Login() {
           <h4><span style={{color: '#44CE6C'}}>Econo</span>migos</h4>
           <h1>Login</h1>
           <form>
-            <Input 
+            <Input
+            primary={true}
             id="email"
             label="E-mail"
             {... email}
             required/>
             <Input
+            primary={true}
             id="senha"
             label="Senha"
             {... password}
-            type="password" 
+            type="password"
             required/>
             <S.ContainerButtons>
-            {!loading ? ( 
-              <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn> 
+            {!loading ? (
+              <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn>
               ) : (
                 <S.ButtonSignIn disabled>Carregando...</S.ButtonSignIn>
               )}
-            
+
               <Link to="/cadastro">
                 <S.ButtonSignUp>Cadastre-se</S.ButtonSignUp>
               </Link>

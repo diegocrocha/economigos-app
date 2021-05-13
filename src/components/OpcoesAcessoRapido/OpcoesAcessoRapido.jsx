@@ -4,8 +4,8 @@ import IconeDinheiro from "../../components/LogosSVGComponentes/IconeDinheiro/Ic
 import IconeRelatorio from "../../components/LogosSVGComponentes/IconeRelatorios/IconeRelatorios";
 import IconeExtrato from "../../components/LogosSVGComponentes/IconeExtratos/IconeExtratos";
 
-export default function OpcoesAcessoRapido({ nome, cor }) {
-    
+export default function OpcoesAcessoRapido({ nome, cor, click}) {
+
     function icone() {
         switch (nome) {
             case "Receitas":
@@ -14,13 +14,13 @@ export default function OpcoesAcessoRapido({ nome, cor }) {
                 return <IconeDinheiro cor={cor}/>;
             case "Relatórios":
                 return <IconeRelatorio cor={cor}/>;
-            case "Extratos": 
+            case "Extratos":
                 return <IconeExtrato cor={cor}/>;
         }
     }
 
     return (
-        <S.OpcoesAcessoRapido color={cor}>
+        <S.OpcoesAcessoRapido onClick={click} color={cor}>
             {icone()}
             <S.NomeOpcaoDinheiro>
                 {nome}

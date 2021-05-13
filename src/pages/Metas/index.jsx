@@ -9,7 +9,6 @@ import CardMetas from "../../components/CardMetas/CardMetas";
 import GreyPig from "../../components/GreyPig/GreyPig";
 
 export default function Metas() {
-
     const { dados } = React.useContext(UserContext);
     const [metas, setMetas] = React.useState([]);
 
@@ -23,8 +22,6 @@ export default function Metas() {
             setMetas(await response.data.metaDtos);
         }
     }
-
-    console.log(metas)
 
     return (
         <S.Metas className="animeRight">
@@ -43,7 +40,7 @@ export default function Metas() {
                     <S.Cards style={metas.length > 2 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
                         {
                             metas.map(itemMeta => (
-                                <CardMetas nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorInicial + 1000} />
+                                <CardMetas key={itemMeta.id} nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorInicial + 1000} />
                             ))
                         }
                     </S.Cards>
