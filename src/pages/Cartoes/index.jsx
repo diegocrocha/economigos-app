@@ -6,19 +6,21 @@ import SetaProximo from "../../assets/seta-proximo.svg";
 import * as S from './style'
 import { UserContext } from '../../hooks/UserContext';
 import api from '../../services/api';
-
+import pt from 'date-fns/locale/pt-BR';
 import { 
     parseISO, 
-    format
-  } from 'date-fns';
+    format,
+} from 'date-fns';
+import ItemUltimasAtividades from '../../components/ItemUltimasAtividades/ItemUltimasAtividades';
+import GreyPig from '../../components/GreyPig/GreyPig';
 
-// import pt from 'date-fns/locales/pt';
 
 export default function Cartoes() {
     const { dados } = React.useContext(UserContext)
     const [ativo, setAtivo] = React.useState(null)
     const [cartoes, setCartoes] = React.useState(null)
     const [detalheCartao, setDetalheCartao] = React.useState(null);
+    let counts = 0;
 
     React.useEffect(() => {
         fetchCartoes()
@@ -51,7 +53,8 @@ export default function Cartoes() {
     function formatData(data) {
         return  format(
             parseISO(data), 
-            "dd 'de' MMMM 'de' yyyy"
+            "dd 'de' MMMM 'de' yyyy",
+            { locale: pt }
           );
     }
 
@@ -69,27 +72,67 @@ export default function Cartoes() {
             <S.InfoCartao>
                 <G.GroupInfosContaCartao>
                     <p>Limite do Cartão</p>
-                    <div>R$<span>{detalheCartao && detalheCartao.limite}</span></div>
+                    {detalheCartao ? 
+                        <div style={{color:"#32A287"}}>R$<span>{detalheCartao.limite.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span></div>
+                        :
+                        <div>---------</div>
+                    }
                 </G.GroupInfosContaCartao>
                 <G.GroupInfosContaCartao>
                     <p>Fatura Atual</p>
-                    <div>R$<span>{detalheCartao && detalheCartao.valor}</span></div>
+                    {detalheCartao ? 
+                        <div style={{color:"#A23232"}}>R$<span>{detalheCartao.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span></div>
+                        :
+                        <div>---------</div>
+                    }
                 </G.GroupInfosContaCartao>
             </S.InfoCartao>
             <S.DetalhesCartao>
                 <div>
                     <p>Vencimento da Fatura</p>
-                    <p>{detalheCartao && formatData(detalheCartao.vencimento)}</p>
+                    {detalheCartao ? 
+                        <p>{formatData(detalheCartao.vencimento)}</p>
+                        :
+                        <p>---------</p>
+                    }
+                    
                 </div>
                 <div>
                     <p>Status do mês</p>
-                    <p>{detalheCartao && detalheCartao.pago.toString()}</p>
+                    {detalheCartao ? 
+                        <p style={detalheCartao.pago ? {color:"#32A287"} : {color:"#A23232"}}>{detalheCartao.pago ? "Pago" : "Não Pago"}</p>
+                        :
+                        <p>---------</p>
+                    }
+                    
                 </div>
                 <div>
                     <p>Fechamento da fatura</p>
-                    <p>{detalheCartao && formatData(detalheCartao.fechamento)}</p>
+                    {detalheCartao ? 
+                        <p>{formatData(detalheCartao.fechamento)}</p>
+                        :
+                        <p>---------</p>
+                    }
                 </div>
             </S.DetalhesCartao>
+            
+            <S.UltimasAtividades>
+                <p className="titulo">Últimas Atividades</p>
+
+                <div className="conjuntoItensUltimasAtividades">
+                    {
+                        detalheCartao ?
+                        detalheCartao.gastos.map(gasto => (  
+                            counts++ % 2 == 0 ?
+                            <ItemUltimasAtividades data={gasto.dataPagamento} descricao={gasto.descricao} categoria={gasto.categoria}/>
+                            :
+                            <ItemUltimasAtividades data={gasto.dataPagamento} descricao={gasto.descricao} categoria={gasto.categoria} BackGrey/>
+                        ))
+                        :
+                        <GreyPig mensagem="Você não tem Atividades"/>
+                    }
+                </div>
+            </S.UltimasAtividades>
         </S.CartoesWrapper>
     )
 }

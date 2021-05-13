@@ -7,7 +7,7 @@ export const Botao = styled.div`
     color: ${props => props.active ? "white" : "#32A287"};
     font-size: ${props => props.active ? "initial" : "smaller"};
     display: flex;
-    border-radius: 10px;
+    border-radius: 7px;
     align-items: center;
     justify-content: center;
     font-weight: 600;
