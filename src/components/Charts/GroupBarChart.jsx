@@ -8,8 +8,11 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
 
     return (
         <VictoryChart 
-            domainPadding={{ x: 225}}
-            animate={{ duration: 350 }}
+            domainPadding={{ x: [300, 50], y: [100, 0] }}
+            animate={{
+                duration: 600,
+                onLoad: { duration: 500 }
+              }}
             labelComponent={<VictoryTooltip />}
             width={dataReceitas.length == 3 ? 750 : 1700}
             height={dataReceitas.length == 3 ? 400 : 600}

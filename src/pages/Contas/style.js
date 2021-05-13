@@ -64,7 +64,7 @@ export const InfoItemSelected = styled.div`
     text-align: center;
 `;
 
-export const GroupInfosConta = styled.div`
+export const GroupInfosContaCartao = styled.div`
     width: 40%;
     height: 100%;
     display: flex;
@@ -200,8 +200,8 @@ export const BalancoMensalContas = styled.div`
   }
 
   .chartBalanco{
-    height: 68%;
-    width: 108%;
+    max-width: 100%;
+    padding: 10px;
   }
 
   .chartDescription{
