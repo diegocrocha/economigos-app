@@ -13,6 +13,7 @@ import {
 } from 'date-fns';
 import ItemUltimasAtividades from '../../components/ItemUltimasAtividades/ItemUltimasAtividades';
 import GreyPig from '../../components/GreyPig/GreyPig';
+import CartaoColorido from '../../components/LogosSVGComponentes/CartaoColorido/CartaoColorido';
 
 
 export default function Cartoes() {

@@ -4,6 +4,7 @@ import {
     parseISO, 
     format,
 } from 'date-fns';
+import alimentacaoFundoRedondo from "../../assets/alimentacao-fundo-redondo.svg";
 
 export default function ItemUltimasAtividades({data, descricao, categoria, BackGrey, height}) {
 
@@ -16,14 +17,14 @@ export default function ItemUltimasAtividades({data, descricao, categoria, BackG
 
     return (
         <S.Atividade BackGrey={BackGrey} height={height}>
-        {/* <S.Atividade height={height}> */}
             <div>
                 {formatData(data)}
             </div>
             <div>
                 {descricao}
             </div>
-            <div>
+            <div className="categoria">
+                <img src={alimentacaoFundoRedondo} alt=""/>
                 {categoria}
             </div>
         </S.Atividade>

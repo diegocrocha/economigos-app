@@ -9,9 +9,21 @@ export const Atividade = styled.div`
     grid-template-columns: 1fr 2fr 1fr;
     font-size: small;
     font-weight: 600;
+    align-items: center;
     background-color: ${props => props.BackGrey ? "#E4E4E4" : "none"};
 
     div{
         min-width: max-content;
+        img{
+            height: 60%;
+            margin-right: 2%;
+        }
+    }
+
+    .categoria{
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-self: left;
     }
 `;

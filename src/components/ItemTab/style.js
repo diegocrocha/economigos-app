@@ -19,6 +19,11 @@ export const ItemTab = styled.div`
         margin-bottom: 3%;
     }
 
+    svg{
+        height: 76%;
+        width: 100%;
+    }
+
     p{
         font-weight: 600;
         font-size: 0.9rem;
