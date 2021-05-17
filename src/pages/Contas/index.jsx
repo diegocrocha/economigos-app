@@ -15,6 +15,7 @@ import GroupBarChart from '../../components/Charts/GroupBarChart'
 import * as G from "../../styles/globalComponents";
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
 import GreyPig from "../../components/GreyPig/GreyPig";
+import ContaC6 from '../../assets/tmp/conta-c6.svg'
 
 export default function Contas() {
 
@@ -102,21 +103,21 @@ export default function Contas() {
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <G.TabLayout id="TabLayout">
                     {contas && contas.map(conta => (
-                        <ItemTab setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
+                        <ItemTab imgItem={ContaC6} setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
                 <G.ImgBtnProximo src={SetaProximo} alt="" />
             </G.GroupMenu>
 
             <S.InfoItemSelected>
-                <S.GroupInfosConta>
+                <S.GroupInfosContaCartao>
                     <p>Saldo da Conta</p>
                     <div style={{ color: "#32A287" }}>R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
-                </S.GroupInfosConta>
-                <S.GroupInfosConta>
+                </S.GroupInfosContaCartao>
+                <S.GroupInfosContaCartao>
                     <p>Gasto da Conta</p>
                     <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? detalheConta.totalGastos.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
-                </S.GroupInfosConta>
+                </S.GroupInfosContaCartao>
             </S.InfoItemSelected>
 
             <S.UltimasAtividades>

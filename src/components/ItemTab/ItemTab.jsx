@@ -1,8 +1,8 @@
 import React from 'react'
-import ContaC6 from '../../assets/tmp/conta-c6.svg'
+import CartaoColorido from '../LogosSVGComponentes/CartaoColorido/CartaoColorido'
 import * as S from './style'
 
-export default function ItemTab({active, nome, idItemTab, setAtivo, ...props}) {
+export default function ItemTab({active, nome, idItemTab, setAtivo, imgItem,...props}) {
     
     function handleSelect() {
         setAtivo(idItemTab)
@@ -10,7 +10,11 @@ export default function ItemTab({active, nome, idItemTab, setAtivo, ...props}) {
     
     return (
         <S.ItemTab onClick={handleSelect} {...props} active={active == idItemTab ? true : false}>
-            <img src={ContaC6} alt=""/>
+            {imgItem ? 
+                <img src={imgItem} alt=""/>
+                :
+                <CartaoColorido color={"#32A287"}/>
+            }
             <p>{nome}</p>
         </S.ItemTab>
     )
