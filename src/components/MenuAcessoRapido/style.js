@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MenuAcessoRapido = styled.div`
-    width: 70%;
+    width: 573px;
     height: 15%;
     margin-top: 5%;
     margin-left: 15%;
@@ -9,4 +9,8 @@ export const MenuAcessoRapido = styled.div`
     border-radius: 14px;
     display: flex;
     align-items: center;
+
+    @media(max-width: 573px){
+        width: 70%;
+    }
 `
