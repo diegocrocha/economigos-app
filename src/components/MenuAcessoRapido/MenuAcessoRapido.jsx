@@ -13,10 +13,14 @@ export default function MenuAcessoRapido() {
         <S.MenuAcessoRapido>
             <OpcoesAcessoRapido click={() => setModalR(true)} nome={"Receitas"} cor={"rgb(50, 162, 135)"} />
             <ModalContabil
+              type="RECEITA"
+              color="rgb(50, 162, 135)"
               modal={modalR}
               setModal={setModalR} />
             <OpcoesAcessoRapido click={() => setModalG(true)} nome={"Gastos"} cor={"#A23232"} />
             <ModalContabil
+              type="GASTO"
+              color="#A23232"
               modal={modalG}
               setModal={setModalG} />
             <OpcoesAcessoRapido nome={"Relatórios"} cor={"#312f2f"} />

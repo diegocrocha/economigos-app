@@ -54,12 +54,12 @@ export const WrapperModal = styled.div`
 `
 
 export const Modal = styled.div`
-  width: 42%;
-  height: 60%;
+  width: 45%;
+  height: 80%;
   border-radius: 8px;
-  margin-left: 29%;
+  margin-left: 27.5%;
   padding: 15px 20px;
-  margin-top: 15%;
+  margin-top: 5%;
   margin-bottom: 10%;
   opacity: 0;
   overflow: hidden;
@@ -73,6 +73,31 @@ export const Modal = styled.div`
       transform: initial;
     }
   }
+
+  .groupInputs {
+    display: flex;
+
+    div {
+      width: 90%;
+      margin: 15px 5%;
+    }
+  }
+
+  h1 {
+    text-align: center;
+    color: ${props => props.type == "RECEITA" ? "rgb(50, 162, 135)" : "#A23232"};
+  }
+
+  .inputWidth {
+      width: 90%;
+      margin: 15px 5%;
+  }
+
+  .wrapperInputs {
+    margin-top:4%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 `
 
 export const ButtonClose = styled.button`
@@ -82,7 +107,9 @@ export const ButtonClose = styled.button`
   float: right;
   border: none;
   border-radius: 50%;
+  margin-bottom: 20px;
   background-color: #A23232;
+  cursor: pointer;
   color: white;
 `
 
@@ -108,6 +135,25 @@ export const Button = styled.button`
     cursor: wait;
   }
 `;
+
+export const SimpleButton = styled.button`
+  background-color: transparent;
+  color: #312F2F;
+  outline: none;
+  font-size: 13px!important;
+  border: none;
+  border-left: 2px ${props => props.color} solid;
+  padding-left: 13px;
+  margin-left: 2.5%;
+  font-weight: 600;
+  cursor: pointer;
+`
+
+export const GroupButtonsModal = styled.div`
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+`
 
 export const InfoItemSelected = styled.div`
     margin-top: -5px;
