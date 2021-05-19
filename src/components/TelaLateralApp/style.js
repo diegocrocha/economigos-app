@@ -4,12 +4,12 @@ import IconeProximo from "../../assets/iconeProximo.svg";
 
 
 export const TelaLateralApp = styled.div`
-    width: 19.5%;
+    width: ${props => props.fechar ? "0%" : "19.5%"};
     height: 90vh;
     background-color: white;
     border-top-left-radius: 14px;
-    margin-left: 0.5%;
-    transition: all 1s;
+    margin-left: ${props => props.fechar ? "19.5%" : "0.5%"};
+    transition: ${props => props.fechar ? "all 1s" : "all 1s 0.8s"};
 `
 
 export const BtnFecharTela = styled.button`
