@@ -8,7 +8,6 @@ import SetaProximo from "../../assets/seta-proximo.svg";
 import Lancamento from "../../components/Lancamento/Lancamento";
 import Cifrao from "../../assets/cifrao-fundo-redondo.svg";
 import Alimentacao from "../../assets/alimentacao-fundo-redondo.svg";
-import PorcoEconomigos from "../../assets/porco-economigos-cinza.svg";
 import Download from "../../assets/download.svg";
 import barChart from "../../assets/bar-chart.svg"
 import GroupBarChart from '../../components/Charts/GroupBarChart'

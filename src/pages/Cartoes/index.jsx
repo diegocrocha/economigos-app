@@ -120,7 +120,7 @@ export default function Cartoes() {
             <S.UltimasAtividades>
                 <p className="titulo">Últimas Atividades</p>
 
-                <div className="conjuntoItensUltimasAtividades">
+                <div style={detalheCartao && detalheCartao.gastos.lenght > 4 ? {overflow: "hidden scroll"} : {overflow: "hidden"}} className="conjuntoItensUltimasAtividades">
                     {
                         detalheCartao ?
                         detalheCartao.gastos.map(gasto => (  

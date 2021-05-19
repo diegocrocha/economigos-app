@@ -143,18 +143,18 @@ export const GroupAtividades = styled.div`
   overflow: hidden;
 
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #C4C4C4;
-    border-radius: 14px;        /* color of the tracking area */
+    background-image: linear-gradient(-90deg, #C4C4C4 6%, #C4C4C4 8%, transparent 83%);
+    border-radius: 7px;        /* color of the tracking area */
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #32A287;    /* color of the scroll thumb */
+    background-color: #C4C4C4;    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #32A287;  /* creates padding around scroll thumb */
+    border: 3px solid #C4C4C4;  /* creates padding around scroll thumb */
   }
 `
 
@@ -202,6 +202,7 @@ export const BalancoMensalContas = styled.div`
   .chartBalanco{
     max-width: 100%;
     padding: 10px;
+    height: 67%;
   }
 
   .chartDescription{
