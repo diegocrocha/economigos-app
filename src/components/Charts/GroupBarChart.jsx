@@ -3,8 +3,7 @@ import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip, VictoryAxis, Vi
 
 export default function GroupBarChart({dataReceitas, dataGastos}) {
     
-    let fontSizeLabelX = dataReceitas.length == 3 ? 30 : 44;
-    let fontSizeLabelY = dataReceitas.length == 3 ? 35 : 50;
+    let fontSizeLabelY = dataReceitas.length == 3 ? 35 : 30;
 
     return (
         <VictoryChart 
@@ -14,14 +13,14 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
                 onLoad: { duration: 500 }
               }}
             labelComponent={<VictoryTooltip />}
-            width={dataReceitas.length == 3 ? 750 : 1700}
-            height={dataReceitas.length == 3 ? 400 : 600}
+            width={dataReceitas.length == 3 ? 600 : 900}
+            // height={dataReceitas.length == 3 ? 400 : 800}
         >
             <VictoryAxis
                 key="x-axis"
                 style={{
                     tickLabels: {
-                        fontSize: fontSizeLabelX,
+                        fontSize: 30,
                         fontFamily: "Poppins",
                         fontWeight: "bold",
                         fill: "#4d4d4d"
@@ -29,7 +28,7 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
                 }}
                 theme={VictoryTheme.material} />
             <VictoryAxis
-                // tickFormat={(t) => `${Math.round(t)}k`}
+                tickFormat={(t) => `${Math.round(t >= 1000 ? (t / 1000) : t)}k`}
                 dependentAxis
                 orientation="left"
                 style={{
@@ -39,7 +38,7 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
                         fontWeight: "bold",
                         fill: "#4d4d4d"
                     }
-                }} />
+                }}/>
             <VictoryGroup offset={12}>
                 <VictoryBar
                     cornerRadius={{ topLeft: 20, topRight: 20 }}

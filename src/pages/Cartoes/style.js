@@ -68,7 +68,6 @@ export const UltimasAtividades = styled.div`
   .conjuntoItensUltimasAtividades{
     height: 75%;
     width: 100%;
-    overflow: hidden scroll;
 
     &::-webkit-scrollbar {
       width: 8px;

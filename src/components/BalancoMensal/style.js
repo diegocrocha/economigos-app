@@ -45,7 +45,7 @@ export const BalancoMensal = styled.div`
     }
     
     .barChart{
-        height: 75%;
+        height: 70%;
         width: 100%;
     }
 
