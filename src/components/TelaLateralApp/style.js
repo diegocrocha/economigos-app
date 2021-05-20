@@ -12,14 +12,14 @@ export const TelaLateralApp = styled.div`
     transition: ${props => props.fechar ? "all 1s" : "all 1s 0.8s"};
 
     .mensagemQuandoFechado{
-        width: 218px;
-        height: 20%;
+        width: 164px;
+        height: 14%;
         margin: auto;
-        margin-top: 15%;
+        margin-top: 58%;
         word-break: break-all;
         text-align: center;
         line-height: 79%;
-        font-size: 60px;
+        font-size: 45px;
         font-weight: 700;
         color: #32A287;
 
@@ -31,7 +31,7 @@ export const TelaLateralApp = styled.div`
 
     .imagemQuandoFechado{
         margin: auto;
-        height: 30%;
+        height: 22%;
     }
 `
 
