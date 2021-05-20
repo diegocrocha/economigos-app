@@ -6,7 +6,7 @@ export default function GroupPieChart({ dataCategorias }) {
         <VictoryPie
             innerRadius={({ datum }) => datum.y + 70}
             cornerRadius = {14}
-            colorScale={["gold", "cyan", "navy" ]}
+            colorScale={["#2EE665", "#59B374", "#14662D" ]}
             data={[
                 // dataCategorias.map(dado => (
                 //     { x: dado.key, y: dado.value }
