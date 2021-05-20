@@ -1,12 +1,13 @@
 import React from 'react'
 import * as S from './style'
 
-const Input = ({label, id, value, onChange, ...props}) => {
+const Input = ({primary, label, id, value, onChange, className, ...props}) => {
   return (
-    <S.InputContainer>
-      <S.Input 
+    <S.InputContainer className={className} primary={primary}>
+      <S.Input
+        primary={primary}
         id={id}
-        type="text" 
+        type="text"
         value={value}
         onChange={onChange}
         {...props}/>

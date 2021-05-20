@@ -9,7 +9,6 @@ import CardMetas from "../../components/CardMetas/CardMetas";
 import GreyPig from "../../components/GreyPig/GreyPig";
 
 export default function Metas() {
-
     const { dados } = React.useContext(UserContext);
     const [metas, setMetas] = React.useState([]);
 
@@ -23,8 +22,6 @@ export default function Metas() {
             setMetas(await response.data.metaDtos);
         }
     }
-
-    console.log(metas)
 
     return (
         <S.Metas className="animeRight">
