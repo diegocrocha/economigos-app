@@ -94,18 +94,14 @@ export const Meta = styled.div`
                 filter: drop-shadow(0px 0.2px 0.5px grey);
             }
 
-            &:nth-child(odd){
-                margin-left: -10%;
-            }
-
             img{
                 margin: 0;
-                height: 95%;
-                width: 25%;
+                height: 107%;
+                width: 15%;
             }
 
             p{
-                font-size: clamp(5px,9px,17px);
+                font-size: clamp(7px,11px,17px);
                 font-weight: 800;
             }
         }

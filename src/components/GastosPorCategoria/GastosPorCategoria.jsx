@@ -4,7 +4,7 @@ import moedaGasto from '../../assets/moeda-gasto.svg'
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria"
 import GroupPieChart from "../../components/Charts/GroupPieChart";
 
-export default function GastosPorCategoria() {
+export default function GastosPorCategoria({dataCategorias}) {
     return (
         <S.GastosPorCategoria>
             <div className="tituloGasto">
@@ -19,7 +19,7 @@ export default function GastosPorCategoria() {
                 </ul>
             </div>
             <div className="graficoDeCategorias">
-                <GroupPieChart/>
+                <GroupPieChart dataCategorias={dataCategorias}/>
             </div>
         </S.GastosPorCategoria>
     )
