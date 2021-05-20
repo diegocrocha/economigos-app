@@ -1,19 +1,19 @@
 import React from 'react'
-import { VictoryPie, VictoryChart, VictoryGroup, VictoryTooltip, VictoryAxis, VictoryTheme } from 'victory';
+import { VictoryPie } from 'victory';
 
-export default function GroupPieChart({ dataCategorias }) {
+export default function GroupPieChart({ maior, meio, menor }) {
     return (
         <VictoryPie
             innerRadius={({ datum }) => datum.y + 70}
             cornerRadius = {14}
-            colorScale={["#2EE665", "#59B374", "#14662D" ]}
+            colorScale={["#32A287", "#23705E", "#133D33" ]}
             data={[
                 // dataCategorias.map(dado => (
                 //     { x: dado.key, y: dado.value }
                 // ))
-                { x: "Cats", y: 35 },
-                { x: "Dogs", y: 40 },
-                { x: "Birds", y: 55 }
+                { x: maior.nome, y: maior.porcentagem },
+                { x: meio.nome, y: meio.porcentagem },
+                { x: menor.nome, y: menor.porcentagem }
             ]}
             style={{
                 labels: {

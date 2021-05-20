@@ -24,7 +24,7 @@ export default function Appi() {
                 <Route path="metas" element={<Metas/>} />
             </Routes>
             </TelaCentralApp>
-            <S.BtnFecharTela onClick={() => setAtivo(!ativo)}></S.BtnFecharTela>
+            {/* <S.BtnFecharTela onClick={() => setAtivo(!ativo)}></S.BtnFecharTela> */}
             <TelaLateralApp fechar={ativo}/>
         </S.Appi>
     )
