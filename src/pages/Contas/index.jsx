@@ -47,14 +47,14 @@ export default function Contas() {
 
     async function fetchContas() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-            setContas(await response.data.contaDtos);
+            const response = await api.get(`/economigos/contas?idUsuario=${dados.usuario.id}`);
+            setContas(await response.data);
         }
     }
 
     async function fetchData() {
         if (ativo) {
-            const response = await api.get(`/economigos/contas/${ativo}/usuario/${dados.usuario.id}`);
+            const response = await api.get(`/economigos/contas/${ativo}?idUsuario=${dados.usuario.id}`);
             setDetalheConta(response.data);
         }
     }
