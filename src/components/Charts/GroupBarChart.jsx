@@ -28,7 +28,7 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
                 }}
                 theme={VictoryTheme.material} />
             <VictoryAxis
-                tickFormat={(t) => `${Math.round(t >= 1000 ? (t / 1000) : t)}k`}
+                tickFormat={(t) => `${Math.round(t >= 1000 ? (t / 1000)+"k" : t)}`}
                 dependentAxis
                 orientation="left"
                 style={{

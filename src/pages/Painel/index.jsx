@@ -30,15 +30,16 @@ function Painel() {
   async function fetchGastos() {
     if (dados) {
       const response = await api.get(`/economigos/categorias/porcentagem-gastos?idUsuario=${dados.usuario.id}`)
-      console.log(response.data)
       setCategorias(response.data)
     }
   }
 
   async function fetchDataDash() {
+    console.log(dados)
     if (!(dados == null)) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
-      
+      console.log(response)
+
       let gastos = []
       let receitas = []
 
@@ -54,6 +55,7 @@ function Painel() {
           y: response.data[1].valorMensalDtos[j].valor
         })
       }
+
       setMesesAnterioresReceitas(receitas);
       setMesesAnterioresGastos(gastos);
     }
