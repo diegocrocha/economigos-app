@@ -23,9 +23,8 @@ export default function MenuAcessoRapido() {
               color="#A23232"
               modal={modalG}
               setModal={setModalG} />
-            <OpcoesAcessoRapido nome={"Relatórios"} cor={"#312f2f"} />
+            <OpcoesAcessoRapido nome={"Telegram"} cor={" #0088cc"} />
             <OpcoesAcessoRapido click={() => setModalG(true)} nome={"Extratos"} cor={"#312F2F"} />
-            {/* <ModalContabil modal={modal} setModal={setModal} /> */}
         </S.MenuAcessoRapido>
     )
 }

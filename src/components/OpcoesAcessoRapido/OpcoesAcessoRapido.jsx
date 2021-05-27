@@ -2,6 +2,7 @@ import React from 'react'
 import * as S from './style'
 import IconeDinheiro from "../../components/LogosSVGComponentes/IconeDinheiro/IconeDinheiro";
 import IconeRelatorio from "../../components/LogosSVGComponentes/IconeRelatorios/IconeRelatorios";
+import IconeTelegram from "../../components/LogosSVGComponentes/IconeTelegram/IconeTelegram";
 import IconeExtrato from "../../components/LogosSVGComponentes/IconeExtratos/IconeExtratos";
 
 export default function OpcoesAcessoRapido({ nome, cor, click}) {
@@ -12,8 +13,8 @@ export default function OpcoesAcessoRapido({ nome, cor, click}) {
                 return <IconeDinheiro cor={cor}/>;
             case "Gastos":
                 return <IconeDinheiro cor={cor}/>;
-            case "Relatórios":
-                return <IconeRelatorio cor={cor}/>;
+            case "Telegram":
+                return <IconeTelegram/>;
             case "Extratos":
                 return <IconeExtrato cor={cor}/>;
         }
