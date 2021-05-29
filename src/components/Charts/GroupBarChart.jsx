@@ -5,6 +5,10 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
     
     let fontSizeLabelY = dataReceitas.length == 3 ? 35 : 30;
 
+    function valorChart(t) {
+        return (t / 1000).toString() + "k"
+    }
+
     return (
         <VictoryChart 
             domainPadding={{ x: [300, 50], y: [100, 0] }}
@@ -28,7 +32,7 @@ export default function GroupBarChart({dataReceitas, dataGastos}) {
                 }}
                 theme={VictoryTheme.material} />
             <VictoryAxis
-                tickFormat={(t) => `${Math.round(t >= 1000 ? t / 1000 + "k" : t)}`}
+                tickFormat={(t) => t >= 1000 ? `${Math.round(t/1000)}k` : t}
                 dependentAxis
                 orientation="left"
                 style={{

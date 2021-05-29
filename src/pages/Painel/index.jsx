@@ -38,7 +38,6 @@ function Painel() {
     console.log(dados)
     if (!(dados == null)) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
-      console.log(response)
 
       let gastos = []
       let receitas = []
@@ -64,7 +63,12 @@ function Painel() {
   return (
     <S.Painel className="animeRight">
       <SaldoTotal  saldo={saldo}/>
-      <GastosPorCategoria dataCategorias={categorias} />
+
+      {categorias ? 
+        <GastosPorCategoria dataCategorias={categorias} />
+        :
+        <GastosPorCategoria dataCategorias={categorias} vazio />
+      }
       <BalancoMensal
         isEmpty={mesesAnterioresReceitas.length > 0 
           && mesesAnterioresGastos.length > 0 

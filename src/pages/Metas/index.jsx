@@ -12,6 +12,8 @@ export default function Metas() {
     const { dados } = React.useContext(UserContext);
     const [metas, setMetas] = React.useState([]);
 
+
+
     React.useEffect(() => {
         fetchMetas();
     }, [dados]);

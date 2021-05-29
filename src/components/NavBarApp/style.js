@@ -15,7 +15,7 @@ export const BackItemNav = styled.div`
     align-items: center;
 
     &:nth-last-child(1) {
-        margin-top: 40%;
+        margin-top: 67%;
     }
 
     a {
@@ -34,8 +34,6 @@ export const ItemNav = styled.li`
     list-style: none;
     background-color: ${props => props.className == "active" ?  "#32A287" : "white"};
     color: ${props => props.className == "active" ? "white" : "#32A287"};
-    /* background-color: ${active ? "#32A287" : "white"}; */
-    /* color: ${active ? "white" : "#32A287"}; */
     padding: 0.5rem;
 
     &:hover {
