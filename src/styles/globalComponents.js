@@ -147,10 +147,21 @@ export const SimpleButton = styled.button`
   margin-left: 2.5%;
   font-weight: 600;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 `
 
 export const GroupButtonsModal = styled.div`
   display: flex;
+  width: 90%;
+  margin-left: 5%;
+`
+
+export const GroupButtonsModalCenter = styled.div`
+  display: flex;
+  justify-content: center;
   width: 90%;
   margin-left: 5%;
 `
