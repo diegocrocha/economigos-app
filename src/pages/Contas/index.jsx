@@ -1,5 +1,6 @@
 import React from 'react'
 import api from "../../services/api";
+import filesApi from '../../services/filesApi';
 import { UserContext } from '../../hooks/UserContext'
 import * as S from "./style";
 import ItemTab from "../../components/ItemTab/ItemTab";
@@ -82,6 +83,12 @@ export default function Contas() {
         }
     }
 
+    async function fetchExport() {
+        if (ativo, dados) {
+          await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
+        }
+      }
+
     function ordenarLista() {
         let listaOrdenada = [];
 
@@ -142,7 +149,7 @@ export default function Contas() {
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
-                                <div>
+                                <div onClick={fetchExport}>
                                     Download Histórico
                                     <img src={Download} alt="" />
                                 </div>
