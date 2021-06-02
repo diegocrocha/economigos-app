@@ -59,7 +59,7 @@ export const DetalhesCartao = styled.div`
 `
 
 export const UltimasAtividades = styled.div`
-  height: 37%;
+  height: 41%;
   margin-top: 1%;
   width: 100%;
   border: 3px solid #E4E4E4;

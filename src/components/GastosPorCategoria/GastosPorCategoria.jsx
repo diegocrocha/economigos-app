@@ -3,30 +3,20 @@ import * as S from './style'
 import moedaGasto from '../../assets/moeda-gasto.svg'
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria"
 import GroupPieChart from "../../components/Charts/GroupPieChart";
+import GreyPig from '../GreyPig/GreyPig';
 
-export default function GastosPorCategoria({dataCategorias}) {
+export default function GastosPorCategoria({ dataCategorias, vazio }) {
+    const [maiorCategoria, setMaiorCategoria] = React.useState(null)
+    const [meioCategoria, setMeioCategoria] = React.useState(null)
+    const [menorCategoria, setMenorCategoria] = React.useState(null)
 
-    let maior = -1, meio = -1, menor = -1;
-    let maiorCategoria = {"nome" : "-----"}, 
-        meioCategoria = {"nome" : "-----"}, 
-        menorCategoria = {"nome" : "-----"};
-
-    for (let index = 0; index < dataCategorias.length; index++) {
-        if (dataCategorias[index].porcentagem >= maior) {
-            maior = dataCategorias[index].porcentagem;
-            maiorCategoria = dataCategorias[index];
-
-        }else if(dataCategorias[index].porcentagem >= meio && dataCategorias[index].porcentagem < maior){
-            meio = dataCategorias[index].porcentagem;
-            meioCategoria = dataCategorias[index];
-
-        }else if (dataCategorias[index].porcentagem >= menor &&dataCategorias[index].porcentagem < meio &&
-                  dataCategorias[index].porcentagem < maior) {
-           
-            menor = dataCategorias[index].porcentagem;
-            menorCategoria = dataCategorias[index];
+    React.useEffect(() => {
+        if (!vazio) {
+            setMaiorCategoria(dataCategorias[0])
+            setMeioCategoria(dataCategorias[1])
+            setMenorCategoria(dataCategorias[2])
         }
-    }
+    }, [])
 
     return (
         <S.GastosPorCategoria>
@@ -34,16 +24,23 @@ export default function GastosPorCategoria({dataCategorias}) {
                 <img src={moedaGasto} alt="" />
                 <span>Gastos</span>
             </div>
-            <div className="listaDeCategorias">
-                <ul>
-                    <ItemListaCategoria cor={"#32A287"} nome={maiorCategoria.nome}></ItemListaCategoria>
-                    <ItemListaCategoria cor={"#23705E"} nome={meioCategoria.nome}></ItemListaCategoria>
-                    <ItemListaCategoria cor={"#133D33"} nome={menorCategoria.nome}></ItemListaCategoria>
-                </ul>
-            </div>
-            <div className="graficoDeCategorias">
-                <GroupPieChart maior={maiorCategoria} meio={meioCategoria} menor={menorCategoria}/>
-            </div>
+
+            {vazio ?
+                <GreyPig height="60" mensagem="Você não possui gastos" />
+                :
+                <>
+                    <div className="listaDeCategorias">
+                        <ul>
+                            <ItemListaCategoria cor={"#A23232"} nomao={maiorCategoria.nome}></ItemListaCategoria>
+                            <ItemListaCategoria cor={"#4d1717"} nomao={meioCategoria.nome}></ItemListaCategoria>
+                            <ItemListaCategoria cor={"#270c0c"} nomao={menorCategoria.nome}></ItemListaCategoria>
+                        </ul>
+                    </div>
+                    <div className="graficoDeCategorias">
+                        <GroupPieChart maior={maiorCategoria} meio={meioCategoria} menor={menorCategoria} />
+                    </div>
+                </>
+            }
         </S.GastosPorCategoria>
     )
 }

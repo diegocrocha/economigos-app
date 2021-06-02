@@ -4,10 +4,11 @@ import MenusApp from "../../components/MenusConjuntoApp/MenusApp";
 import TelaCentralApp from '../../components/TelaCentralApp/TelaCentralApp';
 import TelaLateralApp from '../../components/TelaLateralApp/TelaLateralApp';
 import Cartoes from '../Cartoes';
-import Contas from '../Contas'
-import Painel from '../Painel'
-import Metas from '../Metas'
-import * as S from './style'
+import Contas from '../Contas';
+import Painel from '../Painel';
+import Metas from '../Metas';
+import Institucional from '../Institucional';
+import * as S from './style';
 
 export default function Appi() {
 
@@ -22,6 +23,7 @@ export default function Appi() {
                 <Route path="contas" element={<Contas />} />
                 <Route path="cartoes" element={<Cartoes/>} />
                 <Route path="metas" element={<Metas/>} />
+                <Route path="sair" element={<Institucional/>} />
             </Routes>
             </TelaCentralApp>
             {/* <S.BtnFecharTela onClick={() => setAtivo(!ativo)}></S.BtnFecharTela> */}
