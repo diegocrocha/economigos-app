@@ -64,19 +64,31 @@ export default function Contas() {
             const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`);
             let gastos = []
             let receitas = []
+            let gastosComValorZero = 0;
+            let receitasComValorZero = 0;
 
             for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
                 gastos.push({
                     x: response.data[0].valorMensalDtos[j].mes,
                     y: response.data[0].valorMensalDtos[j].valor
                 })
+                response.data[0].valorMensalDtos[j].valor == 0 ? gastosComValorZero++ : gastosComValorZero;
             }
             for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
                 receitas.push({
                     x: response.data[1].valorMensalDtos[j].mes,
                     y: response.data[1].valorMensalDtos[j].valor
                 })
+                response.data[1].valorMensalDtos[j].valor == 0 ? receitasComValorZero++ : receitasComValorZero;
             }
+
+            if (gastosComValorZero == 3) {
+                gastos = 0
+            }
+            if (receitasComValorZero == 3) {
+                gastos = 0
+            }
+
             setMesesAnterioresReceitas(receitas);
             setMesesAnterioresGastos(gastos);
         }
@@ -127,7 +139,7 @@ export default function Contas() {
                 {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <GreyPig mensagem="Você não tem atividades!"/>
+                            <GreyPig mensagem="Você não tem atividades!" />
                         </S.GroupAtividades>
                     )
                     :
@@ -136,9 +148,9 @@ export default function Contas() {
                             <S.GroupAtividades style={{ overflowY: "scroll" }}>
                                 {listaOrdenada.map(itemList => (
                                     itemList.recebido ?
-                                        <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data={itemList.dataPagamento.replaceAll("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
                                         :
-                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data={itemList.dataPagamento.replace("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
@@ -161,23 +173,25 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <GreyPig mensagem="Você não tem lançamentos!"/>
+                                <GreyPig mensagem = "Você não tem lançamentos!" />
                             </S.GroupAtividades>
                         </>
                     )
                     :
-                    (<>
-                        <div className="chartBalanco" >
-                            <GroupBarChart
-                                dataReceitas={mesesAnterioresReceitas}
-                                dataGastos={mesesAnterioresGastos}
-                            />
-                        </div>
-                        <div className="chartDescription">
-                            <ItemListaCategoria nome="Receitas" cor="#32A287" />
-                            <ItemListaCategoria nome="Gastos" cor="#A23232" />
-                        </div>
-                    </>)
+                    (
+                        <>
+                            <div className="chartBalanco" >
+                                <GroupBarChart
+                                    dataReceitas={mesesAnterioresReceitas}
+                                    dataGastos={mesesAnterioresGastos}
+                                />
+                            </div>
+                            <div className="chartDescription">
+                                <ItemListaCategoria nomao="Receitas" cor="#32A287" />
+                                <ItemListaCategoria nomao="Gastos" cor="#A23232" />
+                            </div>
+                        </>
+                    )
                 }
             </S.BalancoMensalContas>
         </S.Contas>
