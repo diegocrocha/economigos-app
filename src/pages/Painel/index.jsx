@@ -11,15 +11,15 @@ function Painel() {
   const { dados } = React.useContext(UserContext);
   const [ saldo, setSaldo ] = React.useState(null);
   const [ categorias, setCategorias ] = React.useState([]);
-  const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
-  const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
+  const [ mesesAnterioresReceitas, setMesesAnterioresReceitas ] = React.useState([]);
+  const [ mesesAnterioresGastos, setMesesAnterioresGastos ] = React.useState([]);
 
   React.useEffect(() => {
     fetchDataDash()
     fetchSaldo()
     fetchGastos()
   }, [dados])
-
+  
   async function fetchSaldo() {
     if (dados) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
@@ -30,12 +30,12 @@ function Painel() {
   async function fetchGastos() {
     if (dados) {
       const response = await api.get(`/economigos/categorias/porcentagem-gastos?idUsuario=${dados.usuario.id}`)
+      console.log("aqui: " + response.data[0].nome);
       setCategorias(response.data)
     }
   }
 
   async function fetchDataDash() {
-    console.log(dados)
     if (!(dados == null)) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
 
@@ -63,12 +63,7 @@ function Painel() {
   return (
     <S.Painel className="animeRight">
       <SaldoTotal  saldo={saldo}/>
-
-      {categorias ? 
-        <GastosPorCategoria dataCategorias={categorias} />
-        :
-        <GastosPorCategoria dataCategorias={categorias} vazio />
-      }
+      {/* <GastosPorCategoria dataCategorias={categorias} vazio={categorias == null ? true : false} /> */}
       <BalancoMensal
         isEmpty={mesesAnterioresReceitas.length > 0 
           && mesesAnterioresGastos.length > 0 

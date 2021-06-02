@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink,useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import * as S from './style'
 import GraficosFundoRedondo from '../../components/LogosSVGComponentes/GraficosFundoRedondo/GraficosFundoRedondo'
 import ContasFundoRedondo from '../../components/LogosSVGComponentes/ContasFundoRedondo/ContasFundoRedondo'
@@ -11,7 +11,11 @@ import Sair from '../../components/LogosSVGComponentes/Sair/Sair'
 export default function NavBarApp({ name }) {
 
   const location = useLocation();
-  console.log();
+
+  function logout() {
+    localStorage.removeItem("email");
+    localStorage.removeItem("senha");
+  }
 
   return (
     <S.Nav>
@@ -41,10 +45,10 @@ export default function NavBarApp({ name }) {
             </S.ItemNav>
           </NavLink>
         </S.BackItemNav>
-        <S.BackItemNav active className={location.pathname == "/app/metas" ? "active-nav" : ""}>
+        <S.BackItemNav className={location.pathname == "/app/metas" ? "active-nav" : ""}>
           <NavLink to="/app/metas" activeClassName={location.pathname == "/app/metas" ? "active-nav" : ""}>
             <MetasFundoRedondo active={location.pathname == "/app/metas" ? true : false}/>
-            <S.ItemNav active className={location.pathname == "/app/metas" ? "active" : ""}>
+            <S.ItemNav className={location.pathname == "/app/metas" ? "active" : ""}>
               Metas
           </S.ItemNav>
           </NavLink>
@@ -58,10 +62,12 @@ export default function NavBarApp({ name }) {
           </NavLink>
         </S.BackItemNav> */}
         <S.BackItemNav>
-          <Sair/>
-          <S.ItemNav>
-            Sair
-          </S.ItemNav>
+          {/* <NavLink to="/" onClick={logout()}> */}
+            <Sair/>
+            <S.ItemNav>
+              Sair
+            </S.ItemNav>
+          {/* </NavLink> */}
         </S.BackItemNav>
       </ul>
     </S.Nav>
