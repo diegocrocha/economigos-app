@@ -17,7 +17,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
   const [contas, setContas] = React.useState(null)
   const [cartoes, setCartoes] = React.useState(null)
 
-  const { dados } = React.useContext(UserContext);
+  const { dados, reload } = React.useContext(UserContext);
 
   React.useEffect(() => {
     data.setValue(today());
@@ -78,6 +78,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
           }
           break;
       }
+      reload()
     }
   }
 
