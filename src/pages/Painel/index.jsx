@@ -19,7 +19,7 @@ function Painel() {
     fetchSaldo()
     fetchGastos()
   }, [dados])
-  
+
   async function fetchSaldo() {
     if (dados) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
@@ -36,7 +36,7 @@ function Painel() {
   }
 
   async function fetchDataDash() {
-    if (!(dados == null)) {
+    if (dados) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
 
       let gastos = []
@@ -65,9 +65,9 @@ function Painel() {
       <SaldoTotal  saldo={saldo}/>
       {/* <GastosPorCategoria dataCategorias={categorias} vazio={categorias == null ? true : false} /> */}
       <BalancoMensal
-        isEmpty={mesesAnterioresReceitas.length > 0 
-          && mesesAnterioresGastos.length > 0 
-          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) + 
+        isEmpty={mesesAnterioresReceitas.length > 0
+          && mesesAnterioresGastos.length > 0
+          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) +
           mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
         dataReceitas={mesesAnterioresReceitas}
         dataGastos={mesesAnterioresGastos}

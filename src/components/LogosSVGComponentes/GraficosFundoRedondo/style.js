@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const GraficosFundoRedondo = styled.svg`
-    
+
     margin: 0% 2.5%;
 
     circle{

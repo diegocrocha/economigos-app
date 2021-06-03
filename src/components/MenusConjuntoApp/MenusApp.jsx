@@ -14,18 +14,18 @@ export default function MenusApp() {
     React.useEffect(() => {
         fetchNome()
     }, [dados])
-    
+
     async function fetchNome() {
         if (dados) {
             const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-            setNome(await response.data.email);
+            setNome(await response.data.nome);
         }
     }
 
     return (
         <>
             <HeaderApp />
-            <NavBarApp name={nome.split("@")[0]} />
+            <NavBarApp name={nome} />
         </>
     )
 }
