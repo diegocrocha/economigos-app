@@ -39,7 +39,7 @@ export default function Contas() {
 
     React.useEffect(() => {
         fetchData();
-    }, [ativo]);
+    }, [ativo, dados]);
 
     React.useEffect(() => {
         ordenarLista();
@@ -125,7 +125,8 @@ export default function Contas() {
             <S.InfoItemSelected>
                 <S.GroupInfosContaCartao>
                     <p>Saldo da Conta</p>
-                    <div style={{ color: "#32A287" }}>R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
+                    <div style={{ color:  (detalheConta && detalheConta.valorAtual >= 0 ? "#32A287" : "#A23232")}}>
+                      R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
                 <S.GroupInfosContaCartao>
                     <p>Gasto da Conta</p>

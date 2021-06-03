@@ -45,37 +45,42 @@ export const UserStorage = ({ children }) => {
         }
     }
 
-    React.useEffect(() => {
-        async function autoLogin() {
-            const email = window.localStorage.getItem('email');
-            const senha = window.localStorage.getItem('senha');
+    function reload() {
+      autoLogin()
+    }
 
-            if (email && senha) {
-                try {
-                    setError(null);
-                    setLoading(true);
-                    // const response = await user.get('/VALIDATE_JWT', {
-                    //     headers: {
-                    //         'Authorization': `Bearer ${token}`
-                    //     }
-                    // })
-                    // if (response.status !== 200) throw new Error('Token inválido');
-                    // getUser(email);
-                    userLogin(email,senha);
-                } catch (error) {
-                    userLogout();
-                } finally {
-                    setLoading(false);
-                }
-            } else {
-                setLogin(null);
-            }
-        }
+    async function autoLogin() {
+      const email = window.localStorage.getItem('email');
+      const senha = window.localStorage.getItem('senha');
+
+      if (email && senha) {
+          try {
+              setError(null);
+              setLoading(true);
+              // const response = await user.get('/VALIDATE_JWT', {
+              //     headers: {
+              //         'Authorization': `Bearer ${token}`
+              //     }
+              // })
+              // if (response.status !== 200) throw new Error('Token inválido');
+              // getUser(email);
+              userLogin(email,senha);
+          } catch (error) {
+              userLogout();
+          } finally {
+              setLoading(false);
+          }
+      } else {
+          setLogin(null);
+      }
+  }
+
+    React.useEffect(() => {
         autoLogin()
     }, [userLogout])
 
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, dados, loading, login, error }}>
+        <UserContext.Provider value={{ userLogin, userLogout, reload, dados, loading, login, error }}>
             {children}
         </UserContext.Provider>
     )

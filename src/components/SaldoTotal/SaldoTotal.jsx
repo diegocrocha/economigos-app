@@ -7,7 +7,7 @@ function SaldoTotal({saldo}) {
     const [olho, setOlho] = React.useState(true);
 
     return (
-        <S.SaldoTotal>
+        <S.SaldoTotal saldo={saldo}>
             <div className="visualizacaoSaldo">
                 <img onClick={() => setOlho(!olho)} src={olho ? visualizacaoSaldoFechado : eyeOpen} alt="" />
             </div>
