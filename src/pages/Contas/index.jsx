@@ -15,6 +15,7 @@ import * as G from "../../styles/globalComponents";
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
 import GreyPig from "../../components/GreyPig/GreyPig";
 import ContaC6 from '../../assets/tmp/conta-c6.svg'
+import Head from '../../components/Helper/Head'
 
 export default function Contas() {
 
@@ -110,6 +111,7 @@ export default function Contas() {
 
     return (
         <S.Contas className="animeRight">
+          <Head title="Contas" />
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <G.TabLayout id="TabLayout">

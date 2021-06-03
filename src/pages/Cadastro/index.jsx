@@ -8,6 +8,7 @@ import api from '../../services/api'
 import { UserContext } from '../../hooks/UserContext'
 import useForm from '../../hooks/useForm'
 import { toast } from 'react-toastify';
+import Head from '../../components/Helper/Head'
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ export default function Cadastro() {
 
   return (
     <S.Cadastro>
+      <Head title="Cadastro"/>
       <HeaderSign />
       <L.DivAux>
       <L.ContainerSign>
