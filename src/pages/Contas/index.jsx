@@ -152,7 +152,7 @@ export default function Contas() {
                                     itemList.recebido ?
                                         <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data={itemList.dataPagamento.replaceAll("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
                                         :
-                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data={itemList.dataPagamento.replace("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data={itemList.dataPagamento.replaceAll("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">

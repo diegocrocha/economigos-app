@@ -2,10 +2,10 @@ import React from 'react'
 import * as S from './style'
 import MenuAcessoRapido from "../../components/MenuAcessoRapido/MenuAcessoRapido";
 
-export default function TelaCentralApp({ children, fechado }) {
+export default function TelaCentralApp({ children }) {
     return (
         <>
-            <S.TelaCentralApp fechado={fechado}>
+            <S.TelaCentralApp>
                 <MenuAcessoRapido />
                 <S.Pages id="paginaCentral" className="animeLeft">
                     {children}
