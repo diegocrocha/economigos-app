@@ -4,12 +4,12 @@ import IconeProximo from "../../assets/iconeProximo.svg";
 
 
 export const TelaLateralApp = styled.div`
-    width: ${props => props.fechar ? "0%" : "19.5%"};
+    width: 19.5%;
     height: 90vh;
     background-color: ${props => props.fechar ? "white" : "transparent"};
     border-top-left-radius: 14px;
-    margin-left: ${props => props.fechar ? "19.5%" : "0.5%"};
-    transition: ${props => props.fechar ? "all 1s" : "all 1s 0.8s"};
+    margin-left: 0.5%;
+    transition: all 1s;
 
     .mensagemQuandoFechado{
         width: 164px;
@@ -32,6 +32,45 @@ export const TelaLateralApp = styled.div`
     .imagemQuandoFechado{
         margin: auto;
         height: 22%;
+    }
+
+    .contas{
+        width: 100%;
+        height: 94%;
+        margin-top: 14%;
+
+        .titulo{
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin-left: 7.5%;
+        
+            span{
+                font-size: 1.4rem;
+                font-weight: 600;
+                color: #32A287;
+            }
+
+            img{
+                height: 20px;
+            }
+        }
+
+        .rec-pagination{
+            margin-top: 0px;
+        }
+
+        .rec-dot_active{
+            background-color: #32A287;
+            box-shadow: 0 0 1px 3px #32A287;
+        }
+
+        .ultimaAtividades{
+            margin-top: 20px;
+        }
     }
 `
 
