@@ -3,7 +3,7 @@ import * as S from './style'
 import api from '../../services/api';
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header';
-import { Input } from '../../components/Form/Input/Input';
+import Head from '../../components/Helper/Head'
 import ButtonMain from '../../components/ButtonMain/ButtonMain';
 import CardDiferencial from '../../components/CardDiferencial/CardDiferencial';
 import IconD1 from '../../assets/telegram-economigos.svg'
@@ -18,6 +18,7 @@ function Institucional() {
 
   return (
     <>
+      <Head title="Institucional" />
       <S.Home>
         <Header />
         <S.TitleHome><span style={{color: '#44CE6C'}}>Econo</span>migos</S.TitleHome>

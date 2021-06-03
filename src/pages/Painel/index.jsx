@@ -5,6 +5,7 @@ import GastosPorCategoria from "../../components/GastosPorCategoria/GastosPorCat
 import BalancoMensal from "../../components/BalancoMensal/BalancoMensal"
 import { UserContext } from '../../hooks/UserContext'
 import api from '../../services/api'
+import Head from '../../components/Helper/Head';
 
 
 function Painel() {
@@ -62,6 +63,7 @@ function Painel() {
 
   return (
     <S.Painel className="animeRight">
+      <Head title="Painel" />
       <SaldoTotal  saldo={saldo}/>
       {/* <GastosPorCategoria dataCategorias={categorias} vazio={categorias == null ? true : false} /> */}
       <BalancoMensal

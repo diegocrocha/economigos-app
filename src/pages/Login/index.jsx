@@ -5,6 +5,7 @@ import Input from '../../components/Form/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../hooks/UserContext'
 import useForm from '../../hooks/useForm'
+import Head from '../../components/Helper/Head'
 
 
 function Login() {
@@ -28,6 +29,7 @@ function Login() {
 
   return (
     <S.Login>
+      <Head title="Login" />
       <HeaderSign />
       <S.DivAux>
       <S.ContainerSign>
