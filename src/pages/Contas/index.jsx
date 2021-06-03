@@ -15,6 +15,7 @@ import * as G from "../../styles/globalComponents";
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
 import GreyPig from "../../components/GreyPig/GreyPig";
 import ContaC6 from '../../assets/tmp/conta-c6.svg'
+import Head from '../../components/Helper/Head'
 
 export default function Contas() {
 
@@ -110,6 +111,7 @@ export default function Contas() {
 
     return (
         <S.Contas className="animeRight">
+          <Head title="Contas" />
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <G.TabLayout id="TabLayout">
@@ -139,7 +141,7 @@ export default function Contas() {
                 {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <GreyPig mensagem="Você não tem atividades!" />
+                            <GreyPig mensagem="Você não possui atividades registradas!"/>
                         </S.GroupAtividades>
                     )
                     :
@@ -173,7 +175,7 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <GreyPig mensagem = "Você não tem lançamentos!" />
+                                <GreyPig mensagem="Você não possui lançamentos registrados!"/>
                             </S.GroupAtividades>
                         </>
                     )

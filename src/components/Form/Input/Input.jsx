@@ -1,10 +1,12 @@
 import React from 'react'
 import * as S from './style'
 
-const Input = ({primary, label, id, value, onChange, className, ...props}) => {
+const Input = ({primary, label, id, value, onChange, className, erro, ...props}) => {
   return (
-    <S.InputContainer className={className} primary={primary}>
+    <>
+    <S.InputContainer erro={erro} className={className} primary={primary}>
       <S.Input
+        erro={erro}
         primary={primary}
         id={id}
         type="text"
@@ -13,6 +15,8 @@ const Input = ({primary, label, id, value, onChange, className, ...props}) => {
         {...props}/>
       <S.Label htmlFor={id}>{label}</S.Label>
     </S.InputContainer>
+    {erro && <S.Error>{erro}</S.Error>}
+    </>
   )
 }
 

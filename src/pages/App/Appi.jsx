@@ -9,8 +9,9 @@ import Painel from '../Painel';
 import Metas from '../Metas';
 import Institucional from '../Institucional';
 import { UserContext } from '../../hooks/UserContext';
-import * as S from './style';
 import api from '../../services/api';
+import * as S from './style';
+import Telegram from '../Telegram';
 
 export default function Appi() {
 
@@ -49,7 +50,7 @@ export default function Appi() {
                 <Route path="contas" element={<Contas />} />
                 <Route path="cartoes" element={<Cartoes/>} />
                 <Route path="metas" element={<Metas/>} />
-                <Route path="sair" element={<Institucional/>} />
+                <Route path="telegram" element={<Telegram/>} />
             </Routes>
             </TelaCentralApp>
             <S.BtnFecharTela onClick={() => setAtivo(!ativo)}></S.BtnFecharTela>

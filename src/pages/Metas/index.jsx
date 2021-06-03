@@ -7,6 +7,7 @@ import BotaoAdicionar from "../../assets/botao-adicionar.svg";
 import Aviao from "../../assets/aviao.svg";
 import CardMetas from "../../components/CardMetas/CardMetas";
 import GreyPig from "../../components/GreyPig/GreyPig";
+import Head from '../../components/Helper/Head'
 
 export default function Metas() {
     const { dados } = React.useContext(UserContext);
@@ -27,6 +28,7 @@ export default function Metas() {
 
     return (
         <S.Metas className="animeRight">
+            <Head title="Metas" />
             <S.NavMetas>
                 <BotaoMenuMetas nome="Metas Ativas" active />
                 <BotaoMenuMetas nome="Metas Inativas" />
@@ -42,7 +44,7 @@ export default function Metas() {
                     <S.Cards style={metas.length > 2 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
                         {
                             metas.map(itemMeta => (
-                                <CardMetas nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
+                                <CardMetas key={itemMeta.id} nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
                             ))
                         }
                     </S.Cards>

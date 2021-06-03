@@ -5,6 +5,7 @@ import GastosPorCategoria from "../../components/GastosPorCategoria/GastosPorCat
 import BalancoMensal from "../../components/BalancoMensal/BalancoMensal"
 import { UserContext } from '../../hooks/UserContext'
 import api from '../../services/api'
+import Head from '../../components/Helper/Head';
 
 
 function Painel() {
@@ -19,7 +20,7 @@ function Painel() {
     fetchSaldo()
     fetchGastos()
   }, [dados])
-  
+
   async function fetchSaldo() {
     if (dados) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
@@ -36,7 +37,7 @@ function Painel() {
   }
 
   async function fetchDataDash() {
-    if (!(dados == null)) {
+    if (dados) {
       const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
 
       let gastos = []
@@ -62,12 +63,13 @@ function Painel() {
 
   return (
     <S.Painel className="animeRight">
+      <Head title="Painel" />
       <SaldoTotal  saldo={saldo}/>
       {/* <GastosPorCategoria dataCategorias={categorias} vazio={categorias == null ? true : false} /> */}
       <BalancoMensal
-        isEmpty={mesesAnterioresReceitas.length > 0 
-          && mesesAnterioresGastos.length > 0 
-          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) + 
+        isEmpty={mesesAnterioresReceitas.length > 0
+          && mesesAnterioresGastos.length > 0
+          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) +
           mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
         dataReceitas={mesesAnterioresReceitas}
         dataGastos={mesesAnterioresGastos}

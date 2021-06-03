@@ -7,12 +7,13 @@ import * as S from './style'
 import { UserContext } from '../../hooks/UserContext';
 import api from '../../services/api';
 import pt from 'date-fns/locale/pt-BR';
-import { 
-    parseISO, 
+import {
+    parseISO,
     format,
 } from 'date-fns';
 import ItemUltimasAtividades from '../../components/ItemUltimasAtividades/ItemUltimasAtividades';
 import GreyPig from '../../components/GreyPig/GreyPig';
+import Head from '../../components/Helper/Head'
 import CartaoColorido from '../../components/LogosSVGComponentes/CartaoColorido/CartaoColorido';
 
 
@@ -53,7 +54,7 @@ export default function Cartoes() {
 
     function formatData(data) {
         return  format(
-            parseISO(data), 
+            parseISO(data),
             "dd 'de' MMMM 'de' yyyy",
             { locale: pt }
           );
@@ -61,6 +62,7 @@ export default function Cartoes() {
 
     return (
         <S.CartoesWrapper className="animeRight">
+          <Head title="Cartões"/>
             <G.GroupMenu style={{height: "23%"}}>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <G.TabLayout id="TabLayout">
@@ -73,7 +75,7 @@ export default function Cartoes() {
             <S.InfoCartao>
                 <G.GroupInfosContaCartao>
                     <p>Limite do Cartão</p>
-                    {detalheCartao ? 
+                    {detalheCartao ?
                         <div style={{color:"#32A287"}}>R$<span>{detalheCartao.limite.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span></div>
                         :
                         <div>---------</div>
@@ -81,7 +83,7 @@ export default function Cartoes() {
                 </G.GroupInfosContaCartao>
                 <G.GroupInfosContaCartao>
                     <p>Fatura Atual</p>
-                    {detalheCartao ? 
+                    {detalheCartao ?
                         <div style={{color:"#A23232"}}>R$<span>{detalheCartao.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span></div>
                         :
                         <div>---------</div>
@@ -91,32 +93,32 @@ export default function Cartoes() {
             <S.DetalhesCartao>
                 <div>
                     <p>Vencimento da Fatura</p>
-                    {detalheCartao ? 
+                    {detalheCartao ?
                         <p>{formatData(detalheCartao.vencimento)}</p>
                         :
                         <p>---------</p>
                     }
-                    
+
                 </div>
                 <div>
                     <p>Status do mês</p>
-                    {detalheCartao ? 
+                    {detalheCartao ?
                         <p style={detalheCartao.pago ? {color:"#32A287"} : {color:"#A23232"}}>{detalheCartao.pago ? "Pago" : "Não Pago"}</p>
                         :
                         <p>---------</p>
                     }
-                    
+
                 </div>
                 <div>
                     <p>Fechamento da fatura</p>
-                    {detalheCartao ? 
+                    {detalheCartao ?
                         <p>{formatData(detalheCartao.fechamento)}</p>
                         :
                         <p>---------</p>
                     }
                 </div>
             </S.DetalhesCartao>
-            
+
             <S.UltimasAtividades>
                 <p className="titulo">Últimas Atividades</p>
 
@@ -124,6 +126,7 @@ export default function Cartoes() {
                     {
                         detalheCartao && detalheCartao.gastos.lenght > 0 ?
                         detalheCartao.gastos.map(gasto => (  
+
                             counts++ % 2 == 0 ?
                             <ItemUltimasAtividades data={gasto.dataPagamento} descricao={gasto.descricao} categoria={gasto.categoria}/>
                             :

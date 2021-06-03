@@ -1,74 +1,76 @@
 import React from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import * as S from './style'
-import GraficosFundoRedondo from '../../components/LogosSVGComponentes/GraficosFundoRedondo/GraficosFundoRedondo'
-import ContasFundoRedondo from '../../components/LogosSVGComponentes/ContasFundoRedondo/ContasFundoRedondo'
-import CartoesFundoRedondo from '../../components/LogosSVGComponentes/CartoesFundoRedondo/CartoesFundoRedondo'
-import MetasFundoRedondo from '../../components/LogosSVGComponentes/MetasFundoRedondo/MetasFundoRedondo'
-import EconopontosFundoRedondo from '../../components/LogosSVGComponentes/EconopontosFundoRedondo/EconopontosFundoRedondo'
 import Sair from '../../components/LogosSVGComponentes/Sair/Sair'
+import { UserContext } from '../../hooks/UserContext'
+import GroupItemNav from '../GroupItemNav/GroupItemNav'
+
+
+function ItemNav({type, func}) {
+  let rota = false;
+  switch (type) {
+    case "painel":
+      rota = location.pathname == "/app/painel";
+      return (
+        <S.BackItemNav active={rota}>
+          <NavLink to="/app/painel" >
+            <GroupItemNav type="Painel" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+      )
+    case "contas":
+      rota = location.pathname == "/app/contas";
+      return (
+        <S.BackItemNav active={rota}>
+          <NavLink to="/app/contas" >
+            <GroupItemNav type="Contas" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+      )
+     case "cartoes":
+      rota = location.pathname == "/app/cartoes";
+      return (
+        <S.BackItemNav active={rota}>
+          <NavLink to="/app/cartoes" >
+            <GroupItemNav type="Cartões" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+      )
+      case "metas":
+        rota = location.pathname == "/app/metas";
+        return (
+          <S.BackItemNav active={rota}>
+          <NavLink to="/app/metas" >
+            <GroupItemNav type="Metas" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+        )
+      case "sair":
+        return (
+          <S.BackItemNav onClick={func}>
+            <GroupItemNav type="Sair" />
+        </S.BackItemNav>
+        )
+      default:
+        return null
+  }
+}
 
 export default function NavBarApp({ name }) {
 
   const location = useLocation();
 
-  function logout() {
-    localStorage.removeItem("email");
-    localStorage.removeItem("senha");
-  }
+  const { userLogout } = React.useContext(UserContext);
 
   return (
     <S.Nav>
       <S.Ola>Olá, {name}!</S.Ola>
       <ul>
-        <S.BackItemNav className={location.pathname == "/app/painel" ? "active-nav" : ""}>
-          <NavLink to="/app/painel" activeClassName={location.pathname == "/app/painel" ? "active-nav" : ""}>
-            <GraficosFundoRedondo active={location.pathname == "/app/painel" ? true : false} />
-            <S.ItemNav className={location.pathname == "/app/painel" ? "active" : ""}>
-              Painel
-            </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav className={location.pathname == "/app/contas" ? "active-nav" : ""}>
-          <NavLink to="/app/contas" activeClassName={location.pathname == "/app/contas" ? "active-nav" : ""}>
-            <ContasFundoRedondo active={location.pathname == "/app/contas" ? true : false}/>
-            <S.ItemNav className={location.pathname == "/app/contas" ? "active" : ""}>
-              Contas
-          </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav className={location.pathname == "/app/cartoes" ? "active-nav" : ""}>
-          <NavLink to="/app/cartoes" activeClassName={location.pathname == "/app/cartoes" ? "active-nav" : ""}>
-            <CartoesFundoRedondo active={location.pathname == "/app/cartoes" ? true : false}/>
-            <S.ItemNav className={location.pathname == "/app/cartoes" ? "active" : ""}>
-              Cartões
-            </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav className={location.pathname == "/app/metas" ? "active-nav" : ""}>
-          <NavLink to="/app/metas" activeClassName={location.pathname == "/app/metas" ? "active-nav" : ""}>
-            <MetasFundoRedondo active={location.pathname == "/app/metas" ? true : false}/>
-            <S.ItemNav className={location.pathname == "/app/metas" ? "active" : ""}>
-              Metas
-          </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        {/* <S.BackItemNav>
-          <NavLink to="/app/econopontos">
-            <EconopontosFundoRedondo/>
-            <S.ItemNav>
-              Econopontos
-          </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav> */}
-        <S.BackItemNav>
-          {/* <NavLink to="/" onClick={logout()}> */}
-            <Sair/>
-            <S.ItemNav>
-              Sair
-            </S.ItemNav>
-          {/* </NavLink> */}
-        </S.BackItemNav>
+        <ItemNav type="painel" />
+        <ItemNav type="contas" />
+        <ItemNav type="cartoes" />
+        <ItemNav type="metas" />
+        <ItemNav type="sair" func={userLogout}/>
       </ul>
     </S.Nav>
   )

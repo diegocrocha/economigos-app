@@ -12,9 +12,13 @@ export const UserStorage = ({ children }) => {
 
     const userLogout = React.useCallback(async function userLogout() {
         setDados(false)
-        setLogin(false)
+        setLogin(null)
         setError(null)
         setLoading(false)
+        window.localStorage.removeItem("autenticado")
+        window.localStorage.removeItem('email')
+        window.localStorage.removeItem('senha')
+        await api.get("economigos/sessao/logout")
     }, [])
 
     async function userLogin(email, password) {
@@ -32,7 +36,6 @@ export const UserStorage = ({ children }) => {
             setLogin(true);
             localStorage.setItem("email", email);
             localStorage.setItem("senha", password);
-            // console.log(data);
         } catch (err) {
             setError(err.message)
             setLogin(false);
@@ -65,14 +68,14 @@ export const UserStorage = ({ children }) => {
                     setLoading(false);
                 }
             } else {
-                setLogin(false);
+                setLogin(null);
             }
         }
         autoLogin()
     }, [userLogout])
 
     return (
-        <UserContext.Provider value={{ userLogin, dados, loading, login, error }}>
+        <UserContext.Provider value={{ userLogin, userLogout, dados, loading, login, error }}>
             {children}
         </UserContext.Provider>
     )
