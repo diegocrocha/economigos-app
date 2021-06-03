@@ -5,13 +5,12 @@ import Input from '../../components/Form/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../hooks/UserContext'
 import useForm from '../../hooks/useForm'
-import Tooltip from '../../components/Helper/Tooltip/Tooltip'
 
 
 function Login() {
   const navigate = useNavigate();
-  const email = useForm()
-  const password = useForm();
+  const email = useForm("email")
+  const password = useForm("senha");
 
   const {userLogin, erro, loading, login} = React.useContext(UserContext);
 
@@ -54,13 +53,13 @@ function Login() {
             required/>
             <S.ContainerButtons>
             {!loading ? (
-              <S.ButtonSignIn onClick={handleSubmit}>Entrar</S.ButtonSignIn>
+              <S.ButtonSignUp onClick={handleSubmit}>Entrar</S.ButtonSignUp>
               ) : (
-                <S.ButtonSignIn disabled>Carregando...</S.ButtonSignIn>
+                <S.ButtonSignUp disabled>Carregando...</S.ButtonSignUp>
               )}
 
               <Link to="/cadastro">
-                <S.ButtonSignUp>Cadastre-se</S.ButtonSignUp>
+                <S.ButtonSignIn>Cadastre-se</S.ButtonSignIn>
               </Link>
           </S.ContainerButtons>
           </form>

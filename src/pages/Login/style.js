@@ -71,7 +71,7 @@ export const FormSign = styled.div`
 `
 
 export const ContainerButtons = styled.div`
-  margin: 3.5rem 25% 0 25%;
+  margin: 3rem 25% 0 25%;
 
   @media only screen and (max-width: 960px) {
     & {

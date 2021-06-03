@@ -5,10 +5,8 @@ export const Nav = styled.nav`
     width: 20%;
 `;
 
-let active;
-
 export const BackItemNav = styled.div`
-    background-color: ${props => props.className == "active-nav" ? "white" : "#e4e4e4"};
+    background-color: ${props => props.active ? "white" : "#e4e4e4"};
     text-align: center;
     height: 9vh;
     display: flex;
@@ -19,7 +17,6 @@ export const BackItemNav = styled.div`
     }
 
     a {
-        ${props => props.className == "active-nav" ? active = true : active = false};
         display: flex;
         width: 100%;
         align-items: center;
@@ -32,8 +29,8 @@ export const ItemNav = styled.li`
     cursor: pointer;
     font-weight: bold;
     list-style: none;
-    background-color: ${props => props.className == "active" ?  "#32A287" : "white"};
-    color: ${props => props.className == "active" ? "white" : "#32A287"};
+    background-color: ${props => props.active ?  "#32A287" : "white"};
+    color: ${props => props.active ? "white" : "#32A287"};
     padding: 0.5rem;
 
     &:hover {

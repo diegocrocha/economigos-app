@@ -6,7 +6,7 @@ export const Select = ({options, label, value, setValue, className, type, ...pro
       <S.SelectContainer className={className}>
         <S.Select {...props} value={value} onChange={({target}) => setValue(target.value)}>
                <option value='' disabled>Selecione</option>
-               {options.map(option =>
+               {options && options.map(option =>
                     <option key={option.id} value={option.id}>{type === "CONTAS" ? option.apelido : option.categoria}</option>
                 )}
             </S.Select>

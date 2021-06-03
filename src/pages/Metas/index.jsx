@@ -42,7 +42,7 @@ export default function Metas() {
                     <S.Cards style={metas.length > 2 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
                         {
                             metas.map(itemMeta => (
-                                <CardMetas nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
+                                <CardMetas key={itemMeta.id} nome={itemMeta.nome} urlImage={Aviao} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
                             ))
                         }
                     </S.Cards>
