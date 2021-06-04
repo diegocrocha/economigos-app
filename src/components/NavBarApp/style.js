@@ -42,5 +42,7 @@ export const Ola = styled.h2`
     font-weight: 500;
     margin-bottom: 5vh;
     padding-left: 2rem;
+    padding-right: 2rem;
     margin-top: 5vh;
+    text-align: center;
 `
