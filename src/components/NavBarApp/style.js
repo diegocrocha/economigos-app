@@ -10,6 +10,7 @@ export const BackItemNav = styled.div`
     text-align: center;
     height: 9vh;
     display: flex;
+    transition: 0.15s;
     align-items: center;
 
     &:nth-last-child(1) {
@@ -29,14 +30,13 @@ export const ItemNav = styled.li`
     cursor: pointer;
     font-weight: bold;
     list-style: none;
+    transition: 0.05s;
+    color: #32A287;
+    background-color: white;
     background-color: ${props => props.active ?  "#32A287" : "white"};
     color: ${props => props.active ? "white" : "#32A287"};
     padding: 0.5rem;
 
-    &:hover {
-        background-color: #32A287;
-        color: white;
-    }
 `
 export const Ola = styled.h2`
     font-weight: 500;

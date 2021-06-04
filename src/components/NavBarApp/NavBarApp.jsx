@@ -7,6 +7,8 @@ import GroupItemNav from '../GroupItemNav/GroupItemNav'
 
 
 function ItemNav({type, func}) {
+  const location = useLocation();
+  
   let rota = false;
   switch (type) {
     case "painel":
