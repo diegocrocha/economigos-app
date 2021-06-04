@@ -14,19 +14,10 @@ export default createGlobalStyle`
         background-color: white;
         color: #312F2F;
     }
-  /* ::-webkit-scrollbar {
-    width:10px;
-    height: 10px;
-  }
 
-  ::-webkit-scrollbar-track {
-    background:#312F2F;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #44CF6C;
-    border-radius: 10px;
-  } */
+    .blur {
+      filter: blur(5px);
+    }
 
     a{
         text-decoration: none;

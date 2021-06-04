@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Search = styled.div`
-    
+
     width: 100%;
     height: 60%;
     border-radius: 10px;
@@ -11,7 +11,7 @@ export const Search = styled.div`
 `;
 
 export const SearchInput = styled.div`
-    
+
     width: 80%;
     height: 100%;
     background-color: none;
@@ -19,7 +19,7 @@ export const SearchInput = styled.div`
 `;
 
 export const Input = styled.input`
-    
+
     height: 100%;
     display: block;
     font-size: 1rem;
@@ -34,7 +34,7 @@ export const Input = styled.input`
 
 
 export const SearchImage = styled.div`
-    
+
     width: 20%;
     height: 100%;
     background-color: none;
@@ -46,12 +46,12 @@ export const SearchImage = styled.div`
 `;
 
 export const ImgSearch = styled.img`
-    
+
     width: 40%;
     height: 45%;
     &:hover{
         cursor: pointer;
         text-shadow: 0px 1px 2px grey;
     }
-    
+
 `;

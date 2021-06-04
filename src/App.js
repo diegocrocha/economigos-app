@@ -11,8 +11,6 @@ import Appi from './pages/App/Appi.jsx';
 import { ToastContainer } from 'react-toastify';
 import Teste from "./pages/Teste/teste";
 import PrivateRoute from './hooks/PrivateRoute.js';
-// import Dashboard from './pages/Dashboard/index.jsx';
-// import Painel from './pages/Painel/index.jsx';
 
 function App() {
   return (

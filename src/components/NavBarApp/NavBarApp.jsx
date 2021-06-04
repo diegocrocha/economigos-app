@@ -47,8 +47,8 @@ function ItemNav({type, func}) {
         )
       case "sair":
         return (
-          <S.BackItemNav onClick={func}>
-            <GroupItemNav type="Sair" />
+          <S.BackItemNav active={rota} onClick={func}>
+            <GroupItemNav type="Sair" active={rota}/>
         </S.BackItemNav>
         )
       default:
@@ -57,8 +57,6 @@ function ItemNav({type, func}) {
 }
 
 export default function NavBarApp({ name }) {
-
-  const location = useLocation();
 
   const { userLogout } = React.useContext(UserContext);
 

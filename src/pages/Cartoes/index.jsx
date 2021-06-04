@@ -5,6 +5,7 @@ import ItemTab from '../../components/ItemTab/ItemTab';
 import SetaProximo from "../../assets/seta-proximo.svg";
 import * as S from './style'
 import { UserContext } from '../../hooks/UserContext';
+import Logo from '../../assets/logo-escuro.svg'
 import api from '../../services/api';
 import pt from 'date-fns/locale/pt-BR';
 import {
@@ -22,7 +23,6 @@ export default function Cartoes() {
     const [ativo, setAtivo] = React.useState(null)
     const [cartoes, setCartoes] = React.useState(null)
     const [detalheCartao, setDetalheCartao] = React.useState(null);
-    let counts = 0;
 
     React.useEffect(() => {
         fetchCartoes()
@@ -30,7 +30,9 @@ export default function Cartoes() {
 
     React.useEffect(() => {
         if (cartoes != null) {
-            setAtivo(cartoes[0].id)
+            if (cartoes.lenght > 0) {
+              setAtivo(cartoes[0].id)
+            }
         }
     }, [cartoes]);
 
@@ -61,7 +63,9 @@ export default function Cartoes() {
     }
 
     return (
-        <S.CartoesWrapper className="animeRight">
+      <>
+      {!ativo && <ModalSemCartao />}
+      <S.CartoesWrapper className={!ativo ? "animeRight blur" : "animeRight"}>
           <Head title="Cartões"/>
             <G.GroupMenu style={{height: "23%"}}>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
@@ -137,5 +141,22 @@ export default function Cartoes() {
                 </div>
             </S.UltimasAtividades>
         </S.CartoesWrapper>
-    )
+        </>
+      )
+}
+
+
+function ModalSemCartao() {
+
+  return (
+    <S.SemCartaoWrapper>
+        <S.ModalSemCartao>
+          <img src={Logo}/>
+          <p>Você não possui cartão</p>
+          <p>Adicione um cartão agora mesmo!</p>
+          <G.Button color="#32A287">Adicionar cartão</G.Button>
+        </S.ModalSemCartao>
+    </S.SemCartaoWrapper>
+  )
+
 }

@@ -6,6 +6,7 @@ import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext'
 import { toast } from 'react-toastify';
 import api from '../../services/api';
+import InputReal from '../Form/InputReal';
 
 export default function ModalContabil({type, color, modal, setModal}) {
   const valor = useForm()
@@ -115,7 +116,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
               <div className="groupInputs">
               <Input
                 label="Valor"
-                type="number"
+                id="valor"
                 {...valor}/>
               <Input
                 label="Data"
