@@ -35,6 +35,8 @@ export const GastosPorCategoria = styled.div`
     .listaDeCategorias{
         width: 50%;
         height: 80%;
+        padding-bottom: 5%;
+        overflow: hidden;
 
         ul{
             list-style: none;

@@ -106,7 +106,10 @@ export default function Contas() {
                 listaOrdenada.push(detalheConta.gastos[Number(gasto)]);
             }
         }
-        setListaOrdenada(listaOrdenada);
+
+        console.log(listaOrdenada)
+
+        setListaOrdenada(listaOrdenada.sort((a, b) => b.id - a.id));
     }
 
     return (
@@ -114,12 +117,13 @@ export default function Contas() {
           <Head title="Contas" />
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
+                <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
                     {contas && contas.map(conta => (
                         <ItemTab imgItem={ContaC6} setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
-                <G.ImgBtnProximo src={SetaProximo} alt="" />
+                <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
             </G.GroupMenu>
 
             <S.InfoItemSelected>

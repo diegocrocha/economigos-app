@@ -27,6 +27,12 @@ export const ItemTab = styled.div`
     p{
         font-weight: 600;
         font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+        padding-left: 5px;
+        padding-right: 5px;
+        white-space: nowrap;
     }
 
     &:hover{

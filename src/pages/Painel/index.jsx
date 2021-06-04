@@ -31,7 +31,7 @@ function Painel() {
   async function fetchGastos() {
     if (dados) {
       const response = await api.get(`/economigos/categorias/porcentagem-gastos?idUsuario=${dados.usuario.id}`)
-      console.log("aqui: " + response.data[0].nome);
+      console.log("aqui: " + JSON.stringify(response.data));
       setCategorias(response.data)
     }
   }
@@ -65,7 +65,7 @@ function Painel() {
     <S.Painel className="animeRight">
       <Head title="Painel" />
       <SaldoTotal  saldo={saldo}/>
-      {/* <GastosPorCategoria dataCategorias={categorias} vazio={categorias == null ? true : false} /> */}
+      <GastosPorCategoria preenchido={categorias != null && categorias.length > 0 ? true : false} dataCategorias={categorias} />
       <BalancoMensal
         isEmpty={mesesAnterioresReceitas.length > 0
           && mesesAnterioresGastos.length > 0

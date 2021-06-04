@@ -9,7 +9,7 @@ export const Appi = styled.section`
     overflow:hidden;
 `
 
-export const BtnFecharTela = styled.button`
+export const BtnFecharTela = styled.img`
     height: 35px;
     width: 35px;
     position: absolute;
@@ -19,8 +19,8 @@ export const BtnFecharTela = styled.button`
     border: none;
     background-size: 135%;
     transition: box-shadow 0.5s;
-    background-image: url("${IconeProximo}");
-    background-position: center center;
+    background-color: #e4e4e4;
+    padding: 4px;
 
     &:hover{
         cursor:pointer;

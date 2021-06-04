@@ -1,9 +1,9 @@
 import React from 'react'
 import * as S from "./style";
 
-export default function CartaoContas({nomeConta, saldo}) {
+export default function CartaoContas({nomeConta, saldo, negativo}) {
     return (
-        <S.CartaoContas>
+        <S.CartaoContas negativo={negativo}>
             <span className="nomeConta">{nomeConta}</span>
             <div className="saldoConta">R$<span>{Number(saldo).toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span></div>
             <div className="footer"></div>

@@ -26,7 +26,7 @@ export const Lancamento = styled.div`
         p{
             color: #312F2F;
             opacity: 0.5;
-            width: 100%;
+            width: 77%;
             overflow: hidden;
             font-weight: 600;
             font-size: 0.6rem;
@@ -41,9 +41,9 @@ export const Lancamento = styled.div`
     }
 
     .valorLancamento{
-        width: 40%;
+        width: 35%;
         height: 80%;
-        justify-content: center;
+        justify-content: flex-end;
         display: flex;
         align-items: center;
         font-weight: 600;
