@@ -65,12 +65,13 @@ export default function Cartoes() {
           <Head title="Cartões"/>
             <G.GroupMenu style={{height: "23%"}}>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
+                <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
                 {cartoes && cartoes.map(cartao => (
                         <ItemTab setAtivo={setAtivo} active={ativo} key={cartao.id} idItemTab={cartao.id} nome={cartao.nome} />
                     ))}
                 </G.TabLayout>
-                <G.ImgBtnProximo src={SetaProximo} alt="" />
+                <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
             </G.GroupMenu>
             <S.InfoCartao>
                 <G.GroupInfosContaCartao>

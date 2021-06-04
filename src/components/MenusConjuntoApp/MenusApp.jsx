@@ -9,8 +9,6 @@ export default function MenusApp() {
     const { dados } = React.useContext(UserContext)
     const [nome, setNome] = React.useState("")
 
-
-
     React.useEffect(() => {
         fetchNome()
     }, [dados])
@@ -25,7 +23,7 @@ export default function MenusApp() {
     return (
         <>
             <HeaderApp />
-            <NavBarApp name={nome} />
+            <NavBarApp name={nome.split(" ")[0]} />
         </>
     )
 }

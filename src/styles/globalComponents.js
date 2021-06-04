@@ -23,7 +23,7 @@ export const GroupMenu = styled.div`
 
 export const ImgBtnAdicionar = styled.img`
     height: 35px;
-    width: 20%;
+    width: 16%;
     &:hover{
       cursor: pointer;
       filter: drop-shadow(0px 0px 2px grey);
@@ -34,6 +34,18 @@ export const ImgBtnProximo = styled.img`
     height: 30px;
     position: relative;
     left: 2%;
+
+    &:hover{
+      cursor: pointer;
+      filter: drop-shadow(1px 0px 3px grey);
+    }
+`;
+
+export const ImgBtnAnterior = styled.img`
+    height: 30px;
+    position: relative;
+    left: 0%;
+    transform: rotate(180deg);
 
     &:hover{
       cursor: pointer;
