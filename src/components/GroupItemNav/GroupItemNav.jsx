@@ -25,7 +25,9 @@ export default function GroupItemNav({type, active}) {
     }
   }
   function handleHover() {
+    if (!active) {
       setActiveA(true)
+    }
   }
 
   function handleUp() {

@@ -21,7 +21,7 @@ import CartaoColorido from '../../components/LogosSVGComponentes/CartaoColorido/
 export default function Cartoes() {
     const { dados } = React.useContext(UserContext)
     const [ativo, setAtivo] = React.useState(null)
-    const [cartoes, setCartoes] = React.useState(null)
+    const [cartoes, setCartoes] = React.useState([])
     const [detalheCartao, setDetalheCartao] = React.useState(null);
 
     React.useEffect(() => {
@@ -29,10 +29,8 @@ export default function Cartoes() {
     }, [dados])
 
     React.useEffect(() => {
-        if (cartoes != null) {
-            if (cartoes.lenght > 0) {
-              setAtivo(cartoes[0].id)
-            }
+        if (cartoes.length > 0) {
+            setAtivo(cartoes[0].id)
         }
     }, [cartoes]);
 
@@ -43,7 +41,7 @@ export default function Cartoes() {
     async function fetchCartoes() {
         if (dados) {
             const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-            setCartoes(await response.data.cartaoDtos);
+            setCartoes(response.data.cartaoDtos);
         }
     }
 
@@ -130,7 +128,7 @@ export default function Cartoes() {
                 <div style={detalheCartao && detalheCartao.gastos.lenght > 4 ? {overflow: "hidden scroll"} : {overflow: "hidden"}} className="conjuntoItensUltimasAtividades">
                     {
                         detalheCartao && detalheCartao.gastos.lenght > 0 ?
-                        detalheCartao.gastos.map(gasto => (  
+                        detalheCartao.gastos.map(gasto => (
 
                             counts++ % 2 == 0 ?
                             <ItemUltimasAtividades data={gasto.dataPagamento} descricao={gasto.descricao} categoria={gasto.categoria}/>
