@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MetasFundoRedondo = styled.svg`
-    
+    transition: .05s;
     margin: 0% 2.5%;
 
     circle{
@@ -10,15 +10,5 @@ export const MetasFundoRedondo = styled.svg`
 
     path{
         fill: ${props => props.active ? "white" : "#32A287"}
-    }
-
-    &:hover{
-        circle{
-            fill: #32A287
-        }
-
-        path{
-            fill: white
-        }
     }
 `;

@@ -8,38 +8,26 @@ import { ItemNav } from '../NavBarApp/style'
 import * as S from './style'
 
 export default function GroupItemNav({type, active}) {
-  const [activeA, setActiveA] = React.useState(active)
 
   function Icon() {
     switch (type) {
       case "Painel":
-        return <GraficosFundoRedondo active={activeA} />
+        return <GraficosFundoRedondo active={active} />
       case "Contas":
-        return <ContasFundoRedondo active={activeA} />
+        return <ContasFundoRedondo active={active} />
       case "Cartões":
-        return <CartoesFundoRedondo active={activeA} />
+        return <CartoesFundoRedondo active={active} />
       case "Metas":
-        return <MetasFundoRedondo active={activeA} />
+        return <MetasFundoRedondo active={active} />
       case "Sair":
-        return <Sair active={activeA}/>
-    }
-  }
-  function handleHover() {
-    if (!active) {
-      setActiveA(true)
-    }
-  }
-
-  function handleUp() {
-    if (!active) {
-      setActiveA(false)
+        return <Sair active={active}/>
     }
   }
 
   return (
-    <S.Wrapper onMouseOver={handleHover} onMouseOut={handleUp}>
+    <S.Wrapper>
         {Icon()}
-        <ItemNav active={activeA}>
+        <ItemNav className="itemNav" active={active}>
           {type}
         </ItemNav>
     </S.Wrapper>
