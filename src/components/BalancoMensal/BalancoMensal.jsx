@@ -12,8 +12,8 @@ export default function BalancoMensal({isEmpty, dataReceitas, dataGastos}) {
                 <span className="titleChart">Balanço Mensal</span>
             </div>
             <ul>
-                <S.DescricaoBalancoMensal cor={"#32A287"} nomao={"Receitas"}/>
-                <S.DescricaoBalancoMensal cor={"#A23232"} nomao={"Gastos"}/>
+                <S.DescricaoBalancoMensal cor={"#32A287"} nome={"Receitas"}/>
+                <S.DescricaoBalancoMensal cor={"#A23232"} nome={"Gastos"}/>
             </ul>
             {isEmpty ?
                 <GreyPig height={40} mensagem="Você não possui lançamentos registrados!"/>

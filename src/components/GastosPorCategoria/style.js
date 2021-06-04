@@ -48,6 +48,27 @@ export const GastosPorCategoria = styled.div`
     .graficoDeCategorias{
         width: 50%;
         height: 80%;
+
+        .totalGastos{
+            position: absolute;
+            top: 45%;
+            width: 82px;
+            height: 50px;
+            left: 62.6%;
+            justify-items: center;
+            display: inline-grid;
+            overflow: hidden;
+
+            span{
+                color: #A23232;
+                font-weight: 800;
+                font-size: 12px;
+
+                span{
+                    font-size: 8px;
+                }
+            }
+        }
     }
 
 `
