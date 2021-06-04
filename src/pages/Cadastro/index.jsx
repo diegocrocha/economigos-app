@@ -28,7 +28,8 @@ export default function Cadastro() {
       if (senha.validate() && email.validate()) {
         await api.post('economigos/usuarios', {
           email: email.value,
-          senha: senha.value
+          senha: senha.value,
+          nome: "Economigo"
       }).then(function () {
         userLogin(email.value, senha.value)
       }).catch(function () {

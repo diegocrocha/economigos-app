@@ -107,8 +107,6 @@ export default function Contas() {
             }
         }
 
-        console.log(listaOrdenada)
-
         setListaOrdenada(listaOrdenada.sort((a, b) => b.id - a.id));
     }
 

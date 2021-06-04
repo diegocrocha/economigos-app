@@ -18,7 +18,7 @@ import OlhoFechado from '../../assets/olho-fechado.svg'
 export default function Appi() {
 
     const { dados } = React.useContext(UserContext);
-    const [ativo, setAtivo] = React.useState(false);
+    const [ativo, setAtivo] = React.useState(true);
     const [contas, setContas] = React.useState(null);
     const [gastos, setGastos] = React.useState(null);
     const [receitas, setReceitas] = React.useState(null);

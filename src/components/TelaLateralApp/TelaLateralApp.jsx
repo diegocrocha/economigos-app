@@ -59,22 +59,21 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                     <>
                         <div className="contas">
                             <div className="titulo">
-                                <span>{location.pathname == "/app/painel" ? "Contas" : "Saldo"}</span> 
+                                <span>{location.pathname == "/app/painel" ? "Contas" : "Saldo"}</span>
                                 <img style={location.pathname == "/app/painel" ? {display: "block"} : {display: "none"}} src={BotaoAdicionar} alt="" />
                             </div>
-                            <Carousel itemsToShow={1} itemPadding={[5, 5, 5, 5]} showArrows={false}>
-                                {location.pathname == "/app/painel" ? 
-                                    contas.map(conta => (
-                                        <CartaoContas nomeConta={conta.apelido} saldo={conta.valorAtual} negativo={Number(conta.valorAtual) < 0 ? true : false} />
-                                    ))
+                            {location.pathname == "/app/painel" && contas ?
+                                    (<Carousel itemsToShow={1} itemPadding={[5, 5, 5, 5]} showArrows={false}>
+                                      {contas.map(conta => (
+                                        <CartaoContas key={conta.id} nomeConta={conta.apelido} saldo={conta.valorAtual} negativo={Number(conta.valorAtual) < 0 ? true : false} />
+                                      ))}
+                                      </Carousel>)
                                     :
-                                    <CartaoContas nomeConta={"Saldo Total"} saldo={saldo} negativo={Number(saldo) < 0 ? true : false} />
-                                }
-                            </Carousel>
+                                    <CartaoContas nomeConta={"Saldo Total"} saldo={saldo} negativo={Number(saldo) < 0 ? true : false} />}
                             <div className="ultimaAtividades">
                                 <div className="titulo"><span>Últimas Atividades</span></div>
                                 <div className="listaDeUltimasAtividades" style={lancamentos.length > 6 ? { overflow: "scroll" } : { overflow: "hidden" }}>
-                                    {lancamentos.length > 0 ?
+                                    {lancamentos.length > 0 && lancamentos ?
                                         lancamentos.map(Lanc => (
                                             Lanc.recebido ?
                                                 <Lancamento key={Lanc.id} urlImage={Cifrao} titulo={Lanc.descricao !== "" ? Lanc.descricao : "Receita"} data={Lanc.dataPagamento.replaceAll("-", "/")} valor={Lanc.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />

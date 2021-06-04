@@ -16,4 +16,9 @@ export const Pages = styled.div`
     margin-top: 2%;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+
+    @media(max-width: 573px){
+        width: 70%;
+    }
 `

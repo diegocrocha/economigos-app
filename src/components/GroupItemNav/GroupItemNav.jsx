@@ -21,7 +21,7 @@ export default function GroupItemNav({type, active}) {
       case "Metas":
         return <MetasFundoRedondo active={activeA} />
       case "Sair":
-        return <Sair />
+        return <Sair active={activeA}/>
     }
   }
   function handleHover() {
