@@ -54,6 +54,6 @@ export const HeaderIconeConfig = styled.object`
 
 export const HeaderIconePerfil = styled.object`
     width: auto;
-    height: 80%;
+    height: 100%;
     margin-top: 0.5%;
 `;

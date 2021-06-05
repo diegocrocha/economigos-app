@@ -27,7 +27,7 @@ export const Input = styled.input`
     border: none;
     margin-left: 5%;
     color: #32A287;
-    font-weight: 600;
+    font-weight: 550;
 
 `;
 

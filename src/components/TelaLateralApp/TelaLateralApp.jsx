@@ -82,7 +82,7 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                                                 <Lancamento key={Lanc.id} urlImage={Alimentacao} titulo={Lanc.descricao !== "" ? Lanc.descricao : Lanc.categoria} data={Lanc.dataPagamento.replaceAll("-", "/")} valor={Lanc.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
                                         ))
                                         :
-                                        <GreyPig style={{marginTop: "25px"}} height="40" mensagem="Você não possui atividades!" />
+                                        <GreyPig style={{marginTop: "35px"}} height="40" mensagem="Você não possui atividades!" />
                                     }
                                 </div>
                             </div>

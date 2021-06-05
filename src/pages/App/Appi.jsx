@@ -12,6 +12,7 @@ import api from '../../services/api';
 import * as S from './style';
 import OlhoAberto from '../../assets/olho-aberto.svg'
 import OlhoFechado from '../../assets/olho-fechado.svg'
+import Perfil from '../Perfil';
 
 export default function Appi() {
 
@@ -56,7 +57,8 @@ export default function Appi() {
                 <Route path="painel" element={<Painel />} />
                 <Route path="contas" element={<Contas />} />
                 <Route path="cartoes" element={<Cartoes/>} />
-                <Route path="metas" element={<Metas/>} />
+                <Route path="metas" element={<Metas/>} />]
+                <Route path="perfil" element={<Perfil/>} />
             </Routes>
             </TelaCentralApp>
             <S.BtnFecharTela onClick={() => alterarBtn()} src={olho ? OlhoFechado : OlhoAberto}></S.BtnFecharTela>
