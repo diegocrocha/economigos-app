@@ -192,8 +192,8 @@ export default function Contas() {
                                 />
                             </div>
                             <div className="chartDescription">
-                                <ItemListaCategoria nomao="Receitas" cor="#32A287" />
-                                <ItemListaCategoria nomao="Gastos" cor="#A23232" />
+                                <ItemListaCategoria nome="Receitas" cor="#32A287" />
+                                <ItemListaCategoria nome="Gastos" cor="#A23232" />
                             </div>
                         </>
                     )

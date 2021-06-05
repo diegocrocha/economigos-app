@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CartaoContas = styled.div`
-    width: 100%;
+    width: ${props => props.nomeConta == "Saldo Total" ? "90%" : "100%"};
+    margin-left: ${props => props.nomeConta == "Saldo Total" ? "5%" : "0%"};
     height: 130px;
     border: 1px solid ${props => props.negativo ? "rgb(162, 50, 50)" : "#32A287"};
     padding: 10px;

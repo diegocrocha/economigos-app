@@ -8,6 +8,7 @@ import GroupItemNav from '../GroupItemNav/GroupItemNav'
 
 function ItemNav({type, func}) {
   let rota = false;
+  const location = useLocation()
   switch (type) {
     case "painel":
       rota = location.pathname == "/app/painel";

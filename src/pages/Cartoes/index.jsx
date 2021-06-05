@@ -15,8 +15,6 @@ import {
 import ItemUltimasAtividades from '../../components/ItemUltimasAtividades/ItemUltimasAtividades';
 import GreyPig from '../../components/GreyPig/GreyPig';
 import Head from '../../components/Helper/Head'
-import CartaoColorido from '../../components/LogosSVGComponentes/CartaoColorido/CartaoColorido';
-
 
 export default function Cartoes() {
     const { dados } = React.useContext(UserContext)
@@ -149,14 +147,14 @@ export default function Cartoes() {
 function ModalSemCartao() {
 
   return (
-    <S.SemCartaoWrapper>
-        <S.ModalSemCartao>
+    <G.SemWrapper>
+        <G.ModalSem>
           <img src={Logo}/>
           <p>Você não possui cartão</p>
           <p>Adicione um cartão agora mesmo!</p>
           <G.Button color="#32A287">Adicionar cartão</G.Button>
-        </S.ModalSemCartao>
-    </S.SemCartaoWrapper>
+        </G.ModalSem>
+    </G.SemWrapper>
   )
 
 }

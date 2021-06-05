@@ -72,7 +72,7 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                                     <CartaoContas nomeConta={"Saldo Total"} saldo={saldo} negativo={Number(saldo) < 0 ? true : false} />}
                             <div className="ultimaAtividades">
                                 <div className="titulo"><span>Últimas Atividades</span></div>
-                                <div className="listaDeUltimasAtividades" style={lancamentos.length > 6 ? { overflow: "scroll" } : { overflow: "hidden" }}>
+                                <div className="listaDeUltimasAtividades" style={lancamentos.length > 6 ? { overflowY: "scroll" } : { overflow: "hidden" }}>
                                     {lancamentos.length > 0 && lancamentos ?
                                         lancamentos.map(Lanc => (
                                             Lanc.recebido ?
