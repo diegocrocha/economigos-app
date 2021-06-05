@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const CartaoContas = styled.div`
     width: 100%;
     height: 130px;
-    border: 1px solid ${props => props.negativo ? "rgb(162, 50, 50)" : "#32A287"};
+    border: 2px solid ${props => props.negativo ? "rgb(162, 50, 50)" : "#32A287"};
     padding: 10px;
     border-radius: 7px;
-    box-shadow: 0px 1px 6px 1px grey;
+    box-shadow: 0px 1px 5px 1px grey;
 
     .saldoConta{
         width: 100%;

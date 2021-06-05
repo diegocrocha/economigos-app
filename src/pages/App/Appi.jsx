@@ -7,11 +7,9 @@ import Cartoes from '../Cartoes';
 import Contas from '../Contas';
 import Painel from '../Painel';
 import Metas from '../Metas';
-import Institucional from '../Institucional';
 import { UserContext } from '../../hooks/UserContext';
 import api from '../../services/api';
 import * as S from './style';
-import Telegram from '../Telegram';
 import OlhoAberto from '../../assets/olho-aberto.svg'
 import OlhoFechado from '../../assets/olho-fechado.svg'
 
@@ -59,7 +57,6 @@ export default function Appi() {
                 <Route path="contas" element={<Contas />} />
                 <Route path="cartoes" element={<Cartoes/>} />
                 <Route path="metas" element={<Metas/>} />
-                <Route path="telegram" element={<Telegram/>} />
             </Routes>
             </TelaCentralApp>
             <S.BtnFecharTela onClick={() => alterarBtn()} src={olho ? OlhoFechado : OlhoAberto}></S.BtnFecharTela>

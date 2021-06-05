@@ -9,7 +9,6 @@ import Login from './pages/Login/index.jsx';
 import Cadastro from './pages/Cadastro/index.jsx';
 import Appi from './pages/App/Appi.jsx';
 import { ToastContainer } from 'react-toastify';
-import Teste from "./pages/Teste/teste";
 import PrivateRoute from './hooks/PrivateRoute.js';
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
         <Route path="/login" exact element={<Login />} />
         <Route path="/cadastro" exact element={<Cadastro />} />
         <PrivateRoute path="/app/*" element={<Appi />} />
-        <Route path="/test" element={<Teste />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       </UserStorage>
