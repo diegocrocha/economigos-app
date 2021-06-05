@@ -1,9 +1,10 @@
 import React from 'react'
 import Logo from '../../assets/logo-escuro.svg'
-import Perfil from '../../components/LogosSVGComponentes/PerfilIcon/Perfil'
+import PerfilIcon from '../../components/LogosSVGComponentes/PerfilIcon/PerfilIcon'
 import Notificacoes from '../../components/LogosSVGComponentes/NotificationIcon/Notification'
 import SearchPrincipal from '../../components/SearchPrincipal/SearchPrincipal';
 import * as S from "./style";
+import { NavLink } from 'react-router-dom';
 
 export default function HeaderApp() {
     return (
@@ -16,7 +17,9 @@ export default function HeaderApp() {
             </S.AlinhamentoSearch>
             <S.AlinhamentoIcones>
                 <Notificacoes/>
-                <Perfil/>
+                <NavLink to="/app/perfil">
+                  <PerfilIcon/>
+                </NavLink>
             </S.AlinhamentoIcones>
         </S.HeaderApp>
     )

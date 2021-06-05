@@ -21,11 +21,10 @@ export const TelaLateralApp = styled.div`
         line-height: 79%;
         font-size: 45px;
         font-weight: 700;
-        color: #32A287;
+        color: #C8CBD0;
 
         span{
-            color: white;
-            text-shadow: 0px 0px 2px black;    
+            color: #C8CBD0;
         }
     }
 
@@ -47,7 +46,7 @@ export const TelaLateralApp = styled.div`
             align-items: center;
             width: 85%;
             margin-left: 7.5%;
-        
+
             span{
                 font-size: 1.4rem;
                 font-weight: 600;

@@ -9,6 +9,7 @@ import Lancamento from "../../components/Lancamento/Lancamento";
 import Cifrao from "../../assets/cifrao-fundo-redondo.svg";
 import Alimentacao from "../../assets/alimentacao-fundo-redondo.svg";
 import GreyPig from '../GreyPig/GreyPig';
+import GreyPigFull from '../../assets/grey-pig-full.svg'
 import api from '../../services/api';
 import { useLocation } from 'react-router-dom';
 
@@ -51,9 +52,9 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                 {!fechar ?
                     <>
                         <div className="mensagemQuandoFechado">
-                            ECONO<span>MIGOS</span>
+                            Econo<span>migos</span>
                         </div>
-                        <img className="imagemQuandoFechado" src={GreenPig} alt="" />
+                        <img className="imagemQuandoFechado" src={GreyPigFull} alt="" />
                     </>
                     :
                     <>
@@ -81,7 +82,7 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                                                 <Lancamento key={Lanc.id} urlImage={Alimentacao} titulo={Lanc.descricao !== "" ? Lanc.descricao : Lanc.categoria} data={Lanc.dataPagamento.replaceAll("-", "/")} valor={Lanc.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
                                         ))
                                         :
-                                        <GreyPig height="60" mensagem="Você não tem Atividades" />
+                                        <GreyPig style={{marginTop: "35px"}} height="40" mensagem="Você não possui atividades!" />
                                     }
                                 </div>
                             </div>

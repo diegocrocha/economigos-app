@@ -12,4 +12,8 @@ export const HeaderIconePerfil = styled.svg`
         filter: drop-shadow(0px 1px 2px grey)
     }
 
+    &:hover circle {
+      fill: #32A287
+    }
+
 `;
