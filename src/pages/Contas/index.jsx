@@ -16,6 +16,7 @@ import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCat
 import GreyPig from "../../components/GreyPig/GreyPig";
 import ContaC6 from '../../assets/tmp/conta-c6.svg'
 import Head from '../../components/Helper/Head'
+import { formatCurrency, formatDateMain } from '../../utils/utils';
 
 export default function Contas() {
 
@@ -118,7 +119,13 @@ export default function Contas() {
                 <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
                     {contas && contas.map(conta => (
-                        <ItemTab imgItem={ContaC6} setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
+                        <ItemTab
+                          imgItem={ContaC6}
+                          setAtivo={setAtivo}
+                          active={ativo}
+                          key={conta.id}
+                          idItemTab={conta.id}
+                          nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
                 <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
@@ -128,11 +135,11 @@ export default function Contas() {
                 <S.GroupInfosContaCartao>
                     <p>Saldo da Conta</p>
                     <div style={{ color:  (detalheConta && detalheConta.valorAtual >= 0 ? "#32A287" : "#A23232")}}>
-                      R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
+                      R$<span>{detalheConta ? formatCurrency(detalheConta.valorAtual) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
                 <S.GroupInfosContaCartao>
                     <p>Gasto da Conta</p>
-                    <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? detalheConta.totalGastos.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
+                    <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? formatCurrency(detalheConta.totalGastos) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
             </S.InfoItemSelected>
 
@@ -153,9 +160,20 @@ export default function Contas() {
                             <S.GroupAtividades style={{ overflowY: "scroll" }}>
                                 {listaOrdenada.map(itemList => (
                                     itemList.recebido ?
-                                        <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data={itemList.dataPagamento.replaceAll("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        <Lancamento
+                                          key={itemList.id}
+                                          urlImage={Cifrao}
+                                          titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"}
+                                          data={formatDateMain(itemList.dataPagamento)}
+                                          valor={formatCurrency(itemList.valor)}
+                                          receita />
                                         :
-                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data={itemList.dataPagamento.replaceAll("-", "/")} valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                        <Lancamento
+                                          key={itemList.id}
+                                          urlImage={Alimentacao}
+                                          titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria}
+                                          data={formatDateMain(itemList.dataPagamento)}
+                                          valor={formatCurrency(itemList.valor)} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">

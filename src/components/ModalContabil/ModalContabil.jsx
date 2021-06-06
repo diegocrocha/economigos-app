@@ -7,6 +7,7 @@ import { UserContext } from '../../hooks/UserContext'
 import { toast } from 'react-toastify';
 import api from '../../services/api';
 import InputReal from '../Form/InputReal';
+import { today } from '../../utils/utils';
 
 export default function ModalContabil({type, color, modal, setModal}) {
   const valor = useForm()
@@ -94,11 +95,6 @@ export default function ModalContabil({type, color, modal, setModal}) {
     setModal(false)
   }
 
-  function today() {
-    const date = new Date().toLocaleDateString('pt-BR');
-    return `${date.substr(6,4)}-${date.substr(3,2)}-${date.substr(0,2)}`;
-  }
-
   function handleOutsideClick(event) {
     if(event.target === event.currentTarget) {
         setModal(false);
@@ -126,17 +122,20 @@ export default function ModalContabil({type, color, modal, setModal}) {
               <Input
                 className="inputWidth"
                 label="Descrição"
+                id="descricao"
                 {...descricao}/>
-                <div className="groupInputs">
+              <div className="groupInputs">
                 <Select
                 type="CONTAS"
                 setValue={setConta}
                 value={conta}
+                id="contas"
                 label="Conta"
                 options={contas}/>
               <Select
                 setValue={setCategoria}
                 value={categoria}
+                id="categorias"
                 label="Categoria"
                 options={categorias}/>
                 </div>

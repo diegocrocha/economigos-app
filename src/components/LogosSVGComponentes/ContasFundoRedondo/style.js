@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ContasFundoRedondo = styled.svg`
     transition: .05s;
-    margin: 0% 2.5%;
+    margin: 0% 6.5% 0 4%;
 
     circle{
         fill: ${props => props.active ? "#32A287" : "white"}
