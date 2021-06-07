@@ -7,7 +7,7 @@ export default function Lancamento({urlImage, titulo, data, valor, receita}) {
             <img src={urlImage} alt=""/>
             <div className="infosLancamento">
                 <p>{titulo}</p>
-                <p>{data}</p>
+                <p>{data.split(" ")[0]}</p>
             </div>
             <p className="valorLancamento">R${valor}</p>
         </S.Lancamento>
