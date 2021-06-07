@@ -9,7 +9,7 @@ import api from '../../services/api';
 import InputReal from '../Form/InputReal';
 import { today } from '../../utils/utils';
 
-export default function ModalContabil({type, color, modal, setModal}) {
+export default function ModalContabil({ type, color, modal, setModal }) {
   const valor = useForm()
   const data = useForm()
   const descricao = useForm()
@@ -96,32 +96,32 @@ export default function ModalContabil({type, color, modal, setModal}) {
   }
 
   function handleOutsideClick(event) {
-    if(event.target === event.currentTarget) {
-        setModal(false);
+    if (event.target === event.currentTarget) {
+      setModal(false);
     }
   }
 
-    return (
-      <>
-        {modal &&
+  return (
+    <>
+      {modal &&
         <G.WrapperModal onClick={handleOutsideClick}>
           <G.Modal type={type}>
             <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
             <h1>{type == "RECEITA" ? "Nova Receita" : "Novo Gasto"}</h1>
             <form className="wrapperInputs">
               <div className="groupInputs">
-              <Input
-                label="Valor"
-                id="valor"
-                {...valor}/>
-              <Input
-                label="Data"
-                type="date"
-                {...data}/>
+                <Input
+                  label="Valor"
+                  id="valor"
+                  {...valor} />
+                <Input
+                  label="Data"
+                  type="date"
+                  {...data} />
               </div>
               <Input
                 className="inputWidth"
-                label="Descrição"
+                label="Descrição
                 id="descricao"
                 {...descricao}/>
               <div className="groupInputs">
@@ -147,6 +147,6 @@ export default function ModalContabil({type, color, modal, setModal}) {
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}
-      </>
-    )
+    </>
+  )
 }

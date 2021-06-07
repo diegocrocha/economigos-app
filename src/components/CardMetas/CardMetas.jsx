@@ -4,11 +4,16 @@ import Bandeira from "../../assets/bandeira.svg";
 import Edit from "../../assets/edit.svg";
 import CifraoFundoRedondo from "../../assets/cifrao-fundo-redondo.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
+import ModalMetas from "../../components/ModalMetas/ModalMetas";
 import { formatCurrency, percentComplete } from '../../utils/utils';
 
-export default function CardMetas({ nome, urlImage, descricao, valorInicial, valorFinal }) {
+export default function CardMetas({ idMeta, nome, urlImage, descricao, valorInicial, valorFinal}) {
+
+    const [modalEdit, setModalEdit] = React.useState(false)
+
     return (
         <S.Meta>
+            {modalEdit && <ModalMetas edit idMeta={idMeta} setModal={setModalEdit} titulo={"Atualizar Meta"}/>}
             <p className="nome" >{nome}</p>
             <img src={urlImage} alt="" />
             <div className="totalPercent">
@@ -28,13 +33,9 @@ export default function CardMetas({ nome, urlImage, descricao, valorInicial, val
                 <img src={Bandeira} alt="" />
             </div>
             <div className="alteracoes">
-                <div>
+                <div onClick={() => setModalEdit(true)}>
                     <img src={CifraoFundoRedondo} alt="" />
                     <p>Atualizar</p>
-                </div>
-                <div>
-                    <img src={Edit} alt="" />
-                    <p>Editar</p>
                 </div>
             </div>
         </S.Meta>

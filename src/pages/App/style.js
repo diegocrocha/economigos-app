@@ -21,6 +21,7 @@ export const BtnFecharTela = styled.img`
     transition: box-shadow 0.5s;
     background-color: #e4e4e4;
     padding: 4px;
+    opacity: ${props => props.opa ? "0.2" : "1"};
 
     &:hover{
         cursor:pointer;
