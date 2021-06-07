@@ -90,7 +90,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
     valor.value = 0.00
   }
 
-  function cadastar() {
+  function cadastrar() {
     handleSubmit()
     setModal(false)
   }
@@ -135,13 +135,14 @@ export default function ModalContabil({type, color, modal, setModal}) {
               <Select
                 setValue={setCategoria}
                 value={categoria}
+                type={"CATEGORIAS"}
                 id="categorias"
                 label="Categoria"
                 options={categorias}/>
                 </div>
                 </form>
                 <G.GroupButtonsModal>
-                  <G.Button color={color} onClick={cadastar}>Adicionar</G.Button>
+                  <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
                   <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
