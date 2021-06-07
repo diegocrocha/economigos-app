@@ -51,10 +51,10 @@ export const GastosPorCategoria = styled.div`
 
         .totalGastos{
             position: absolute;
-            top: 45%;
+            top: 19%;
             width: 82px;
             height: 50px;
-            left: 62.6%;
+            left: 80%;
             justify-items: center;
             display: inline-grid;
             overflow: hidden;

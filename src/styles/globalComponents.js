@@ -66,12 +66,13 @@ export const WrapperModal = styled.div`
 `
 
 export const Modal = styled.div`
-  width: 45%;
-  height: 80%;
+
+  width: ${props => props.largura && props.largura != 45 ? props.largura : "45"}%;
+  height: ${props => props.altura && props.altura != 80 ? props.altura : "80"}%;
   border-radius: 8px;
-  margin-left: 27.5%;
+  margin-left: ${props => props.marginLeft && props.marginLeft != 27.5 ? props.marginLeft : "27.5"}%;
   padding: 15px 20px;
-  margin-top: 5%;
+  margin-top: ${props => props.marginTop && props.marginTop != 5 ? props.marginTop : "5"}%;
   margin-bottom: 10%;
   opacity: 0;
   overflow: hidden;
@@ -92,6 +93,15 @@ export const Modal = styled.div`
     div {
       width: 90%;
       margin: 15px 5%;
+    }
+
+    .divInput{
+      width: 100%;
+      margin-top: 5px;
+
+      p{
+        margin: -15px 0px 0px 5%;
+      }
     }
   }
 
