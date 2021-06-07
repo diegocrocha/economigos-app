@@ -121,7 +121,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
               </div>
               <Input
                 className="inputWidth"
-                label="Descrição
+                label="Descrição"
                 id="descricao"
                 {...descricao}/>
               <div className="groupInputs">

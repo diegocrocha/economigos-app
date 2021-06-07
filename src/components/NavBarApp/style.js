@@ -14,7 +14,7 @@ export const BackItemNav = styled.div`
     align-items: center;
 
     &:nth-last-child(1) {
-        margin-top: 67%;
+        margin-top: 61%;
     }
 
     a {
