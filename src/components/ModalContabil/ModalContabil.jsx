@@ -6,6 +6,8 @@ import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext'
 import { toast } from 'react-toastify';
 import api from '../../services/api';
+import InputReal from '../Form/InputReal';
+import { today } from '../../utils/utils';
 
 export default function ModalContabil({ type, color, modal, setModal }) {
   const valor = useForm()
@@ -88,14 +90,9 @@ export default function ModalContabil({ type, color, modal, setModal }) {
     valor.value = 0.00
   }
 
-  function cadastar() {
+  function cadastrar() {
     handleSubmit()
     setModal(false)
-  }
-
-  function today() {
-    const date = new Date().toLocaleDateString('pt-BR');
-    return `${date.substr(6, 4)}-${date.substr(3, 2)}-${date.substr(0, 2)}`;
   }
 
   function handleOutsideClick(event) {
@@ -124,26 +121,30 @@ export default function ModalContabil({ type, color, modal, setModal }) {
               </div>
               <Input
                 className="inputWidth"
-                label="Descrição"
-                {...descricao} />
+                label="Descrição
+                id="descricao"
+                {...descricao}/>
               <div className="groupInputs">
                 <Select
-                  type="CONTAS"
-                  setValue={setConta}
-                  value={conta}
-                  label="Conta"
-                  options={contas} />
-                <Select
-                  setValue={setCategoria}
-                  value={categoria}
-                  label="Categoria"
-                  options={categorias} />
-              </div>
-            </form>
-            <G.GroupButtonsModal>
-              <G.Button color={color} onClick={cadastar}>Adicionar</G.Button>
-              <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
-            </G.GroupButtonsModal>
+                type="CONTAS"
+                setValue={setConta}
+                value={conta}
+                id="contas"
+                label="Conta"
+                options={contas}/>
+              <Select
+                setValue={setCategoria}
+                value={categoria}
+                type={"CATEGORIAS"}
+                id="categorias"
+                label="Categoria"
+                options={categorias}/>
+                </div>
+                </form>
+                <G.GroupButtonsModal>
+                  <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
+                  <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
+                </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}
     </>

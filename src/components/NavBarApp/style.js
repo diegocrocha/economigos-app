@@ -8,7 +8,7 @@ export const Nav = styled.nav`
 export const BackItemNav = styled.div`
     background-color: ${props => props.active ? "white" : "#e4e4e4"};
     text-align: center;
-    height: 9vh;
+    height: 9.5vh;
     display: flex;
     transition: 0.15s;
     align-items: center;
@@ -25,7 +25,7 @@ export const BackItemNav = styled.div`
 `
 
 export const ItemNav = styled.li`
-    width: 70%;
+    width: 65%;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
@@ -35,7 +35,7 @@ export const ItemNav = styled.li`
     background-color: white;
     background-color: ${props => props.active ?  "#32A287" : "white"};
     color: ${props => props.active ? "white" : "#32A287"};
-    padding: 0.5rem;
+    padding: 0.40rem;
 
 `
 export const Ola = styled.h2`

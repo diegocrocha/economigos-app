@@ -107,7 +107,7 @@ export const Modal = styled.div`
 
   h1 {
     text-align: center;
-    color: ${props => props.type == "RECEITA" ? "rgb(50, 162, 135)" : "#A23232"};
+    color: ${props => props.type == "GASTO" ? "#A23232" : "rgb(50, 162, 135)"};
   }
 
   .inputWidth {

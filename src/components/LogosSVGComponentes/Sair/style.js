@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Sair = styled.svg`
     transition: .05s;
-    margin: 0% 2.5%;
+    margin: 0% 6.5% 0 4%;
     cursor: pointer;
 
     circle{

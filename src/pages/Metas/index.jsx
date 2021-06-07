@@ -87,7 +87,7 @@ export default function Metas() {
                         (ativo == 2 ?
                             metasFinalizadas.length == 0 ?
                                 (
-                                    <GreyPig height="50" mensagem="Esta conta não possui metas Inativas!" />
+                                    <GreyPig height="50" mensagem="Esta conta não possui metas finalizadas!" />
                                 )
                                 :
                                 (
@@ -102,7 +102,7 @@ export default function Metas() {
                             :
                             metasInativas.length == 0 ?
                                 (
-                                    <GreyPig height="50" mensagem="Esta conta não possui metas Finalizadas!" />
+                                    <GreyPig height="50" mensagem="Esta conta não possui metas inativas!" />
                                 )
                                 :
                                 (
