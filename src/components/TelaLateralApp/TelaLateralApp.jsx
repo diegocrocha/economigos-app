@@ -12,6 +12,7 @@ import GreyPig from '../GreyPig/GreyPig';
 import GreyPigFull from '../../assets/grey-pig-full.svg'
 import api from '../../services/api';
 import { useLocation } from 'react-router-dom';
+import { formatCurrency, formatDateMain } from '../../utils/utils';
 
 
 export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
@@ -75,11 +76,21 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                                 <div className="titulo"><span>Últimas Atividades</span></div>
                                 <div className="listaDeUltimasAtividades" style={lancamentos.length > 6 ? { overflowY: "scroll" } : { overflow: "hidden" }}>
                                     {lancamentos.length > 0 && lancamentos ?
-                                        lancamentos.map(Lanc => (
-                                            Lanc.recebido ?
-                                                <Lancamento key={Lanc.id} urlImage={Cifrao} titulo={Lanc.descricao !== "" ? Lanc.descricao : "Receita"} data={Lanc.dataPagamento.replaceAll("-", "/")} valor={Lanc.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        lancamentos.map(lanc => (
+                                            lanc.recebido ?
+                                                <Lancamento
+                                                  key={lanc.id}
+                                                  urlImage={Cifrao}
+                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Receita"}
+                                                  data={formatDateMain(lanc.dataPagamento)}
+                                                  valor={formatCurrency(lanc.valor)} receita />
                                                 :
-                                                <Lancamento key={Lanc.id} urlImage={Alimentacao} titulo={Lanc.descricao !== "" ? Lanc.descricao : Lanc.categoria} data={Lanc.dataPagamento.replaceAll("-", "/")} valor={Lanc.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                                <Lancamento
+                                                  key={lanc.id}
+                                                  urlImage={Alimentacao}
+                                                  titulo={lanc.descricao !== "" ? lanc.descricao : lanc.categoria}
+                                                  data={formatDateMain(lanc.dataPagamento)}
+                                                  valor={formatCurrency(lanc.valor)} />
                                         ))
                                         :
                                         <GreyPig style={{marginTop: "35px"}} height="40" mensagem="Você não possui atividades!" />

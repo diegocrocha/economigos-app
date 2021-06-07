@@ -7,6 +7,7 @@ import { UserContext } from '../../hooks/UserContext'
 import { toast } from 'react-toastify';
 import api from '../../services/api';
 import InputReal from '../Form/InputReal';
+import { today } from '../../utils/utils';
 
 export default function ModalContabil({type, color, modal, setModal}) {
   const valor = useForm()
@@ -89,14 +90,9 @@ export default function ModalContabil({type, color, modal, setModal}) {
     valor.value = 0.00
   }
 
-  function cadastar() {
+  function cadastrar() {
     handleSubmit()
     setModal(false)
-  }
-
-  function today() {
-    const date = new Date().toLocaleDateString('pt-BR');
-    return `${date.substr(6,4)}-${date.substr(3,2)}-${date.substr(0,2)}`;
   }
 
   function handleOutsideClick(event) {
@@ -126,23 +122,27 @@ export default function ModalContabil({type, color, modal, setModal}) {
               <Input
                 className="inputWidth"
                 label="Descrição"
+                id="descricao"
                 {...descricao}/>
-                <div className="groupInputs">
+              <div className="groupInputs">
                 <Select
                 type="CONTAS"
                 setValue={setConta}
                 value={conta}
+                id="contas"
                 label="Conta"
                 options={contas}/>
               <Select
                 setValue={setCategoria}
                 value={categoria}
+                type={"CATEGORIAS"}
+                id="categorias"
                 label="Categoria"
                 options={categorias}/>
                 </div>
                 </form>
                 <G.GroupButtonsModal>
-                  <G.Button color={color} onClick={cadastar}>Adicionar</G.Button>
+                  <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
                   <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>

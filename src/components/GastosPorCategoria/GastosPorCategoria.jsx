@@ -4,6 +4,7 @@ import moedaGasto from '../../assets/moeda-gasto.svg'
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria"
 import GroupPieChart from "../../components/Charts/GroupPieChart";
 import GreyPig from '../GreyPig/GreyPig';
+import { formatCurrency } from '../../utils/utils';
 
 export default function GastosPorCategoria({ dataCategorias, preenchido }) {
     const [maiorCategoria, setMaiorCategoria] = React.useState("")
@@ -50,7 +51,7 @@ export default function GastosPorCategoria({ dataCategorias, preenchido }) {
                     <div className="graficoDeCategorias">
                         <div className="totalGastos">
                             <span>Gastos</span>
-                            <span><span>R$</span>{Number(somas).toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span>
+                            <span><span>R$</span>{formatCurrency(Number(somas))}</span>
                         </div>
                         <GroupPieChart maior={maiorCategoria} meio={meioCategoria} menor={menorCategoria} />
                     </div>
