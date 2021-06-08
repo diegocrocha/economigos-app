@@ -35,6 +35,8 @@ export const GastosPorCategoria = styled.div`
     .listaDeCategorias{
         width: 50%;
         height: 80%;
+        padding-bottom: 5%;
+        overflow: hidden;
 
         ul{
             list-style: none;
@@ -46,6 +48,27 @@ export const GastosPorCategoria = styled.div`
     .graficoDeCategorias{
         width: 50%;
         height: 80%;
+
+        .totalGastos{
+            position: absolute;
+            top: 19%;
+            width: 82px;
+            height: 50px;
+            left: 80%;
+            justify-items: center;
+            display: inline-grid;
+            overflow: hidden;
+
+            span{
+                color: #A23232;
+                font-weight: 800;
+                font-size: 12px;
+
+                span{
+                    font-size: 8px;
+                }
+            }
+        }
     }
 
 `

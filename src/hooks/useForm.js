@@ -6,8 +6,8 @@ const types = {
         message: 'Preencha um email válido'
     },
     senha: {
-        regex: /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z$*&@#]{8,}$/,
-        message: 'A senha deve conter no mínimo 8 caracteres e pelo menos uma letra e um número'
+        regex: /^.{8,}$/,
+        message: 'A senha deve conter no mínimo 8 caracteres'
     }
 }
 
@@ -16,10 +16,10 @@ const useForm = (type) => {
     const [erro, setError] = React.useState(null);
 
     function validate(value) {
-        if (type === false) return true;
+        if (type == false) return true;
 
-        if(value.length === 0) {
-            setError("Preencha um valor");
+        if(value.length == 0) {
+            setError("Preencha o campo");
             return false;
         } else if (types[type] && !types[type].regex.test(value)) {
             setError (types[type].message);
@@ -41,7 +41,7 @@ const useForm = (type) => {
         setValue,
         onChange,
         erro,
-        validate: () => validate(validate),
+        validate: () => validate(value),
         onBlur: () => validate(value)
     }
 }

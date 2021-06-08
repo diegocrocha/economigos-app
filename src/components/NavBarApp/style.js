@@ -5,21 +5,19 @@ export const Nav = styled.nav`
     width: 20%;
 `;
 
-let active;
-
 export const BackItemNav = styled.div`
-    background-color: ${props => props.className == "active-nav" ? "white" : "#e4e4e4"};
+    background-color: ${props => props.active ? "white" : "#e4e4e4"};
     text-align: center;
-    height: 9vh;
+    height: 9.5vh;
     display: flex;
+    transition: 0.15s;
     align-items: center;
 
     &:nth-last-child(1) {
-        margin-top: 40%;
+        margin-top: 61%;
     }
 
     a {
-        ${props => props.className == "active-nav" ? active = true : active = false};
         display: flex;
         width: 100%;
         align-items: center;
@@ -27,25 +25,24 @@ export const BackItemNav = styled.div`
 `
 
 export const ItemNav = styled.li`
-    width: 70%;
+    width: 65%;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
     list-style: none;
-    background-color: ${props => props.className == "active" ?  "#32A287" : "white"};
-    color: ${props => props.className == "active" ? "white" : "#32A287"};
-    /* background-color: ${active ? "#32A287" : "white"}; */
-    /* color: ${active ? "white" : "#32A287"}; */
-    padding: 0.5rem;
+    transition: 0.05s;
+    color: #32A287;
+    background-color: white;
+    background-color: ${props => props.active ?  "#32A287" : "white"};
+    color: ${props => props.active ? "white" : "#32A287"};
+    padding: 0.40rem;
 
-    &:hover {
-        background-color: #32A287;
-        color: white;
-    }
 `
 export const Ola = styled.h2`
     font-weight: 500;
     margin-bottom: 5vh;
     padding-left: 2rem;
+    padding-right: 2rem;
     margin-top: 5vh;
+    text-align: center;
 `

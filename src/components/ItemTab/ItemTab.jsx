@@ -13,7 +13,11 @@ export default function ItemTab({active, nome, idItemTab, setAtivo, imgItem,...p
             {imgItem ? 
                 <img src={imgItem} alt=""/>
                 :
-                <CartaoColorido color={"#32A287"}/>
+                active == idItemTab ? 
+                    <CartaoColorido color={"#32A287"}/>
+                    :
+                    <CartaoColorido color={"#bababa"}/>
+
             }
             <p>{nome}</p>
         </S.ItemTab>

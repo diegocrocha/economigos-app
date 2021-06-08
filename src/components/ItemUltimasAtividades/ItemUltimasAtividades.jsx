@@ -1,24 +1,14 @@
 import React from 'react'
 import * as S from "./style";
-import { 
-    parseISO, 
-    format,
-} from 'date-fns';
 import alimentacaoFundoRedondo from "../../assets/alimentacao-fundo-redondo.svg";
+import { formatDateMain } from '../../utils/utils';
 
 export default function ItemUltimasAtividades({data, descricao, categoria, BackGrey, height}) {
-
-    function formatData(data) {
-        return  format(
-            parseISO(data), 
-            "dd'/'MM'/'yyyy",
-          );
-    }
 
     return (
         <S.Atividade BackGrey={BackGrey} height={height}>
             <div>
-                {formatData(data)}
+                {formatDateMain(data)}
             </div>
             <div>
                 {descricao}

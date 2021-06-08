@@ -12,9 +12,13 @@ export const UserStorage = ({ children }) => {
 
     const userLogout = React.useCallback(async function userLogout() {
         setDados(false)
-        setLogin(false)
+        setLogin(null)
         setError(null)
         setLoading(false)
+        window.localStorage.removeItem("autenticado")
+        window.localStorage.removeItem('email')
+        window.localStorage.removeItem('senha')
+        await api.get("economigos/sessao/logout")
     }, [])
 
     async function userLogin(email, password) {
@@ -32,7 +36,6 @@ export const UserStorage = ({ children }) => {
             setLogin(true);
             localStorage.setItem("email", email);
             localStorage.setItem("senha", password);
-            // console.log(data);
         } catch (err) {
             setError(err.message)
             setLogin(false);
@@ -42,37 +45,42 @@ export const UserStorage = ({ children }) => {
         }
     }
 
-    React.useEffect(() => {
-        async function autoLogin() {
-            const email = window.localStorage.getItem('email');
-            const senha = window.localStorage.getItem('senha');
+    function reload() {
+      autoLogin()
+    }
 
-            if (email && senha) {
-                try {
-                    setError(null);
-                    setLoading(true);
-                    // const response = await user.get('/VALIDATE_JWT', {
-                    //     headers: {
-                    //         'Authorization': `Bearer ${token}`
-                    //     }
-                    // })
-                    // if (response.status !== 200) throw new Error('Token inválido');
-                    // getUser(email);
-                    userLogin(email,senha);
-                } catch (error) {
-                    userLogout();
-                } finally {
-                    setLoading(false);
-                }
-            } else {
-                setLogin(false);
-            }
-        }
+    async function autoLogin() {
+      const email = window.localStorage.getItem('email');
+      const senha = window.localStorage.getItem('senha');
+
+      if (email && senha) {
+          try {
+              setError(null);
+              setLoading(true);
+              // const response = await user.get('/VALIDATE_JWT', {
+              //     headers: {
+              //         'Authorization': `Bearer ${token}`
+              //     }
+              // })
+              // if (response.status !== 200) throw new Error('Token inválido');
+              // getUser(email);
+              userLogin(email,senha);
+          } catch (error) {
+              userLogout();
+          } finally {
+              setLoading(false);
+          }
+      } else {
+          setLogin(null);
+      }
+  }
+
+    React.useEffect(() => {
         autoLogin()
     }, [userLogout])
 
     return (
-        <UserContext.Provider value={{ userLogin, dados, loading, login, error }}>
+        <UserContext.Provider value={{ userLogin, userLogout, reload, dados, loading, login, error }}>
             {children}
         </UserContext.Provider>
     )

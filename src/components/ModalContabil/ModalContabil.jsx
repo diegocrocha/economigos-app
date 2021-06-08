@@ -6,8 +6,10 @@ import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext'
 import { toast } from 'react-toastify';
 import api from '../../services/api';
+import InputReal from '../Form/InputReal';
+import { today } from '../../utils/utils';
 
-export default function ModalContabil({type, color, modal, setModal}) {
+export default function ModalContabil({ type, color, modal, setModal }) {
   const valor = useForm()
   const data = useForm()
   const descricao = useForm()
@@ -17,152 +19,134 @@ export default function ModalContabil({type, color, modal, setModal}) {
   const [contas, setContas] = React.useState(null)
   const [cartoes, setCartoes] = React.useState(null)
 
-  const { dados } = React.useContext(UserContext);
+  const { dados, reload } = React.useContext(UserContext);
 
   React.useEffect(() => {
     data.setValue(today());
   }, [])
 
   React.useEffect(() => {
-    // fetchData()
+    fetchData()
   }, [dados])
 
-  // async function fetchData() {
-  //   if (dados) {
-  //     const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-  //     const responseC = await api.get(`/economigos/categorias`)
-  //     setCategorias(await responseC.data)
-  //     setContas(await response.data.contaDtos);
-  //     setCartoes(await response.data.cartaoDtos);
-  //     setConta(await response.data.contaDtos[0].id);
-  //     setCategoria(await response.data[0].id)
-  //   }
-  // }
+  async function fetchData() {
+    if (dados) {
+      const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
+      const responseC = await api.get(`/economigos/categorias`)
+      setCategorias(await responseC.data)
+      setContas(await response.data.contaDtos);
+      setCartoes(await response.data.cartaoDtos);
+      setConta(await response.data.contaDtos[0].id)
+      setCategoria(await responseC.data[0].id)
+    }
+  }
+
 
   async function handleSubmit() {
     if (dados) {
-      const response = await api.post(`/economigos/gastos`, {
-        idConta: conta,
-        idCategoria: categoria,
-        gastoCartao: false,
-        valor: Number(valor.value),
-        pago: true,
-        descricao: descricao.value,
-        fixo: false,
-        dataPagamento: data.value
-      })
-      if (await response.status === 201) {
-        toast.success("Gasto cadastrado com sucesso")
-        setModal(false);
-      } else {
-        toast.error("Erro ao cadastrar o gasto")
+      switch (type) {
+        case "RECEITA":
+          const response = await api.post(`/economigos/rendas`, {
+            idConta: conta,
+            idCategoria: categoria,
+            valor: Number(valor.value),
+            recebido: true,
+            pago: true,
+            descricao: descricao.value,
+            fixo: false,
+            dataPagamento: data.value
+          })
+          if (await response.status === 201) {
+            toast.success("Receita cadastrada com sucesso")
+          } else {
+            toast.error("Erro ao cadastrar a receita")
+          }
+          break;
+        case "GASTO":
+          const responseG = await api.post(`/economigos/gastos`, {
+            idConta: conta,
+            idCategoria: categoria,
+            gastoCartao: false,
+            valor: Number(valor.value),
+            pago: true,
+            descricao: descricao.value,
+            fixo: false,
+            dataPagamento: data.value
+          })
+          if (await responseG.status === 201) {
+            toast.success("Gasto cadastrado com sucesso")
+          } else {
+            toast.error("Erro ao cadastrar o gasto")
+          }
+          break;
       }
+      reload()
     }
   }
 
-  async function handleSubmitR() {
-    if (dados) {
-      const response = await api.post(`/economigos/rendas`, {
-        idConta: conta,
-        idCategoria: categoria,
-        valor: Number(valor.value),
-        recebido: true,
-        pago: true,
-        descricao: descricao.value,
-        fixo: false,
-        dataPagamento: data.value
-      })
-      if (await response.status === 201) {
-        toast.success("Receita cadastrada com sucesso")
-      } else {
-        toast.error("Erro ao cadastrar a receita")
-      }
-    }
-    setModal(false);
+  function continuarCadastrando() {
+    handleSubmit()
+    descricao.value = ""
+    valor.value = 0.00
   }
 
-  function today() {
-    const date = new Date().toLocaleDateString('pt-BR');
-    return `${date.substr(6,4)}-${date.substr(3,2)}-${date.substr(0,2)}`;
+  function cadastrar() {
+    handleSubmit()
+    setModal(false)
   }
 
   function handleOutsideClick(event) {
-    if(event.target === event.currentTarget) {
-        setModal(false);
+    if (event.target === event.currentTarget) {
+      setModal(false);
     }
   }
 
-    return (
-      <>
-        {modal &&
-        <G.WrapperModal>
+  return (
+    <>
+      {modal &&
+        <G.WrapperModal onClick={handleOutsideClick}>
           <G.Modal type={type}>
             <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
             <h1>{type == "RECEITA" ? "Nova Receita" : "Novo Gasto"}</h1>
             <form className="wrapperInputs">
               <div className="groupInputs">
-              <Input
-                label="Valor"
-                type="number"
-                {...valor}/>
-              <Input
-                label="Data"
-                type="date"
-                {...data}/>
+                <Input
+                  label="Valor"
+                  id="valor"
+                  {...valor} />
+                <Input
+                  label="Data"
+                  type="date"
+                  {...data} />
               </div>
               <Input
                 className="inputWidth"
                 label="Descrição"
+                id="descricao"
                 {...descricao}/>
-                <div className="groupInputs">
+              <div className="groupInputs">
                 <Select
                 type="CONTAS"
                 setValue={setConta}
                 value={conta}
+                id="contas"
                 label="Conta"
-                options={[{"id": 1, "apelido": "C6BANK"}]}/>
+                options={contas}/>
               <Select
                 setValue={setCategoria}
                 value={categoria}
+                type={"CATEGORIAS"}
+                id="categorias"
                 label="Categoria"
-                options={[
-                  {
-                      "id": 1,
-                      "categoria": "Alimento"
-                  },
-                  {
-                      "id": 2,
-                      "categoria": "Eletrônicos"
-                  },
-                  {
-                      "id": 3,
-                      "categoria": "Casa"
-                  },
-                  {
-                      "id": 4,
-                      "categoria": "Locomoção"
-                  },
-                  {
-                      "id": 5,
-                      "categoria": "Salário"
-                  },
-                  {
-                      "id": 6,
-                      "categoria": "Entretenimento"
-                  },
-                  {
-                      "id": 7,
-                      "categoria": "Investimento"
-                  }
-              ]}/>
+                options={categorias}/>
                 </div>
                 </form>
                 <G.GroupButtonsModal>
-                  <G.Button color={color} onClick={type == "RECEITA" ? handleSubmitR : handleSubmit}>Adicionar</G.Button>
-                  <G.SimpleButton color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
+                  <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
+                  <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}
-      </>
-    )
+    </>
+  )
 }

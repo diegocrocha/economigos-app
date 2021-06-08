@@ -1,64 +1,76 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import * as S from './style'
-import GraficosFundoRedondo from '../../components/LogosSVGComponentes/GraficosFundoRedondo/GraficosFundoRedondo'
-import ContasFundoRedondo from '../../components/LogosSVGComponentes/ContasFundoRedondo/ContasFundoRedondo'
-import CartoesFundoRedondo from '../../components/LogosSVGComponentes/CartoesFundoRedondo/CartoesFundoRedondo'
-import MetasFundoRedondo from '../../components/LogosSVGComponentes/MetasFundoRedondo/MetasFundoRedondo'
-import EconopontosFundoRedondo from '../../components/LogosSVGComponentes/EconopontosFundoRedondo/EconopontosFundoRedondo'
 import Sair from '../../components/LogosSVGComponentes/Sair/Sair'
+import { UserContext } from '../../hooks/UserContext'
+import GroupItemNav from '../GroupItemNav/GroupItemNav'
+
+
+function ItemNav({type, func}) {
+  let rota = false;
+  const location = useLocation();
+
+  switch (type) {
+    case "painel":
+      rota = location.pathname == "/app/painel";
+      return (
+        <S.BackItemNav active={rota}>
+          <NavLink to="/app/painel" >
+            <GroupItemNav type="Painel" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+      )
+    case "contas":
+      rota = location.pathname == "/app/contas";
+      return (
+        <S.BackItemNav active={rota}>
+          <NavLink to="/app/contas" >
+            <GroupItemNav type="Contas" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+      )
+     case "cartoes":
+      rota = location.pathname == "/app/cartoes";
+      return (
+        <S.BackItemNav active={rota}>
+          <NavLink to="/app/cartoes" >
+            <GroupItemNav type="Cartões" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+      )
+      case "metas":
+        rota = location.pathname == "/app/metas";
+        return (
+          <S.BackItemNav active={rota}>
+          <NavLink to="/app/metas" >
+            <GroupItemNav type="Metas" active={rota} />
+          </NavLink>
+        </S.BackItemNav>
+        )
+      case "sair":
+        return (
+          <S.BackItemNav active={rota} onClick={func}>
+            <GroupItemNav type="Sair" active={rota}/>
+        </S.BackItemNav>
+        )
+      default:
+        return null
+  }
+}
 
 export default function NavBarApp({ name }) {
+
+  const { userLogout } = React.useContext(UserContext);
+
   return (
     <S.Nav>
       <S.Ola>Olá, {name}!</S.Ola>
       <ul>
-        <S.BackItemNav className="active-nav">
-          <NavLink to="/app/painel" activeClassName="active-nav">
-            <GraficosFundoRedondo active />
-            <S.ItemNav className="active">
-              Painel
-            </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav>
-          <NavLink to="/app/contas">
-            <ContasFundoRedondo />
-            <S.ItemNav>
-              Contas
-          </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav>
-          <NavLink to="/app/cartoes">
-            <CartoesFundoRedondo/>
-            <S.ItemNav>
-              Cartões
-            </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav active>
-          <NavLink to="/app/metas">
-            <MetasFundoRedondo/>
-            <S.ItemNav active>
-              Metas
-          </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav>
-          <NavLink to="/app/econopontos">
-            <EconopontosFundoRedondo/>
-            <S.ItemNav>
-              Econopontos
-          </S.ItemNav>
-          </NavLink>
-        </S.BackItemNav>
-        <S.BackItemNav>
-          <Sair/>
-          <S.ItemNav>
-            Sair
-          </S.ItemNav>
-        </S.BackItemNav>
+        <ItemNav type="painel" />
+        <ItemNav type="contas" />
+        <ItemNav type="cartoes" />
+        <ItemNav type="metas" />
+        <ItemNav type="sair" func={userLogout}/>
       </ul>
     </S.Nav>
   )

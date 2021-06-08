@@ -206,7 +206,7 @@ export const BalancoMensalContas = styled.div`
   }
 
   .chartDescription{
-    height: 14%;
+    height: 0%;
     width: 75%;
     margin-left: 15%;
     display: flex;

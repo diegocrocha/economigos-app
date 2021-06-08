@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const GreyPig = styled.img`
     height: ${props => props.height ? props.height : 80}%;
     margin: auto;
+    justify-items: center;
 `;
 
 export const Text = styled.p`

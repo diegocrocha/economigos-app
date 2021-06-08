@@ -96,8 +96,8 @@ export const Meta = styled.div`
 
             img{
                 margin: 0;
-                height: 107%;
-                width: 15%;
+                height: 125%;
+                width: 10%;
             }
 
             p{

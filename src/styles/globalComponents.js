@@ -23,7 +23,7 @@ export const GroupMenu = styled.div`
 
 export const ImgBtnAdicionar = styled.img`
     height: 35px;
-    width: 20%;
+    width: 16%;
     &:hover{
       cursor: pointer;
       filter: drop-shadow(0px 0px 2px grey);
@@ -34,6 +34,18 @@ export const ImgBtnProximo = styled.img`
     height: 30px;
     position: relative;
     left: 2%;
+
+    &:hover{
+      cursor: pointer;
+      filter: drop-shadow(1px 0px 3px grey);
+    }
+`;
+
+export const ImgBtnAnterior = styled.img`
+    height: 30px;
+    position: relative;
+    left: 0%;
+    transform: rotate(180deg);
 
     &:hover{
       cursor: pointer;
@@ -54,12 +66,13 @@ export const WrapperModal = styled.div`
 `
 
 export const Modal = styled.div`
-  width: 45%;
-  height: 80%;
+
+  width: ${props => props.largura && props.largura != 45 ? props.largura : "45"}%;
+  height: ${props => props.altura && props.altura != 80 ? props.altura : "80"}%;
   border-radius: 8px;
-  margin-left: 27.5%;
+  margin-left: ${props => props.marginLeft && props.marginLeft != 27.5 ? props.marginLeft : "27.5"}%;
   padding: 15px 20px;
-  margin-top: 5%;
+  margin-top: ${props => props.marginTop && props.marginTop != 5 ? props.marginTop : "5"}%;
   margin-bottom: 10%;
   opacity: 0;
   overflow: hidden;
@@ -81,11 +94,20 @@ export const Modal = styled.div`
       width: 90%;
       margin: 15px 5%;
     }
+
+    .divInput{
+      width: 100%;
+      margin-top: 5px;
+
+      p{
+        margin: -15px 0px 0px 5%;
+      }
+    }
   }
 
   h1 {
     text-align: center;
-    color: ${props => props.type == "RECEITA" ? "rgb(50, 162, 135)" : "#A23232"};
+    color: ${props => props.type == "GASTO" ? "#A23232" : "rgb(50, 162, 135)"};
   }
 
   .inputWidth {
@@ -204,4 +226,55 @@ export const GroupInfosContaCartao = styled.div`
         font-size: 1.9rem;
       }
     }
+`
+
+export const SemWrapper = styled.div`
+  background: transparent;
+  position: absolute;
+  padding-top: 10%;
+  border-radius: 10px;
+  width: 100%;
+  z-index: 1000!important;
+  height: 100%;
+`
+
+export const ModalSem = styled.div`
+  width: 50%;
+  height: 80%;
+  text-align: center;
+  border-radius: 8px;
+  margin-left: 25%;
+  padding: 10px 10px;
+  margin-bottom: 10%;
+  opacity: 0;
+  overflow: hidden;
+  transform: scale(.7);
+  animation: scaleUp .3s forwards;
+  background-color: white;
+  border: #32A287 2px solid;
+  justify-items: center;
+
+  img {
+    width: 80%;
+    margin-bottom: 30px;
+    margin-left: 10%;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+
+  button {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  @keyframes scaleUp {
+    to {
+      opacity: 1;
+      transform: initial;
+    }
+  }
 `

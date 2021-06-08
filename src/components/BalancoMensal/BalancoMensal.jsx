@@ -16,8 +16,8 @@ export default function BalancoMensal({isEmpty, dataReceitas, dataGastos}) {
                 <S.DescricaoBalancoMensal cor={"#A23232"} nome={"Gastos"}/>
             </ul>
             {isEmpty ?
-                <GreyPig height={40} mensagem="Você não tem lançamentos!"/>
-                : 
+                <GreyPig height={40} mensagem="Você não possui lançamentos registrados!"/>
+                :
                 <div className="barChart">
                     <GroupBarChart
                     dataReceitas={dataReceitas}

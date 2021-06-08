@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const SaldoTotal = styled.div`
     width: 49.5%;
     height: 40%;
-    background-color: #32A287;
-    border: 3px solid #32A287;
+    background-color: ${props => props.saldo >= 0 ? "#32A287" : "#A23232"};
+    border: 3px solid ${props => props.saldo >= 0 ? "#32A287" : "#A23232"};
     border-radius: 14px;
     margin-right: 1%;
 
@@ -17,7 +17,7 @@ export const SaldoTotal = styled.div`
         img{
             height: 100%;
             margin-left: 2%;
-        
+
             &:hover{
                 cursor: pointer;
             }

@@ -16,6 +16,9 @@ import * as G from "../../styles/globalComponents";
 import ItemListaCategoria from "../../components/ItemListaCategoria/ItemListaCategoria";
 import GreyPig from "../../components/GreyPig/GreyPig";
 import ContaC6 from '../../assets/tmp/conta-c6.svg'
+import Head from '../../components/Helper/Head'
+import { formatCurrency, formatDateMain } from '../../utils/utils';
+import ModalContas from '../../components/ModalContas/ModalContas';
 
 export default function Contas() {
 
@@ -26,6 +29,7 @@ export default function Contas() {
     const [listaOrdenada, setListaOrdenada] = React.useState([]);
     const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
     const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
+    const [modal, setModal] = React.useState(false)
 
     React.useEffect(() => {
         fetchContas();
@@ -39,7 +43,7 @@ export default function Contas() {
 
     React.useEffect(() => {
         fetchData();
-    }, [ativo]);
+    }, [ativo, dados]);
 
     React.useEffect(() => {
         ordenarLista();
@@ -63,23 +67,7 @@ export default function Contas() {
     async function fetchDataDash() {
         if (ativo) {
             const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`);
-            let gastos = []
-            let receitas = []
-
-            for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
-                gastos.push({
-                    x: response.data[0].valorMensalDtos[j].mes,
-                    y: response.data[0].valorMensalDtos[j].valor
-                })
-            }
-            for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
-                receitas.push({
-                    x: response.data[1].valorMensalDtos[j].mes,
-                    y: response.data[1].valorMensalDtos[j].valor
-                })
-            }
-            setMesesAnterioresReceitas(receitas);
-            setMesesAnterioresGastos(gastos);
+            ultimosMeses(response)
         }
     }
 
@@ -88,6 +76,37 @@ export default function Contas() {
           const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
         }
       }
+    function ultimosMeses(response) {
+        let gastos = []
+        let receitas = []
+        let gastosComValorZero = 0;
+        let receitasComValorZero = 0;
+
+        for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
+            gastos.push({
+                x: response.data[0].valorMensalDtos[j].mes,
+                y: response.data[0].valorMensalDtos[j].valor
+            })
+            response.data[0].valorMensalDtos[j].valor == 0 ? gastosComValorZero++ : gastosComValorZero;
+        }
+        for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
+            receitas.push({
+                x: response.data[1].valorMensalDtos[j].mes,
+                y: response.data[1].valorMensalDtos[j].valor
+            })
+            response.data[1].valorMensalDtos[j].valor == 0 ? receitasComValorZero++ : receitasComValorZero;
+        }
+
+        if (gastosComValorZero == 3) {
+            gastos = 0 
+        }
+        if (receitasComValorZero == 3) {
+            gastos = 0
+        }
+
+        setMesesAnterioresReceitas(receitas);
+        setMesesAnterioresGastos(gastos);
+    }
 
     function ordenarLista() {
         let listaOrdenada = [];
@@ -100,29 +119,40 @@ export default function Contas() {
                 listaOrdenada.push(detalheConta.gastos[Number(gasto)]);
             }
         }
-        setListaOrdenada(listaOrdenada);
+
+        setListaOrdenada(listaOrdenada.sort((a, b) => b.id - a.id));
     }
 
     return (
         <S.Contas className="animeRight">
+            {modal && <ModalContas setModal={setModal} titulo={"Nova Conta"} />}
+            <Head title="Contas" />
             <G.GroupMenu>
-                <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
+                <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
+                <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
                     {contas && contas.map(conta => (
-                        <ItemTab imgItem={ContaC6} setAtivo={setAtivo} active={ativo} key={conta.id} idItemTab={conta.id} nome={conta.apelido} />
+                        <ItemTab
+                            imgItem={ContaC6}
+                            setAtivo={setAtivo}
+                            active={ativo}
+                            key={conta.id}
+                            idItemTab={conta.id}
+                            nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
-                <G.ImgBtnProximo src={SetaProximo} alt="" />
+                <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
             </G.GroupMenu>
 
             <S.InfoItemSelected>
                 <S.GroupInfosContaCartao>
                     <p>Saldo da Conta</p>
-                    <div style={{ color: "#32A287" }}>R$<span>{detalheConta ? detalheConta.valorAtual.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
+                    <div style={{ color: (detalheConta && detalheConta.valorAtual >= 0 ? "#32A287" : "#A23232") }}>
+                        R$<span>{detalheConta ? formatCurrency(detalheConta.valorAtual) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
                 <S.GroupInfosContaCartao>
                     <p>Gasto da Conta</p>
-                    <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? detalheConta.totalGastos.toLocaleString('pt-br', { minimumFractionDigits: 2 }) : "0,00"}</span></div>
+                    <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? formatCurrency(detalheConta.totalGastos) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
             </S.InfoItemSelected>
 
@@ -134,7 +164,7 @@ export default function Contas() {
                 {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <GreyPig mensagem="Você não tem atividades!"/>
+                            <GreyPig mensagem="Você não possui atividades registradas!" />
                         </S.GroupAtividades>
                     )
                     :
@@ -143,9 +173,20 @@ export default function Contas() {
                             <S.GroupAtividades style={{ overflowY: "scroll" }}>
                                 {listaOrdenada.map(itemList => (
                                     itemList.recebido ?
-                                        <Lancamento key={itemList.id} urlImage={Cifrao} titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} receita />
+                                        <Lancamento
+                                            key={itemList.id}
+                                            urlImage={Cifrao}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"}
+                                            data={formatDateMain(itemList.dataPagamento)}
+                                            valor={formatCurrency(itemList.valor)}
+                                            receita />
                                         :
-                                        <Lancamento key={itemList.id} urlImage={Alimentacao} titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria} data="20/10/20" valor={itemList.valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })} />
+                                        <Lancamento
+                                            key={itemList.id}
+                                            urlImage={Alimentacao}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria}
+                                            data={formatDateMain(itemList.dataPagamento)}
+                                            valor={formatCurrency(itemList.valor)} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
@@ -168,23 +209,25 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <GreyPig mensagem="Você não tem lançamentos!"/>
+                                <GreyPig mensagem="Você não possui lançamentos registrados!" />
                             </S.GroupAtividades>
                         </>
                     )
                     :
-                    (<>
-                        <div className="chartBalanco" >
-                            <GroupBarChart
-                                dataReceitas={mesesAnterioresReceitas}
-                                dataGastos={mesesAnterioresGastos}
-                            />
-                        </div>
-                        <div className="chartDescription">
-                            <ItemListaCategoria nome="Receitas" cor="#32A287" />
-                            <ItemListaCategoria nome="Gastos" cor="#A23232" />
-                        </div>
-                    </>)
+                    (
+                        <>
+                            <div className="chartBalanco" >
+                                <GroupBarChart
+                                    dataReceitas={mesesAnterioresReceitas}
+                                    dataGastos={mesesAnterioresGastos}
+                                />
+                            </div>
+                            <div className="chartDescription">
+                                <ItemListaCategoria nome="Receitas" cor="#32A287" />
+                                <ItemListaCategoria nome="Gastos" cor="#A23232" />
+                            </div>
+                        </>
+                    )
                 }
             </S.BalancoMensalContas>
         </S.Contas>
