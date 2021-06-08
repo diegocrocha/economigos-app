@@ -2,6 +2,7 @@ import React from 'react'
 import * as S from './style'
 import OpcoesAcessoRapido from "../../components/OpcoesAcessoRapido/OpcoesAcessoRapido";
 import ModalContabil from '../ModalContabil/ModalContabil';
+import ModalExtrato from '../ModalExtrato/ModalExtrato';
 import ModalTelegram from '../ModalTelegram/ModalTelegram';
 
 export default function MenuAcessoRapido() {
@@ -28,7 +29,11 @@ export default function MenuAcessoRapido() {
         modal={modalT}
         setModal={setModalT}
         />
-      <OpcoesAcessoRapido click={() => setModalG(true)} nome={"Extratos"} cor={"#312F2F"} />
+      <OpcoesAcessoRapido click={() => setModalE(true)} nome={"Extratos"} cor={"#312F2F"} />
+        <ModalExtrato
+          color="#312F2F"
+          modal={modalE}
+          setModal={setModalE} />
     </S.MenuAcessoRapido>
   )
 }

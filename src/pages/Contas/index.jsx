@@ -1,5 +1,6 @@
 import React from 'react'
 import api from "../../services/api";
+import filesApi from '../../services/filesApi';
 import { UserContext } from '../../hooks/UserContext'
 import * as S from "./style";
 import ItemTab from "../../components/ItemTab/ItemTab";
@@ -70,6 +71,11 @@ export default function Contas() {
         }
     }
 
+    async function fetchExport() {
+        if (ativo, dados) {
+          const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
+        }
+      }
     function ultimosMeses(response) {
         let gastos = []
         let receitas = []
@@ -92,7 +98,7 @@ export default function Contas() {
         }
 
         if (gastosComValorZero == 3) {
-            gastos = 0
+            gastos = 0 
         }
         if (receitasComValorZero == 3) {
             gastos = 0
@@ -184,7 +190,7 @@ export default function Contas() {
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
-                                <div>
+                                <div onClick={fetchExport}>
                                     Download Histórico
                                     <img src={Download} alt="" />
                                 </div>
