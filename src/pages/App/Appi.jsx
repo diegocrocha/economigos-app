@@ -18,7 +18,7 @@ export default function Appi() {
 
     const { dados } = React.useContext(UserContext);
     const [ativo, setAtivo] = React.useState(true);
-    const [contas, setContas] = React.useState(null);
+    const [contas, setContas] = React.useState([]);
     const [gastos, setGastos] = React.useState(null);
     const [receitas, setReceitas] = React.useState(null);
     const [olho, setOlho] = React.useState(true);

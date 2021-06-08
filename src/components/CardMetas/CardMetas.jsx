@@ -7,7 +7,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import ModalMetas from "../../components/ModalMetas/ModalMetas";
 import { formatCurrency, percentComplete } from '../../utils/utils';
 
-export default function CardMetas({ idMeta, nome, urlImage, descricao, valorInicial, valorFinal}) {
+export default function CardMetas({ idMeta, nome, urlImage, descricao, valorInicial, valorFinal }) {
 
     const [modalEdit, setModalEdit] = React.useState(false)
 

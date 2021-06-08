@@ -4,7 +4,7 @@ export const HeaderExtrato = styled.div`
     margin: 30px 5% 10px 5%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 45px;
+    grid-template-rows: 20px;
     grid-gap: 10px;
     grid-template-areas: "data descricao tipo categoria";
 
