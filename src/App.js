@@ -2,7 +2,6 @@ import React from 'react';
 import Institucional from './pages/Institucional/index.jsx';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import {UserStorage} from './hooks/UserContext'
-
 import GlobalStyle from './styles/global.js';
 import NotFound from './pages/NotFound/NotFound.jsx';
 import Login from './pages/Login/index.jsx';

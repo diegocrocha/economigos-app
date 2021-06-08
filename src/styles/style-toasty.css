@@ -1,0 +1,9 @@
+.Toastify__toast-container {
+    width: 320px;
+  }
+  .Toastify__toast--success {
+    background: #32A287;
+  }
+  .Toastify__toast--error {
+    background: #A23232;
+  }

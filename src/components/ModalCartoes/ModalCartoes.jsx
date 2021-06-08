@@ -4,6 +4,7 @@ import { UserContext } from '../../hooks/UserContext';
 import * as G from '../../styles/globalComponents'
 import Input from '../Form/Input/Input';
 import { Select } from '../Form/Select/Select';
+import "../../styles/style-toasty.css";
 
 export default function ModalCartoes({modal, setModal}) {
   const limitCard = useForm()

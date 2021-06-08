@@ -6,6 +6,7 @@ import api from '../../services/api';
 import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext';
 import { toast } from 'react-toastify';
+import "../../styles/style-toasty.css";
 
 export default function ModalContas({ titulo, setModal }) {
 

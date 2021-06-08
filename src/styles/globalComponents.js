@@ -68,11 +68,11 @@ export const WrapperModal = styled.div`
 export const Modal = styled.div`
 
   width: ${props => props.largura && props.largura != 45 ? props.largura : "45"}%;
-  height: ${props => props.altura && props.altura != 80 ? props.altura : "80"}%;
+  height: ${props => props.altura && props.altura != 80 ? props.altura : "60"}%;
   border-radius: 8px;
   margin-left: ${props => props.marginLeft && props.marginLeft != 27.5 ? props.marginLeft : "27.5"}%;
   padding: 15px 20px;
-  margin-top: ${props => props.marginTop && props.marginTop != 5 ? props.marginTop : "5"}%;
+  margin-top: ${props => props.marginTop && props.marginTop != 5 ? props.marginTop : "7.5"}%;
   margin-bottom: 10%;
   opacity: 0;
   overflow: hidden;

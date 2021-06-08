@@ -11,7 +11,7 @@ export default function MenuAcessoRapido() {
 
   return (
     <S.MenuAcessoRapido>
-      <OpcoesAcessoRapido click={() => setModalR(true)} nome={"Receitas"} cor={"rgb(50, 162, 135)"} />
+      <OpcoesAcessoRapido click={() => setModalR(true)} nome={"Rendas"} cor={"rgb(50, 162, 135)"} />
       <ModalContabil
         type="RECEITA"
         color="rgb(50, 162, 135)"

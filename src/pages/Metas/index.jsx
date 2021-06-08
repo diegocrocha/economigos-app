@@ -21,7 +21,6 @@ export default function Metas() {
     const [metasFinalizadas, setMetasFinalizadas] = React.useState([]);
     const [ativo, setAtivo] = React.useState(0)
     const [modal, setModal] = React.useState(false)
-    const [idMeta, setIdMeta] = React.useState(0)
 
     React.useEffect(() => {
         fetchMetas();

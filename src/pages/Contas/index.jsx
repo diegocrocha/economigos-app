@@ -95,7 +95,7 @@ export default function Contas() {
             gastos = 0
         }
         if (receitasComValorZero == 3) {
-            gastos = 0
+            receitas = 0
         }
 
         setMesesAnterioresReceitas(receitas);
@@ -170,7 +170,7 @@ export default function Contas() {
                                         <Lancamento
                                             key={itemList.id}
                                             urlImage={Cifrao}
-                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Renda"}
                                             data={formatDateMain(itemList.dataPagamento)}
                                             valor={formatCurrency(itemList.valor)}
                                             receita />
@@ -178,7 +178,7 @@ export default function Contas() {
                                         <Lancamento
                                             key={itemList.id}
                                             urlImage={Alimentacao}
-                                            titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Gasto"}
                                             data={formatDateMain(itemList.dataPagamento)}
                                             valor={formatCurrency(itemList.valor)} />
                                 ))}
