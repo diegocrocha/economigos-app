@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 import InputReal from '../Form/InputReal';
 import { today } from '../../utils/utils';
+import "../../styles/style-toasty.css";
 
 export default function ModalContabil({ type, color, modal, setModal }) {
   const valor = useForm()
@@ -107,7 +108,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
         <G.WrapperModal onClick={handleOutsideClick}>
           <G.Modal type={type}>
             <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
-            <h1>{type == "RECEITA" ? "Nova Receita" : "Novo Gasto"}</h1>
+            <h1>{type == "RECEITA" ? "Nova Renda" : "Novo Gasto"}</h1>
             <form className="wrapperInputs">
               <div className="groupInputs">
                 <Input
@@ -142,8 +143,8 @@ export default function ModalContabil({ type, color, modal, setModal }) {
                 </div>
                 </form>
                 <G.GroupButtonsModal>
-                  <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
-                  <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
+                  <G.Button disabled={valor.value == 0 && descricao.value == ""} color={color} onClick={cadastrar}>Adicionar</G.Button>
+                  <G.SimpleButton disabled={valor.value == 0 && descricao.value == ""} onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}

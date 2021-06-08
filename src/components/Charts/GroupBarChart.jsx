@@ -3,7 +3,7 @@ import { VictoryBar, VictoryChart, VictoryGroup, VictoryTooltip, VictoryAxis, Vi
 
 export default function GroupBarChart({ dataReceitas, dataGastos }) {
 
-    let fontSizeLabelY = dataReceitas.length == 3 ? 30 : 30;
+    let fontSizeLabelY = 30;
 
     return (
         <VictoryChart
@@ -13,7 +13,7 @@ export default function GroupBarChart({ dataReceitas, dataGastos }) {
                 onLoad: { duration: 500 }
             }}
             labelComponent={<VictoryTooltip />}
-            width={dataReceitas.length == 3 ? 600 : 900}
+            width={dataReceitas.length == 3 || dataGastos.length == 3 ? 600 : 900}
         // height={dataReceitas.length == 3 ? 400 : 800}
         >
             <VictoryAxis

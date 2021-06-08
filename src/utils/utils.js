@@ -39,5 +39,5 @@ export function today() {
 // retorna a porcentagem completa de acordo com valor inicial e final | Ex: 25.0
 
 export function percentComplete(initialValue, finalValue) {
-  return ((initialValue * 100) / finalValue)
+  return (((initialValue * 100) / finalValue).toFixed(2))
 }

@@ -6,6 +6,8 @@ import api from '../../services/api';
 import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext';
 import { toast } from 'react-toastify';
+import "../../styles/style-toasty.css";
+
 
 export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
 
@@ -50,7 +52,7 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
                     descricao: "",
                     metaGasto: false,
                     valorAtual: Number(valorInicial.value) >= Number(valorFinal.value) ? finalizar() : Number(valorInicial.value),
-                    valorFinal: Number(valorFinal.value),
+                    valorFinal: Number(valorFinal.value)
                 })
                 if (await responseG.status === 200) {
                     toast.success("Meta atualizada com sucesso")
@@ -58,18 +60,23 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
                     toast.error("Erro ao atualizar meta")
                 }
             } else {
-                const responseG = await api.post(`/economigos/metas`, {
-                    idUsuario: dados.usuario.id,
-                    nome: nome.value,
-                    descricao: "",
-                    metaGasto: false,
-                    valorAtual: Number(valorInicial.value),
-                    valorFinal: Number(valorFinal.value),
-                })
-                if (await responseG.status === 201) {
-                    toast.success("Meta cadastrada com sucesso")
-                } else {
-                    toast.error("Erro ao cadastrar a meta")
+                if (Number(valorInicial.value) >= Number(valorFinal.value)) {
+                    toast.error("Saldo Inicial igual ao Valor Final. Cadastre novamente!")
+                }
+                else{
+                    const responseG = await api.post(`/economigos/metas`, {
+                        idUsuario: dados.usuario.id,
+                        nome: nome.value,
+                        descricao: "",
+                        metaGasto: false,
+                        valorAtual: Number(valorInicial.value),
+                        valorFinal: Number(valorFinal.value)
+                    })
+                    if (await responseG.status === 201) {
+                        toast.success("Meta cadastrada com sucesso")
+                    } else {
+                        toast.error("Erro ao cadastrar a meta")
+                    }
                 }
             }
         }
@@ -183,8 +190,8 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
                     </G.GroupButtonsModal>
                     :
                     <G.GroupButtonsModal style={{ marginLeft: "2%" }}>
-                        <G.Button onClick={cadastar} style={{ padding: "0" }} color="#32A287">Adicionar</G.Button>
-                        <G.SimpleButton onClick={continuarCadastrando} color="#32A287">Adicionar e continuar cadastrando</G.SimpleButton>
+                        <G.Button disabled={valorFinal.value == 0 && valorInicial.value == 0 && nome.value == "" ? true : false} onClick={cadastar} style={{ padding: "0" }} color="#32A287">Adicionar</G.Button>
+                        <G.SimpleButton disabled={valorFinal.value == 0 && valorInicial.value == 0 && nome.value == "" ? true : false} onClick={continuarCadastrando} color="#32A287">Adicionar e continuar cadastrando</G.SimpleButton>
                     </G.GroupButtonsModal>
                 }
             </G.Modal>

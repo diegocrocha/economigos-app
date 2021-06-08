@@ -57,7 +57,7 @@ export default function Appi() {
                     <Route path="painel" element={<Painel />} />
                     <Route path="contas" element={<Contas />} />
                     <Route path="cartoes" element={<Cartoes />} />
-                    <Route path="metas" element={<Metas />} />]
+                    <Route path="metas" element={<Metas />} />
                 <Route path="perfil" element={<Perfil />} />
                 </Routes>
             </TelaCentralApp>
