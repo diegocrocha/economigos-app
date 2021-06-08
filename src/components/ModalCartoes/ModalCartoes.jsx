@@ -23,29 +23,24 @@ export default function ModalCartoes({modal, setModal}) {
   async function handleSubmit() {
     if (dados) {
       const response = await api.post(`/economigos/cartoes`, {
-        idUsuario: conta,
-        nome: categoria,
-        valor: Number(valor.value),
-        recebido: true,
-        pago: true,
-        descricao: descricao.value,
-        fixo: false,
-        dataPagamento: data.value
+        idUsuario: dados.id,
+        nome: apelido.value,
+        fechamento: fechamento.value,
+        vencimento: vencimento.value,
+        pago: statusMes.value,
+        limite: Number(limitCard.value)
       })
       if (await response.status === 201) {
-        toast.success("Receita cadastrada com sucesso")
+        toast.success("Conta cadastrada com sucesso")
       } else {
-        toast.error("Erro ao cadastrar a receita")
+        toast.error("Erro ao cadastrar conta")
       }
     }
   }
 
   function cadastrar() {
-
-  }
-
-  function continuarCadastrando() {
-
+    handleSubmit()
+    setModal(false)
   }
 
   return (
@@ -59,9 +54,11 @@ export default function ModalCartoes({modal, setModal}) {
               <div className="groupInputs">
                 <Input
                   label="Limite"
+                  type="number"
                 />
                 <Input
                   label="Fatura atual"
+                  type="number"
                 />
               </div>
               <div className="groupInputs">
@@ -80,8 +77,8 @@ export default function ModalCartoes({modal, setModal}) {
               </div>
             </form>
             <G.GroupButtonsModal>
-                  <G.Button color={""} onClick={cadastrar}>Adicionar</G.Button>
-                  <G.SimpleButton onClick={continuarCadastrando} color={""}>Adicionar e continuar cadastrando</G.SimpleButton>
+                  <G.Button color={"rgb(50, 162, 135)"} onClick={cadastrar}>Adicionar</G.Button>
+                  <G.SimpleButton onClick={handleSubmit} color={"rgb(50, 162, 135)"}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>

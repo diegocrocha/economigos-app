@@ -14,17 +14,37 @@ export const Select = ({options, label, value, setValue, className, type, ...pro
         case "CATEGORIAS":
           t = "categoria"
           break
+        case "BANKS":
+          t = "apelido"
         default:
           t = "name"
           break
       }
       let aux = []
-      options.map(op => {
-        aux.push({
-          value: op.id,
-          name: op[t]
+
+      if (type == "BANKS") {
+        options.map(op => {
+          if(!('nome' in op)) {
+            aux.push({
+              value: op.id,
+              name: op.apelido
+            })
+          } else {
+            aux.push({
+              value: op.id,
+              name: op.nome + " (Crédito)"
+            })
+          }
         })
-      })
+      } else {
+        options.map(op => {
+          aux.push({
+            value: op.id,
+            name: op[t]
+          })
+        })
+      }
+
       setOpt(aux)
     }
     if (options) {

@@ -18,6 +18,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
   const [categorias, setCategorias] = React.useState(null)
   const [contas, setContas] = React.useState(null)
   const [cartoes, setCartoes] = React.useState(null)
+  const [banks, setBanks] = React.useState([])
 
   const { dados, reload } = React.useContext(UserContext);
 
@@ -29,6 +30,12 @@ export default function ModalContabil({type, color, modal, setModal}) {
     fetchData()
   }, [dados])
 
+  React.useEffect(() => {
+    if (cartoes && contas) {
+      filter();
+    }
+  }, [cartoes, contas])
+
   async function fetchData() {
     if (dados) {
       const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
@@ -39,6 +46,10 @@ export default function ModalContabil({type, color, modal, setModal}) {
       setConta(await response.data.contaDtos[0].id)
       setCategoria(await responseC.data[0].id)
     }
+  }
+
+  function filter() {
+    setBanks(contas.concat(cartoes))
   }
 
 
@@ -80,14 +91,10 @@ export default function ModalContabil({type, color, modal, setModal}) {
           }
           break;
       }
+      descricao.setValue("")
+      valor.setValue(0.00)
       reload()
     }
-  }
-
-  function continuarCadastrando() {
-    handleSubmit()
-    descricao.value = ""
-    valor.value = 0.00
   }
 
   function cadastrar() {
@@ -113,6 +120,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
               <Input
                 label="Valor"
                 id="valor"
+                type="number"
                 {...valor}/>
               <Input
                 label="Data"
@@ -126,12 +134,12 @@ export default function ModalContabil({type, color, modal, setModal}) {
                 {...descricao}/>
               <div className="groupInputs">
                 <Select
-                type="CONTAS"
+                type={type == "RECEITA" ? "CONTAS" : "BANKS"}
                 setValue={setConta}
                 value={conta}
                 id="contas"
                 label="Conta"
-                options={contas}/>
+                options={type == "RECEITA" ? contas : banks}/>
               <Select
                 setValue={setCategoria}
                 value={categoria}
@@ -143,7 +151,7 @@ export default function ModalContabil({type, color, modal, setModal}) {
                 </form>
                 <G.GroupButtonsModal>
                   <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
-                  <G.SimpleButton onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
+                  <G.SimpleButton onClick={handleSubmit} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}
