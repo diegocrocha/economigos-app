@@ -62,6 +62,20 @@ export const InfoItemSelected = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+
+    .buttonEdit{
+      position: absolute;
+      left: 95%;
+      top: 4%;
+      height: 23px;
+
+      &:hover{
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 0px 0px 7px 0px grey;
+      }
+    }
 `;
 
 export const GroupInfosContaCartao = styled.div`

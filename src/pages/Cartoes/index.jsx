@@ -19,6 +19,7 @@ export default function Cartoes() {
     const [ativo, setAtivo] = React.useState(null)
     const [cartoes, setCartoes] = React.useState([])
     const [detalheCartao, setDetalheCartao] = React.useState(null);
+    let counts = 0;
 
     React.useEffect(() => {
         fetchCartoes()

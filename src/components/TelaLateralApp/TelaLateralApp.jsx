@@ -15,17 +15,15 @@ import { useLocation } from 'react-router-dom';
 import { formatCurrency, formatDateMain } from '../../utils/utils';
 
 
-export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
+export default function TelaLateralApp({ fechar, contas, lancamentos, gastos, receitas }) {
 
     const { dados } = React.useContext(UserContext);
-    const [lancamentos, setLancamentos] = React.useState([]);
     const [saldo, setSaldo] = React.useState(null);
     const location = useLocation();
 
     React.useEffect(() => {
-        juntarLancamentos(receitas, gastos);
         fetchSaldo()
-    }, [dados, gastos, receitas]);
+    }, [dados, lancamentos]);
 
     async function fetchSaldo() {
         if (dados) {
@@ -74,22 +72,22 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                                     <CartaoContas nomeConta={"Saldo Total"} saldo={saldo} negativo={Number(saldo) < 0 ? true : false} />}
                             <div className="ultimaAtividades">
                                 <div className="titulo"><span>Últimas Atividades</span></div>
-                                <div className="listaDeUltimasAtividades" style={lancamentos.length > 6 ? { overflowY: "scroll" } : { overflow: "hidden" }}>
+                                <div className="listaDeUltimasAtividades" style={lancamentos.length > 4 ? { overflowY: "scroll" } : { overflow: "hidden" }}>
                                     {lancamentos.length > 0 && lancamentos ?
-                                        lancamentos.map(lanc => (
-                                            lanc.recebido ?
+                                        lancamentos.sort((a, b) => b.id - a.id).map(lanc => (
+                                            lanc.tipo == "Renda"?
                                                 <Lancamento
-                                                  key={lanc.id}
+                                                  key={lanc.descricao}
                                                   urlImage={Cifrao}
                                                   titulo={lanc.descricao !== "" ? lanc.descricao : "Renda"}
-                                                  data={formatDateMain(lanc.dataPagamento)}
+                                                  data={formatDateMain(lanc.data)}
                                                   valor={formatCurrency(lanc.valor)} receita />
                                                 :
                                                 <Lancamento
                                                   key={lanc.id}
                                                   urlImage={Alimentacao}
                                                   titulo={lanc.descricao !== "" ? lanc.descricao : "Gasto"}
-                                                  data={formatDateMain(lanc.dataPagamento)}
+                                                  data={formatDateMain(lanc.data)}
                                                   valor={formatCurrency(lanc.valor)} />
                                         ))
                                         :

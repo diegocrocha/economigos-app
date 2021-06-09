@@ -9,6 +9,7 @@ export default function MenuAcessoRapido() {
   const [modalR, setModalR] = React.useState(false);
   const [modalT, setModalT] = React.useState(false);
   const [modalG, setModalG] = React.useState(false);
+  const [modalE, setModalE] = React.useState(false);
 
   return (
     <S.MenuAcessoRapido>
@@ -28,12 +29,12 @@ export default function MenuAcessoRapido() {
       <ModalTelegram
         modal={modalT}
         setModal={setModalT}
-        />
+      />
       <OpcoesAcessoRapido click={() => setModalE(true)} nome={"Extratos"} cor={"#312F2F"} />
-        <ModalExtrato
-          color="#312F2F"
-          modal={modalE}
-          setModal={setModalE} />
+      <ModalExtrato
+        color="#312F2F"
+        modal={modalE}
+        setModal={setModalE} />
     </S.MenuAcessoRapido>
   )
 }
