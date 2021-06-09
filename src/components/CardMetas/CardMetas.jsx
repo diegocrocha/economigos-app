@@ -1,7 +1,6 @@
 import React from 'react'
 import * as S from "./style";
 import Bandeira from "../../assets/bandeira.svg";
-import Edit from "../../assets/edit.svg";
 import CifraoFundoRedondo from "../../assets/cifrao-fundo-redondo.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 import ModalMetas from "../../components/ModalMetas/ModalMetas";

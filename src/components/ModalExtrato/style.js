@@ -1,13 +1,14 @@
-
 import styled from 'styled-components';
 
 export const h1 = styled.h1`
-    color: green;
+  color: #312F2F;
 `;
 
 export const GroupAtividades = styled.div`
-  height: 63%;
-  width: 100%;
+  height: 60%;
+  margin-bottom: 1%;
+  width: 90%;
+  margin-left: 5%;
   overflow: hidden;
 
   &::-webkit-scrollbar {

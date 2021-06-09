@@ -19,8 +19,9 @@ export default function Appi() {
     const { dados } = React.useContext(UserContext);
     const [ativo, setAtivo] = React.useState(true);
     const [contas, setContas] = React.useState([]);
-    const [gastos, setGastos] = React.useState(null);
-    const [receitas, setReceitas] = React.useState(null);
+    const [lancamentos, setLancamentos] = React.useState([]);
+    const [gastos, setGastos] = React.useState([]);
+    const [receitas, setReceitas] = React.useState([]);
     const [olho, setOlho] = React.useState(true);
 
     React.useEffect(() => {
@@ -37,15 +38,24 @@ export default function Appi() {
 
     async function fetchLancamentos() {
         if (dados) {
-            const response = await api.get(`/economigos/contas/1?idUsuario=${dados.usuario.id}`);
-            setReceitas(response.data.rendas);
-            setGastos(response.data.gastos);
+            const response = await api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
+            console.log("response: " + response)
+            setLancamentos(response.data)
+            separarLancamento(response.data)
         }
     }
 
     function alterarBtn() {
         setOlho(!olho);
         setAtivo(!ativo);
+    }
+
+    function separarLancamento(response) {
+        let listGastos = []
+        let listReceitas = []
+        response.map(lanc => lanc.tipo == "Gasto" ? listGastos.push(lanc) : listReceitas.push(lanc))
+        setGastos(listGastos)
+        setReceitas(listReceitas)
     }
 
 
@@ -62,7 +72,8 @@ export default function Appi() {
                 </Routes>
             </TelaCentralApp>
             <S.BtnFecharTela onClick={() => alterarBtn()} src={olho ? OlhoFechado : OlhoAberto}></S.BtnFecharTela>
-            <TelaLateralApp fechar={ativo} contas={contas} gastos={gastos} receitas={receitas} />
+            {/* <TelaLateralApp fechar={ativo} contas={contas} gastos={gastos} receitas={receitas} /> */}
+            <TelaLateralApp fechar={ativo} contas={contas} lancamentos={lancamentos} />
         </S.Appi>
     )
 }

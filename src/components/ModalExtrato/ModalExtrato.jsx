@@ -8,14 +8,29 @@ import { UserContext } from '../../hooks/UserContext';
 import api from '../../services/api';
 import HeaderExtrato from '../HeaderExtrato/HeaderExtrato'
 import Download from '../../assets/download.svg'
+import GreyPig from '../GreyPig/GreyPig';
 
 export default function ModalExtrato({ color, modal, setModal }) {
 
-    
+    const { dados } = React.useContext(UserContext);
+    const [lancamentos, setLancamentos] = React.useState([]);
+    let count = 0
+
+    React.useEffect(() => {
+        fetchLancamentos()
+    }, [dados])
 
     function handleOutsideClick(event) {
         if (event.target === event.currentTarget) {
             setModal(false);
+        }
+    }
+
+    async function fetchLancamentos() {
+        if (dados) {
+            const response = await api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
+            console.log("response: " + response)
+            setLancamentos(response.data)
         }
     }
 
@@ -27,13 +42,21 @@ export default function ModalExtrato({ color, modal, setModal }) {
                         <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
                         <S.h1>Extratos</S.h1>
                         <HeaderExtrato />
-                        <S.GroupAtividades>
-                                
+                        <S.GroupAtividades style={lancamentos.length > 5 && { overflowY: "scroll" }}>
+                            {lancamentos.length > 0 ?
+                                lancamentos.sort((a, b) => b.id - a.id).map(lanc => (
+                                    count++ % 2 == 0 ?
+                                        <LancamentoExtrato descricao={lanc.descricao == "" ? lanc.tipo : lanc.descricao} data={lanc.data.split(" ")[0].replaceAll("-", "/")} categoria={lanc.categoria} BackGrey />
+                                        :
+                                        <LancamentoExtrato descricao={lanc.descricao == "" ? lanc.tipo : lanc.descricao} data={lanc.data.split(" ")[0].replaceAll("-", "/")} categoria={lanc.categoria} />
+                                ))
+                                :
+                                <GreyPig mensagem="Você não possui Lançamentos" />
+                            }
                         </S.GroupAtividades>
-                        <LancamentoExtrato descricao="Coxinha da padaria chique" data="28/05/2021" categoria="Alimento" BackGrey />
-                        <G.GroupButtonsModalCenter>
-                            <G.SimpleButton color={color}>Download <img src={Download} /></G.SimpleButton>
-                        </G.GroupButtonsModalCenter>
+                        <G.GroupButtonsModal>
+                            <G.Button color={"rgb(50,162,135)"}>Download</G.Button>
+                        </G.GroupButtonsModal>
                     </G.Modal>
                 </G.WrapperModal>
             }

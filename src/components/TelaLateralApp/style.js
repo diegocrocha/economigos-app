@@ -72,7 +72,7 @@ export const TelaLateralApp = styled.div`
             height: 59%;
 
             .listaDeUltimasAtividades{
-                height: 94%;
+                height: 86%;
 
                 &::-webkit-scrollbar {
                     width: 5px;
