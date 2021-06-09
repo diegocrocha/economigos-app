@@ -14,6 +14,7 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
     const apelido = useForm()
     const descricao = useForm()
     const banco = useForm()
+    console.log("idConta" + idConta)
 
     if (edit) {
         React.useEffect(() => {
@@ -23,7 +24,6 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
         async function fetchContas() {
             if (dados) {
                 const response = await api.get(`/economigos/contas/${idConta}?idUsuario=${dados.usuario.id}`);
-                console.log("ddd: " + JSON.stringify(response))
                 banco.setValue(response.data.banco);
                 apelido.setValue(response.data.apelido);
                 descricao.setValue(response.data.descricao);
@@ -38,18 +38,35 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
     }
 
     async function handleSubmit() {
-        if (dados) {
-            const responseG = await api.post(`/economigos/contas`, {
-                banco: banco.value,
-                numeroConta: 0,
-                descricao: descricao.value,
-                apelido: apelido.value,
-                idUsuario: dados.usuario.id,
-            })
-            if (await responseG.status === 201) {
-                toast.success("Conta cadastrada com sucesso")
-            } else {
-                toast.error("Erro ao cadastrar a Conta")
+        if (edit) {
+            if (dados) {
+                const responseG = await api.put(`/economigos/contas/${idConta}`, {
+                    banco: banco.value,
+                    numeroConta: 0,
+                    descricao: descricao.value,
+                    apelido: apelido.value,
+                    idUsuario: dados.usuario.id,
+                })
+                if (await responseG.status === 200) {
+                    toast.success("Conta atualizada com sucesso")
+                } else {
+                    toast.error("Erro ao atualizar Conta")
+                }
+            }
+        }else{
+            if (dados) {
+                const responseG = await api.post(`/economigos/contas`, {
+                    banco: banco.value,
+                    numeroConta: 0,
+                    descricao: descricao.value,
+                    apelido: apelido.value,
+                    idUsuario: dados.usuario.id,
+                })
+                if (await responseG.status === 201) {
+                    toast.success("Conta cadastrada com sucesso")
+                } else {
+                    toast.error("Erro ao cadastrar a Conta")
+                }
             }
         }
         reload()

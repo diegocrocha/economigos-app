@@ -128,7 +128,7 @@ export default function Contas() {
     return (
         <S.Contas className="animeRight">
             {modal && <ModalContas setModal={setModal} titulo={"Nova Conta"} />}
-            {modalEdit && <ModalContas setModal={setModalEdit} titulo={"Atualizar Conta"} edit/>}
+            {modalEdit && <ModalContas idConta={ativo} setModal={setModalEdit} titulo={"Atualizar Conta"} edit/>}
             <Head title="Contas" />
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
