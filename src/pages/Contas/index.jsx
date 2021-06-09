@@ -20,6 +20,7 @@ import Head from '../../components/Helper/Head'
 import { formatCurrency, formatDateMain } from '../../utils/utils';
 import { getBank } from '../../services/banks';
 import ModalContas from '../../components/ModalContas/ModalContas';
+import Edit from "../../assets/edit.svg"
 
 export default function Contas() {
 
@@ -32,6 +33,7 @@ export default function Contas() {
     const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
     const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
     const [modal, setModal] = React.useState(false)
+    const [modalEdit, setModalEdit] = React.useState(false)
 
     React.useEffect(() => {
         fetchContas();
@@ -86,9 +88,10 @@ export default function Contas() {
 
     async function fetchExport() {
         if (ativo, dados) {
-          const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
+            const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
         }
-      }
+    }
+    
     function ultimosMeses(response) {
         let gastos = []
         let receitas = []
@@ -139,6 +142,7 @@ export default function Contas() {
     return (
         <S.Contas className="animeRight">
             {modal && <ModalContas setModal={setModal} titulo={"Nova Conta"} />}
+            {modalEdit && <ModalContas idConta={ativo} setModal={setModalEdit} titulo={"Atualizar Conta"} edit/>}
             <Head title="Contas" />
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
@@ -167,6 +171,7 @@ export default function Contas() {
                     <p>Gasto da Conta</p>
                     <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? formatCurrency(detalheConta.totalGastos) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
+                <img src={Edit} alt="" className="buttonEdit" onClick={() => setModalEdit(true)}/>
             </S.InfoItemSelected>
 
             <S.UltimasAtividades>

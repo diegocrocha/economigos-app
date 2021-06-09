@@ -29,12 +29,12 @@ export default function MenuAcessoRapido() {
       <ModalTelegram
         modal={modalT}
         setModal={setModalT}
-        />
+      />
       <OpcoesAcessoRapido click={() => setModalE(true)} nome={"Extratos"} cor={"#312F2F"} />
-        <ModalExtrato
-          color="#312F2F"
-          modal={modalE}
-          setModal={setModalE} />
+      <ModalExtrato
+        color="#312F2F"
+        modal={modalE}
+        setModal={setModalE} />
     </S.MenuAcessoRapido>
   )
 }

@@ -18,9 +18,8 @@ export default function Appi() {
 
     const { dados } = React.useContext(UserContext);
     const [ativo, setAtivo] = React.useState(true);
-    const [contas, setContas] = React.useState(null);
-    const [gastos, setGastos] = React.useState(null);
-    const [receitas, setReceitas] = React.useState(null);
+    const [contas, setContas] = React.useState([]);
+    const [lancamentos, setLancamentos] = React.useState([]);
     const [olho, setOlho] = React.useState(true);
 
     React.useEffect(() => {
@@ -37,9 +36,8 @@ export default function Appi() {
 
     async function fetchLancamentos() {
         if (dados) {
-            const response = await api.get(`/economigos/contas/1?idUsuario=${dados.usuario.id}`);
-            setReceitas(response.data.rendas);
-            setGastos(response.data.gastos);
+            const response = await api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
+            setLancamentos(response.data.contabilUltimasAtividadesDtos)
         }
     }
 
@@ -47,7 +45,6 @@ export default function Appi() {
         setOlho(!olho);
         setAtivo(!ativo);
     }
-
 
     return (
         <S.Appi>
@@ -62,7 +59,7 @@ export default function Appi() {
                 </Routes>
             </TelaCentralApp>
             <S.BtnFecharTela onClick={() => alterarBtn()} src={olho ? OlhoFechado : OlhoAberto}></S.BtnFecharTela>
-            <TelaLateralApp fechar={ativo} contas={contas} gastos={gastos} receitas={receitas} />
+            <TelaLateralApp fechar={ativo} contas={contas} lancamentos={lancamentos} />
         </S.Appi>
     )
 }
