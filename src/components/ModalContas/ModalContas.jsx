@@ -53,7 +53,7 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
                     toast.error("Erro ao atualizar Conta")
                 }
             }
-        }else{
+        } else {
             if (dados) {
                 const responseG = await api.post(`/economigos/contas`, {
                     banco: banco.value,

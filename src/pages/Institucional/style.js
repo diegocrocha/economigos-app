@@ -7,6 +7,7 @@ export const Home = styled.section`
   padding: 0 49px;
   background-image: url(${BcgHome});
   background-position: center center;
+  background-size: 100%;
   background-repeat: no-repeat;
 `;
 
