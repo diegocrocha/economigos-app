@@ -17,12 +17,15 @@ import GreyPig from "../../components/GreyPig/GreyPig";
 import ContaC6 from '../../assets/tmp/conta-c6.svg'
 import Head from '../../components/Helper/Head'
 import { formatCurrency, formatDateMain } from '../../utils/utils';
+import { getBank } from '../../services/banks';
+import ModalContabil from '../../components/ModalContabil/ModalContabil';
 
 export default function Contas() {
 
     const { dados } = React.useContext(UserContext);
     const [ativo, setAtivo] = React.useState(null);
-    const [contas, setContas] = React.useState(null);
+    const [contas, setContas] = React.useState([]);
+    const [contasT, setContasT] = React.useState(null)
     const [detalheConta, setDetalheConta] = React.useState(null);
     const [listaOrdenada, setListaOrdenada] = React.useState([]);
     const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
@@ -33,8 +36,20 @@ export default function Contas() {
     }, [dados]);
 
     React.useEffect(() => {
-        if (contas != null) {
+      function generateJson() {
+        let accounts = []
+        contas.map(conta => {
+          let bank = getBank(conta.banco)
+          bank.idB = conta.id
+          bank.apelido = conta.apelido
+          accounts.push(bank)
+        })
+        console.log(accounts)
+        setContasT(accounts)
+      }
+        if (contas.length > 0) {
             setAtivo(contas[0].id)
+            generateJson()
         }
     }, [contas]);
 
@@ -118,13 +133,13 @@ export default function Contas() {
                 <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
                 <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
-                    {contas && contas.map(conta => (
+                    {contasT && contasT.map(conta => (
                         <ItemTab
-                          imgItem={ContaC6}
+                          imgItem={conta.image.default}
                           setAtivo={setAtivo}
                           active={ativo}
-                          key={conta.id}
-                          idItemTab={conta.id}
+                          key={conta.idB}
+                          idItemTab={conta.idB}
                           nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
