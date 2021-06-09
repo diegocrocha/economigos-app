@@ -7,6 +7,8 @@ import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext';
 import { toast } from 'react-toastify';
 import "../../styles/style-toasty.css";
+import { Select } from '../Form/Select/Select';
+import { getBanks } from '../../services/banks';
 
 export default function ModalContas({ titulo, setModal }) {
 
@@ -15,6 +17,7 @@ export default function ModalContas({ titulo, setModal }) {
     const descricao = useForm()
     const banco = useForm()
     const [ativa, setAtiva] = React.useState(true);
+    const [banks, setBanks] = React.useState(getBanks())
 
     function handleOutsideClick(event) {
         if (event.target === event.currentTarget) {
@@ -60,10 +63,13 @@ export default function ModalContas({ titulo, setModal }) {
                 <form className="wrapperInputs">
                     <div className="groupInputs">
                         <span className="divInput">
-                            <Input
-                                className="inputWidth"
-                                label="banco"
-                                {...banco} />
+                          <Select
+                            setValue={banco.setValue}
+                            value={banco.value}
+                            id="banks"
+                            label="Categoria"
+                            options={banks}
+                          />
                         </span>
                         <span className="divInput">
                             <Input

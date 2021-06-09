@@ -46,7 +46,6 @@ export default function Contas() {
           bank.apelido = conta.apelido
           accounts.push(bank)
         })
-        console.log(accounts)
         setContasT(accounts)
       }
         if (contas.length > 0) {
