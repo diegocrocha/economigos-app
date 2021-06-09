@@ -8,13 +8,28 @@ import { UserContext } from '../../hooks/UserContext';
 import { toast } from 'react-toastify';
 import "../../styles/style-toasty.css";
 
-export default function ModalContas({ titulo, setModal }) {
+export default function ModalContas({ titulo, setModal, edit, idConta }) {
 
     const { dados, reload } = React.useContext(UserContext);
     const apelido = useForm()
     const descricao = useForm()
     const banco = useForm()
-    const [ativa, setAtiva] = React.useState(true);
+    console.log("idConta" + idConta)
+
+    if (edit) {
+        React.useEffect(() => {
+            fetchContas();
+        }, [dados]);
+
+        async function fetchContas() {
+            if (dados) {
+                const response = await api.get(`/economigos/contas/${idConta}?idUsuario=${dados.usuario.id}`);
+                banco.setValue(response.data.banco);
+                apelido.setValue(response.data.apelido);
+                descricao.setValue(response.data.descricao);
+            }
+        }
+    }
 
     function handleOutsideClick(event) {
         if (event.target === event.currentTarget) {
@@ -23,18 +38,35 @@ export default function ModalContas({ titulo, setModal }) {
     }
 
     async function handleSubmit() {
-        if (dados) {
-            const responseG = await api.post(`/economigos/contas`, {
-                banco: banco.value,
-                numeroConta : 0,
-                descricao: descricao.value,
-                apelido: apelido.value,
-                idUsuario: dados.usuario.id,
-            })
-            if (await responseG.status === 201) {
-                toast.success("Conta cadastrada com sucesso")
-            } else {
-                toast.error("Erro ao cadastrar a Conta")
+        if (edit) {
+            if (dados) {
+                const responseG = await api.put(`/economigos/contas/${idConta}`, {
+                    banco: banco.value,
+                    numeroConta: 0,
+                    descricao: descricao.value,
+                    apelido: apelido.value,
+                    idUsuario: dados.usuario.id,
+                })
+                if (await responseG.status === 200) {
+                    toast.success("Conta atualizada com sucesso")
+                } else {
+                    toast.error("Erro ao atualizar Conta")
+                }
+            }
+        }else{
+            if (dados) {
+                const responseG = await api.post(`/economigos/contas`, {
+                    banco: banco.value,
+                    numeroConta: 0,
+                    descricao: descricao.value,
+                    apelido: apelido.value,
+                    idUsuario: dados.usuario.id,
+                })
+                if (await responseG.status === 201) {
+                    toast.success("Conta cadastrada com sucesso")
+                } else {
+                    toast.error("Erro ao cadastrar a Conta")
+                }
             }
         }
         reload()
@@ -52,6 +84,16 @@ export default function ModalContas({ titulo, setModal }) {
         setModal(false)
     }
 
+    function atualizar() {
+        handleSubmit()
+        setModal(false)
+    }
+
+    function deletar() {
+        handleDelete()
+        setModal(false)
+    }
+
     return (
         <G.WrapperModal onClick={handleOutsideClick}>
             <G.Modal type={"RECEITA"} largura={30} altura={45} marginLeft={35} marginTop={15}>
@@ -62,7 +104,7 @@ export default function ModalContas({ titulo, setModal }) {
                         <span className="divInput">
                             <Input
                                 className="inputWidth"
-                                label="banco"
+                                label="Banco"
                                 {...banco} />
                         </span>
                         <span className="divInput">
@@ -83,10 +125,17 @@ export default function ModalContas({ titulo, setModal }) {
                         </span>
                     </div>
                 </form>
-                <G.GroupButtonsModal style={{ marginLeft: "2%" }}>
-                    <G.Button onClick={cadastar} style={{ padding: "0" }} color="#32A287">Adicionar</G.Button>
-                    <G.SimpleButton onClick={continuarCadastrando} color="#32A287">Adicionar e continuar cadastrando</G.SimpleButton>
-                </G.GroupButtonsModal>
+                {edit ?
+                    <G.GroupButtonsModal style={{ width: "96%", marginLeft: "2%", justifyContent: "space-between" }}>
+                        <G.Button onClick={atualizar} style={{ padding: "0" }} color="#32A287">Atualizar</G.Button>
+                        <G.Button onClick={deletar} style={{ padding: "0" }} color="#A23232">Excluir</G.Button>
+                    </G.GroupButtonsModal>
+                    :
+                    <G.GroupButtonsModal style={{ marginLeft: "2%" }}>
+                        <G.Button onClick={cadastar} style={{ padding: "0" }} color="#32A287">Adicionar</G.Button>
+                        <G.SimpleButton onClick={continuarCadastrando} color="#32A287">Adicionar e continuar cadastrando</G.SimpleButton>
+                    </G.GroupButtonsModal>
+                }
             </G.Modal>
         </G.WrapperModal>
     )

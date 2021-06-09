@@ -93,7 +93,7 @@ export default function Metas() {
                                     <S.Cards style={metasFinalizadas.length > 4 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
                                         {
                                             metasFinalizadas.map(itemMeta => (
-                                                <CardMetas key={itemMeta.id} nome={itemMeta.nome} urlImage={Meta} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
+                                                <CardMetas idMeta={itemMeta.id} key={itemMeta.id} nome={itemMeta.nome} urlImage={Meta} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
                                             ))
                                         }
                                     </S.Cards>
@@ -108,7 +108,7 @@ export default function Metas() {
                                     <S.Cards style={metasInativas.length > 4 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
                                         {
                                             metasInativas.map(itemMeta => (
-                                                <CardMetas key={itemMeta.id} nome={itemMeta.nome} urlImage={Meta} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
+                                                <CardMetas idMeta={itemMeta.id} key={itemMeta.id} nome={itemMeta.nome} urlImage={Meta} valorFinal={itemMeta.valorFinal} valorInicial={itemMeta.valorAtual} />
                                             ))
                                         }
                                     </S.Cards>
