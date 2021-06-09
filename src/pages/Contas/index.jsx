@@ -78,6 +78,7 @@ export default function Contas() {
             const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
         }
     }
+    
     function ultimosMeses(response) {
         let gastos = []
         let receitas = []
