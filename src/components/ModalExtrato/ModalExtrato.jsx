@@ -29,8 +29,7 @@ export default function ModalExtrato({ color, modal, setModal }) {
     async function fetchLancamentos() {
         if (dados) {
             const response = await api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
-            console.log("response: " + response)
-            setLancamentos(response.data)
+            setLancamentos(response.data.contabilUltimasAtividadesDtos)
         }
     }
 
@@ -42,13 +41,13 @@ export default function ModalExtrato({ color, modal, setModal }) {
                         <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
                         <S.h1>Extratos</S.h1>
                         <HeaderExtrato />
-                        <S.GroupAtividades style={lancamentos.length > 5 && { overflowY: "scroll" }}>
+                        <S.GroupAtividades style={lancamentos.length > 5 ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
                             {lancamentos.length > 0 ?
                                 lancamentos.sort((a, b) => b.id - a.id).map(lanc => (
                                     count++ % 2 == 0 ?
-                                        <LancamentoExtrato descricao={lanc.descricao == "" ? lanc.tipo : lanc.descricao} data={lanc.data.split(" ")[0].replaceAll("-", "/")} categoria={lanc.categoria} BackGrey />
+                                        <LancamentoExtrato key={lanc.id} descricao={lanc.descricao == "" ? lanc.tipo : lanc.descricao} data={lanc.data.split(" ")[0].replaceAll("-", "/")} categoria={lanc.categoria} BackGrey />
                                         :
-                                        <LancamentoExtrato descricao={lanc.descricao == "" ? lanc.tipo : lanc.descricao} data={lanc.data.split(" ")[0].replaceAll("-", "/")} categoria={lanc.categoria} />
+                                        <LancamentoExtrato key={lanc.id} descricao={lanc.descricao == "" ? lanc.tipo : lanc.descricao} data={lanc.data.split(" ")[0].replaceAll("-", "/")} categoria={lanc.categoria} />
                                 ))
                                 :
                                 <GreyPig mensagem="Você não possui Lançamentos" />

@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom';
 import { formatCurrency, formatDateMain } from '../../utils/utils';
 
 
-export default function TelaLateralApp({ fechar, contas, lancamentos, gastos, receitas }) {
+export default function TelaLateralApp({ fechar, contas, lancamentos }) {
 
     const { dados } = React.useContext(UserContext);
     const [saldo, setSaldo] = React.useState(null);
@@ -30,19 +30,6 @@ export default function TelaLateralApp({ fechar, contas, lancamentos, gastos, re
             const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
             setSaldo(response.data.valorAtual)
         }
-    }
-
-    async function juntarLancamentos(receitas, gastos) {
-        let lanc = [];
-
-        if (gastos != null && gastos.length > 0) {
-            gastos.map(gasto => (lanc.push(gasto)))
-        }
-        if (receitas != null && receitas.length > 0) {
-            receitas.map(receita => (lanc.push(receita)))
-        }
-
-        setLancamentos(lanc.sort((a, b) => b.id - a.id));
     }
 
     return (
@@ -60,38 +47,38 @@ export default function TelaLateralApp({ fechar, contas, lancamentos, gastos, re
                         <div className="contas">
                             <div className="titulo">
                                 <span>{location.pathname == "/app/painel" ? "Contas" : "Saldo"}</span>
-                                <img style={location.pathname == "/app/painel" ? {display: "block"} : {display: "none"}} src={BotaoAdicionar} alt="" />
+                                <img style={location.pathname == "/app/painel" ? { display: "block" } : { display: "none" }} src={BotaoAdicionar} alt="" />
                             </div>
                             {location.pathname == "/app/painel" && contas ?
-                                    (<Carousel itemsToShow={1} itemPadding={[5, 5, 5, 5]} showArrows={false}>
-                                      {contas.map(conta => (
+                                (<Carousel itemsToShow={1} itemPadding={[5, 5, 5, 5]} showArrows={false}>
+                                    {contas.map(conta => (
                                         <CartaoContas key={conta.id} nomeConta={conta.apelido} saldo={conta.valorAtual} negativo={Number(conta.valorAtual) < 0 ? true : false} />
-                                      ))}
-                                      </Carousel>)
-                                    :
-                                    <CartaoContas nomeConta={"Saldo Total"} saldo={saldo} negativo={Number(saldo) < 0 ? true : false} />}
+                                    ))}
+                                </Carousel>)
+                                :
+                                <CartaoContas nomeConta={"Saldo Total"} saldo={saldo} negativo={Number(saldo) < 0 ? true : false} />}
                             <div className="ultimaAtividades">
                                 <div className="titulo"><span>Últimas Atividades</span></div>
                                 <div className="listaDeUltimasAtividades" style={lancamentos.length > 4 ? { overflowY: "scroll" } : { overflow: "hidden" }}>
                                     {lancamentos.length > 0 && lancamentos ?
                                         lancamentos.sort((a, b) => b.id - a.id).map(lanc => (
-                                            lanc.tipo == "Renda"?
+                                            lanc.tipo == "Renda" ?
                                                 <Lancamento
-                                                  key={lanc.descricao}
-                                                  urlImage={Cifrao}
-                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Renda"}
-                                                  data={formatDateMain(lanc.data)}
-                                                  valor={formatCurrency(lanc.valor)} receita />
+                                                    key={lanc.descricao}
+                                                    urlImage={Cifrao}
+                                                    titulo={lanc.descricao !== "" ? lanc.descricao : "Renda"}
+                                                    data={formatDateMain(lanc.data)}
+                                                    valor={formatCurrency(lanc.valor)} receita />
                                                 :
                                                 <Lancamento
-                                                  key={lanc.id}
-                                                  urlImage={Alimentacao}
-                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Gasto"}
-                                                  data={formatDateMain(lanc.data)}
-                                                  valor={formatCurrency(lanc.valor)} />
+                                                    key={lanc.id}
+                                                    urlImage={Alimentacao}
+                                                    titulo={lanc.descricao !== "" ? lanc.descricao : "Gasto"}
+                                                    data={formatDateMain(lanc.data)}
+                                                    valor={formatCurrency(lanc.valor)} />
                                         ))
                                         :
-                                        <GreyPig style={{marginTop: "35px"}} height="40" mensagem="Você não possui atividades!" />
+                                        <GreyPig style={{ marginTop: "35px" }} height="40" mensagem="Você não possui atividades!" />
                                     }
                                 </div>
                             </div>
