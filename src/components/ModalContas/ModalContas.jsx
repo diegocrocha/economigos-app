@@ -72,6 +72,18 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
         reload()
     }
 
+    async function handleDelete() {
+        if (dados) {
+            const responseG = await api.delete(`/economigos/contas/${idConta}`)
+            if (await responseG.status === 200) {
+                toast.success("Conta deletada com sucesso")
+            } else {
+                toast.error("Erro ao deletar conta")
+            }
+        }
+        reload()
+    }
+
     function continuarCadastrando() {
         handleSubmit()
         banco.value = ""
