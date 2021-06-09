@@ -9,7 +9,7 @@ export default function OpcoesAcessoRapido({ nome, cor, click}) {
 
     function icone() {
         switch (nome) {
-            case "Receitas":
+            case "Rendas":
                 return <IconeDinheiro cor={cor}/>;
             case "Gastos":
                 return <IconeDinheiro cor={cor}/>;

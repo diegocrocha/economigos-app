@@ -81,14 +81,14 @@ export default function TelaLateralApp({ fechar, contas, gastos, receitas }) {
                                                 <Lancamento
                                                   key={lanc.id}
                                                   urlImage={Cifrao}
-                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Receita"}
+                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Renda"}
                                                   data={formatDateMain(lanc.dataPagamento)}
                                                   valor={formatCurrency(lanc.valor)} receita />
                                                 :
                                                 <Lancamento
                                                   key={lanc.id}
                                                   urlImage={Alimentacao}
-                                                  titulo={lanc.descricao !== "" ? lanc.descricao : lanc.categoria}
+                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Gasto"}
                                                   data={formatDateMain(lanc.dataPagamento)}
                                                   valor={formatCurrency(lanc.valor)} />
                                         ))

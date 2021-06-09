@@ -8,8 +8,9 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 import InputReal from '../Form/InputReal';
 import { today } from '../../utils/utils';
+import "../../styles/style-toasty.css";
 
-export default function ModalContabil({type, color, modal, setModal}) {
+export default function ModalContabil({ type, color, modal, setModal }) {
   const valor = useForm()
   const data = useForm()
   const descricao = useForm()
@@ -103,18 +104,18 @@ export default function ModalContabil({type, color, modal, setModal}) {
   }
 
   function handleOutsideClick(event) {
-    if(event.target === event.currentTarget) {
-        setModal(false);
+    if (event.target === event.currentTarget) {
+      setModal(false);
     }
   }
 
-    return (
-      <>
-        {modal &&
+  return (
+    <>
+      {modal &&
         <G.WrapperModal onClick={handleOutsideClick}>
           <G.Modal type={type}>
             <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
-            <h1>{type == "RECEITA" ? "Nova Receita" : "Novo Gasto"}</h1>
+            <h1>{type == "RECEITA" ? "Nova Renda" : "Novo Gasto"}</h1>
             <form className="wrapperInputs">
               <div className="groupInputs">
               <Input
@@ -150,11 +151,11 @@ export default function ModalContabil({type, color, modal, setModal}) {
                 </div>
                 </form>
                 <G.GroupButtonsModal>
-                  <G.Button color={color} onClick={cadastrar}>Adicionar</G.Button>
-                  <G.SimpleButton onClick={handleSubmit} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
+                  <G.Button disabled={valor.validate() && descricao.validate()} color={color} onClick={cadastrar}>Adicionar</G.Button>
+                  <G.SimpleButton disabled={valor.validate() && descricao.validate()} onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}
-      </>
-    )
+    </>
+  )
 }

@@ -53,16 +53,16 @@ export default function Appi() {
         <S.Appi>
             <MenusApp />
             <TelaCentralApp>
-            <Routes>
-                <Route path="painel" element={<Painel />} />
-                <Route path="contas" element={<Contas />} />
-                <Route path="cartoes" element={<Cartoes/>} />
-                <Route path="metas" element={<Metas/>} />]
-                <Route path="perfil" element={<Perfil/>} />
-            </Routes>
+                <Routes>
+                    <Route path="painel" element={<Painel />} />
+                    <Route path="contas" element={<Contas />} />
+                    <Route path="cartoes" element={<Cartoes />} />
+                    <Route path="metas" element={<Metas />} />
+                <Route path="perfil" element={<Perfil />} />
+                </Routes>
             </TelaCentralApp>
             <S.BtnFecharTela onClick={() => alterarBtn()} src={olho ? OlhoFechado : OlhoAberto}></S.BtnFecharTela>
-            <TelaLateralApp fechar={ativo} contas={contas} gastos={gastos} receitas={receitas}/>
+            <TelaLateralApp fechar={ativo} contas={contas} gastos={gastos} receitas={receitas} />
         </S.Appi>
     )
 }

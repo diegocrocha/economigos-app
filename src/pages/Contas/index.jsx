@@ -1,5 +1,6 @@
 import React from 'react'
 import api from "../../services/api";
+import filesApi from '../../services/filesApi';
 import { UserContext } from '../../hooks/UserContext'
 import * as S from "./style";
 import ItemTab from "../../components/ItemTab/ItemTab";
@@ -18,7 +19,7 @@ import ContaC6 from '../../assets/tmp/conta-c6.svg'
 import Head from '../../components/Helper/Head'
 import { formatCurrency, formatDateMain } from '../../utils/utils';
 import { getBank } from '../../services/banks';
-import ModalContabil from '../../components/ModalContabil/ModalContabil';
+import ModalContas from '../../components/ModalContas/ModalContas';
 
 export default function Contas() {
 
@@ -30,6 +31,7 @@ export default function Contas() {
     const [listaOrdenada, setListaOrdenada] = React.useState([]);
     const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
     const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
+    const [modal, setModal] = React.useState(false)
 
     React.useEffect(() => {
         fetchContas();
@@ -79,36 +81,45 @@ export default function Contas() {
     async function fetchDataDash() {
         if (ativo) {
             const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`);
-            let gastos = []
-            let receitas = []
-            let gastosComValorZero = 0;
-            let receitasComValorZero = 0;
-
-            for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
-                gastos.push({
-                    x: response.data[0].valorMensalDtos[j].mes,
-                    y: response.data[0].valorMensalDtos[j].valor
-                })
-                response.data[0].valorMensalDtos[j].valor == 0 ? gastosComValorZero++ : gastosComValorZero;
-            }
-            for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
-                receitas.push({
-                    x: response.data[1].valorMensalDtos[j].mes,
-                    y: response.data[1].valorMensalDtos[j].valor
-                })
-                response.data[1].valorMensalDtos[j].valor == 0 ? receitasComValorZero++ : receitasComValorZero;
-            }
-
-            if (gastosComValorZero == 3) {
-                gastos = 0
-            }
-            if (receitasComValorZero == 3) {
-                gastos = 0
-            }
-
-            setMesesAnterioresReceitas(receitas);
-            setMesesAnterioresGastos(gastos);
+            ultimosMeses(response)
         }
+    }
+
+    async function fetchExport() {
+        if (ativo, dados) {
+          const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
+        }
+      }
+    function ultimosMeses(response) {
+        let gastos = []
+        let receitas = []
+        let gastosComValorZero = 0;
+        let receitasComValorZero = 0;
+
+        for (let j = response.data[0].valorMensalDtos.length - 1; j >= 0; j--) {
+            gastos.push({
+                x: response.data[0].valorMensalDtos[j].mes,
+                y: response.data[0].valorMensalDtos[j].valor
+            })
+            response.data[0].valorMensalDtos[j].valor == 0 ? gastosComValorZero++ : gastosComValorZero;
+        }
+        for (let j = response.data[1].valorMensalDtos.length - 1; j >= 0; j--) {
+            receitas.push({
+                x: response.data[1].valorMensalDtos[j].mes,
+                y: response.data[1].valorMensalDtos[j].valor
+            })
+            response.data[1].valorMensalDtos[j].valor == 0 ? receitasComValorZero++ : receitasComValorZero;
+        }
+
+        if (gastosComValorZero == 3) {
+            gastos = 0
+        }
+        if (receitasComValorZero == 3) {
+            receitas = 0
+        }
+
+        setMesesAnterioresReceitas(receitas);
+        setMesesAnterioresGastos(gastos);
     }
 
     function ordenarLista() {
@@ -128,9 +139,10 @@ export default function Contas() {
 
     return (
         <S.Contas className="animeRight">
-          <Head title="Contas" />
+            {modal && <ModalContas setModal={setModal} titulo={"Nova Conta"} />}
+            <Head title="Contas" />
             <G.GroupMenu>
-                <G.ImgBtnAdicionar src={BotaoAdicionar} alt="" />
+                <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
                 <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
                     {contasT && contasT.map(conta => (
@@ -149,8 +161,8 @@ export default function Contas() {
             <S.InfoItemSelected>
                 <S.GroupInfosContaCartao>
                     <p>Saldo da Conta</p>
-                    <div style={{ color:  (detalheConta && detalheConta.valorAtual >= 0 ? "#32A287" : "#A23232")}}>
-                      R$<span>{detalheConta ? formatCurrency(detalheConta.valorAtual) : "0,00"}</span></div>
+                    <div style={{ color: (detalheConta && detalheConta.valorAtual >= 0 ? "#32A287" : "#A23232") }}>
+                        R$<span>{detalheConta ? formatCurrency(detalheConta.valorAtual) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
                 <S.GroupInfosContaCartao>
                     <p>Gasto da Conta</p>
@@ -166,7 +178,7 @@ export default function Contas() {
                 {detalheConta == null || listaOrdenada.length == 0 ?
                     (
                         <S.GroupAtividades style={{ overflowY: "none" }}>
-                            <GreyPig mensagem="Você não possui atividades registradas!"/>
+                            <GreyPig mensagem="Você não possui atividades registradas!" />
                         </S.GroupAtividades>
                     )
                     :
@@ -176,23 +188,23 @@ export default function Contas() {
                                 {listaOrdenada.map(itemList => (
                                     itemList.recebido ?
                                         <Lancamento
-                                          key={itemList.id}
-                                          urlImage={Cifrao}
-                                          titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"}
-                                          data={formatDateMain(itemList.dataPagamento)}
-                                          valor={formatCurrency(itemList.valor)}
-                                          receita />
+                                            key={itemList.id}
+                                            urlImage={Cifrao}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Renda"}
+                                            data={formatDateMain(itemList.dataPagamento)}
+                                            valor={formatCurrency(itemList.valor)}
+                                            receita />
                                         :
                                         <Lancamento
-                                          key={itemList.id}
-                                          urlImage={Alimentacao}
-                                          titulo={itemList.descricao !== "" ? itemList.descricao : itemList.categoria}
-                                          data={formatDateMain(itemList.dataPagamento)}
-                                          valor={formatCurrency(itemList.valor)} />
+                                            key={itemList.id}
+                                            urlImage={Alimentacao}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Gasto"}
+                                            data={formatDateMain(itemList.dataPagamento)}
+                                            valor={formatCurrency(itemList.valor)} />
                                 ))}
                             </S.GroupAtividades>
                             <div className="DownloadUltimasAtividades">
-                                <div>
+                                <div onClick={fetchExport}>
                                     Download Histórico
                                     <img src={Download} alt="" />
                                 </div>
@@ -211,7 +223,7 @@ export default function Contas() {
                     (
                         <>
                             <S.GroupAtividades style={{ overflowY: "none" }}>
-                                <GreyPig mensagem="Você não possui lançamentos registrados!"/>
+                                <GreyPig mensagem="Você não possui lançamentos registrados!" />
                             </S.GroupAtividades>
                         </>
                     )
