@@ -27,7 +27,6 @@ export default function GastosPorCategoria({ dataCategorias, preenchido }) {
         for (let i = 0; i < dataCategorias.length; i++) {
             total += dataCategorias[i].soma;
         }
-        console.log(total)
         setSomas(total)
     }
 

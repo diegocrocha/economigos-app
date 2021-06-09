@@ -9,7 +9,7 @@ export default function MenuAcessoRapido() {
   const [modalR, setModalR] = React.useState(false);
   const [modalT, setModalT] = React.useState(false);
   const [modalG, setModalG] = React.useState(false);
-  const [modalE, setModalE] = React.useState(false);
+  const [modalE, setModalE] = React.useState(false)
 
   return (
     <S.MenuAcessoRapido>
