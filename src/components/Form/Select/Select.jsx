@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from "./style"
 
-export const Select = ({options, label, value, setValue, className, type, ...props}) => {
+export const Select = ({options, label, value, setValue, className, type, setIsCredito, ...props}) => {
   const [opt, setOpt] = React.useState([])
 
   React.useEffect(() => {
@@ -16,6 +16,7 @@ export const Select = ({options, label, value, setValue, className, type, ...pro
           break
         case "BANKS":
           t = "apelido"
+          break
         default:
           t = "name"
           break
@@ -31,8 +32,8 @@ export const Select = ({options, label, value, setValue, className, type, ...pro
             })
           } else {
             aux.push({
-              value: op.id,
-              name: op.nome + " (Crédito)"
+              value: op.id + "C",
+              name: op.nome + " (Crédito)",
             })
           }
         })
@@ -52,9 +53,23 @@ export const Select = ({options, label, value, setValue, className, type, ...pro
     }
   }, [])
 
+  function handleChange({target}) {
+    if (type === "BANKS") {
+      console.log("é gasto")
+      if (target.value.indexOf("C") > -1) {
+        console.log("é cartao")
+        setIsCredito(true)
+      } else {
+        console.log("nao é cartao")
+        setIsCredito(false)
+      }
+    }
+    setValue(target.value)
+  }
+
     return (
       <S.SelectContainer className={className}>
-        <S.Select {...props} value={value} onChange={({target}) => setValue(target.value)}>
+        <S.Select {...props} value={value} onChange={handleChange}>
                <option value='' disabled>Selecione</option>
                {opt.length > 0 && opt.map(option =>
                     <option
