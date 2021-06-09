@@ -65,7 +65,7 @@ export function getBanks() {
   }, {
     id: 15,
     name: "Outro",
-    path: "banks/outro.svg"
+    path: "banks/outros.svg"
   }, {
     id: 16,
     name: "Carteira",

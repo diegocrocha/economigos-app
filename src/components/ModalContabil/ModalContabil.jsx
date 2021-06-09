@@ -20,6 +20,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
   const [contas, setContas] = React.useState(null)
   const [cartoes, setCartoes] = React.useState(null)
   const [banks, setBanks] = React.useState([])
+  const [isCartao, setIsCartao] = React.useState(false)
 
   const { dados, reload } = React.useContext(UserContext);
 
@@ -41,7 +42,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
     if (dados) {
       const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
       const responseC = await api.get(`/economigos/categorias`)
-      setCategorias(await responseC.data)
+      setCategorias(filterCategoria(responseC.data))
       setContas(await response.data.contaDtos);
       setCartoes(await response.data.cartaoDtos);
       setConta(await response.data.contaDtos[0].id)
@@ -49,8 +50,22 @@ export default function ModalContabil({ type, color, modal, setModal }) {
     }
   }
 
+  function filterCategoria(list) {
+    let newArray;
+    if (type == "RECEITA") {
+      newArray = list.filter(json => json.tipo === "R")
+    } else {
+      newArray = list.filter(json => json.tipo === "G")
+    }
+    return newArray
+  }
+
   function filter() {
-    setBanks(contas.concat(cartoes))
+    let a = contas
+    cartoes.map(cartao => {
+      a.push(cartao)
+    })
+    setBanks(a)
   }
 
 
@@ -75,10 +90,15 @@ export default function ModalContabil({ type, color, modal, setModal }) {
           }
           break;
         case "GASTO":
+          let json = isCartao ? {
+            idCartao: filterC(conta)
+          } : {
+            idConta: conta
+          }
           const responseG = await api.post(`/economigos/gastos`, {
-            idConta: conta,
+            ...json,
             idCategoria: categoria,
-            gastoCartao: false,
+            gastoCartao: isCartao,
             valor: Number(valor.value),
             pago: true,
             descricao: descricao.value,
@@ -96,6 +116,10 @@ export default function ModalContabil({ type, color, modal, setModal }) {
       valor.setValue(0.00)
       reload()
     }
+  }
+
+  function filterC(id) {
+    return Number(id.replace("C", ''))
   }
 
   function cadastrar() {
@@ -138,6 +162,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
                 type={type == "RECEITA" ? "CONTAS" : "BANKS"}
                 setValue={setConta}
                 value={conta}
+                setIsCredito={setIsCartao}
                 id="contas"
                 label="Conta"
                 options={type == "RECEITA" ? contas : banks}/>
@@ -151,8 +176,8 @@ export default function ModalContabil({ type, color, modal, setModal }) {
                 </div>
                 </form>
                 <G.GroupButtonsModal>
-                  <G.Button disabled={valor.validate() && descricao.validate()} color={color} onClick={cadastrar}>Adicionar</G.Button>
-                  <G.SimpleButton disabled={valor.validate() && descricao.validate()} onClick={continuarCadastrando} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
+                  <G.Button disabled={false} color={color} onClick={cadastrar}>Adicionar</G.Button>
+                  <G.SimpleButton disabled={false} onClick={handleSubmit} color={color}>Adicionar e continuar cadastrando</G.SimpleButton>
                 </G.GroupButtonsModal>
           </G.Modal>
         </G.WrapperModal>}

@@ -7,6 +7,8 @@ import useForm from '../../hooks/useForm'
 import { UserContext } from '../../hooks/UserContext';
 import { toast } from 'react-toastify';
 import "../../styles/style-toasty.css";
+import { Select } from '../Form/Select/Select';
+import { getBanks } from '../../services/banks';
 
 export default function ModalContas({ titulo, setModal, edit, idConta }) {
 
@@ -14,7 +16,8 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
     const apelido = useForm()
     const descricao = useForm()
     const banco = useForm()
-    console.log("idConta" + idConta)
+    const [ativa, setAtiva] = React.useState(true);
+    const [banks, setBanks] = React.useState(getBanks())
 
     if (edit) {
         React.useEffect(() => {
@@ -114,10 +117,13 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
                 <form className="wrapperInputs">
                     <div className="groupInputs">
                         <span className="divInput">
-                            <Input
-                                className="inputWidth"
-                                label="Banco"
-                                {...banco} />
+                          <Select
+                            setValue={banco.setValue}
+                            value={banco.value}
+                            id="banks"
+                            label="Categoria"
+                            options={banks}
+                          />
                         </span>
                         <span className="divInput">
                             <Input
