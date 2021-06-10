@@ -5,6 +5,7 @@ export const HeaderIconeNotification = styled.svg`
     height: 60%;
     margin-right: 1%;
     cursor: pointer;
+    opacity: 0;
 
     &:hover{
         filter: drop-shadow(0px 1px 2px grey)

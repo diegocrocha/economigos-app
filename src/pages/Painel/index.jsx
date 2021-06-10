@@ -31,6 +31,7 @@ function Painel() {
   async function fetchGastos() {
     if (dados) {
       const response = await api.get(`/economigos/categorias/porcentagem-gastos?idUsuario=${dados.usuario.id}`)
+      
       setCategorias(response.data)
     }
   }

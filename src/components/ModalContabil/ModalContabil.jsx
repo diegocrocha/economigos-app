@@ -102,7 +102,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
             valor: Number(valor.value),
             pago: true,
             descricao: descricao.value,
-            fixo: false,
+            fixo: true,
             dataPagamento: data.value
           })
           if (await responseG.status === 201) {
