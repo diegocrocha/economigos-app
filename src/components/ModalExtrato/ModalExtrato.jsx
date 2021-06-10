@@ -59,7 +59,7 @@ export default function ModalExtrato({ color, modal, setModal }) {
                             }
                         </S.GroupAtividades>
                         <G.GroupButtonsModal>
-                            <G.Button color={"rgb(50,162,135)"}> <link rel="stylesheet" href="https://saude.abril.com.br/wp-content/uploads/2018/12/cachorro-livro.png" download/> Download</G.Button>
+                            <G.Button color={"rgb(50,162,135)"}> <a href="" download>Download</a></G.Button>
                         </G.GroupButtonsModal>
                     </G.Modal>
                 </G.WrapperModal>

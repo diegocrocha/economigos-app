@@ -19,7 +19,8 @@ export const ItemListaCategoria = styled.li`
 
     span{
         font-weight: 600;
-        color: ${props => props.color}
+        color: ${props => props.color};
+        white-space: nowrap
     }
 
 
