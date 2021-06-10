@@ -11,7 +11,7 @@ import ItemUltimasAtividades from '../../components/ItemUltimasAtividades/ItemUl
 import GreyPig from '../../components/GreyPig/GreyPig';
 import Head from '../../components/Helper/Head'
 import ModalCartoes from '../../components/ModalCartoes/ModalCartoes';
-import { formatCurrency, formatDateFull } from '../../utils/utils';
+import { formatCurrency, formatDateFull, formatDateFullIso, formatDateMain } from '../../utils/utils';
 import Edit from "../../assets/edit.svg"
 
 export default function Cartoes() {

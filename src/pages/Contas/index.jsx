@@ -195,7 +195,7 @@ export default function Contas() {
                                     itemList.recebido ?
                                         <Lancamento
                                             key={itemList.id}
-                                            urlImage={Cifrao}
+                                            urlImage={require(`../../assets/${itemList.categoria.path}`).default}
                                             titulo={itemList.descricao !== "" ? itemList.descricao : "Renda"}
                                             data={formatDateMain(itemList.dataPagamento)}
                                             valor={formatCurrency(itemList.valor)}
@@ -203,7 +203,7 @@ export default function Contas() {
                                         :
                                         <Lancamento
                                             key={itemList.id}
-                                            urlImage={Alimentacao}
+                                            urlImage={require(`../../assets/${itemList.categoria.path}`).default}
                                             titulo={itemList.descricao !== "" ? itemList.descricao : "Gasto"}
                                             data={formatDateMain(itemList.dataPagamento)}
                                             valor={formatCurrency(itemList.valor)} />

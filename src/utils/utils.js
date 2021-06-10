@@ -29,6 +29,15 @@ export function formatDateFull(data) {
     );
 }
 
+export function formatDateFullIso(data) {
+  let date = new Date(data)
+  return format (
+    parseISO(date),
+      "dd 'de' MMMM 'de' yyyy",
+      { locale: pt }
+  )
+}
+
 // retorna a data de hoje no padrão ISO | Ex: 2021-06-10
 
 export function today() {
