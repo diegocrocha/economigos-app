@@ -33,6 +33,11 @@ export default function ModalExtrato({ color, modal, setModal }) {
         }
     }
 
+    // function downloadExtrato() {
+        
+    //     api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
+    // }
+
     return (
         <>
             {modal &&
@@ -54,7 +59,7 @@ export default function ModalExtrato({ color, modal, setModal }) {
                             }
                         </S.GroupAtividades>
                         <G.GroupButtonsModal>
-                            <G.Button color={"rgb(50,162,135)"}>Download</G.Button>
+                            <G.Button color={"rgb(50,162,135)"}> <link rel="stylesheet" href="https://saude.abril.com.br/wp-content/uploads/2018/12/cachorro-livro.png" download/> Download</G.Button>
                         </G.GroupButtonsModal>
                     </G.Modal>
                 </G.WrapperModal>
