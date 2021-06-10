@@ -155,7 +155,7 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
         <G.WrapperModal onClick={handleOutsideClick}>
             <G.Modal type={"RECEITA"} largura={30} altura={45} marginLeft={35} marginTop={15}>
                 <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
-                <h1 id="teste" >{titulo}</h1>
+                <h1>{titulo}</h1>
                 <form className="wrapperInputs">
                     <div className="groupInputs">
                         <span className="divInput">

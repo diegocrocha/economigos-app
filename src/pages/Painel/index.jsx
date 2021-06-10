@@ -10,10 +10,10 @@ import Head from '../../components/Helper/Head';
 
 function Painel() {
   const { dados } = React.useContext(UserContext);
-  const [ saldo, setSaldo ] = React.useState(null);
-  const [ categorias, setCategorias ] = React.useState([]);
-  const [ mesesAnterioresReceitas, setMesesAnterioresReceitas ] = React.useState([]);
-  const [ mesesAnterioresGastos, setMesesAnterioresGastos ] = React.useState([]);
+  const [saldo, setSaldo] = React.useState(null);
+  const [categorias, setCategorias] = React.useState([]);
+  const [mesesAnterioresReceitas, setMesesAnterioresReceitas] = React.useState([]);
+  const [mesesAnterioresGastos, setMesesAnterioresGastos] = React.useState([]);
 
   React.useEffect(() => {
     fetchDataDash()
@@ -31,7 +31,7 @@ function Painel() {
   async function fetchGastos() {
     if (dados) {
       const response = await api.get(`/economigos/categorias/porcentagem-gastos?idUsuario=${dados.usuario.id}`)
-      
+
       setCategorias(response.data)
     }
   }
@@ -64,13 +64,13 @@ function Painel() {
   return (
     <S.Painel className="animeRight">
       <Head title="Painel" />
-      <SaldoTotal  saldo={saldo}/>
+      <SaldoTotal saldo={saldo} />
       <GastosPorCategoria preenchido={categorias != null && categorias.length > 0 ? true : false} dataCategorias={categorias} />
       <BalancoMensal
         isEmpty={mesesAnterioresReceitas.length > 0
           && mesesAnterioresGastos.length > 0
-          && mesesAnterioresReceitas.map(({y}) => Number(y)).reduce((a,b) => a + b) +
-          mesesAnterioresGastos.map(({y}) => Number(y)).reduce((a,b) => a + b) == 0}
+          && mesesAnterioresReceitas.map(({ y }) => Number(y)).reduce((a, b) => a + b) +
+          mesesAnterioresGastos.map(({ y }) => Number(y)).reduce((a, b) => a + b) == 0}
         dataReceitas={mesesAnterioresReceitas}
         dataGastos={mesesAnterioresGastos}
       />
