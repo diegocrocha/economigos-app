@@ -41,16 +41,16 @@ export default function Contas() {
     }, [dados]);
 
     React.useEffect(() => {
-        function generateJson() {
-            let accounts = []
-            contas.map(conta => {
-                let bank = getBank(conta.banco)
-                bank.idB = conta.id
-                bank.apelido = conta.apelido
-                accounts.push(bank)
-            })
-            setContasT(accounts)
-        }
+      function generateJson() {
+        let accounts = []
+        contas.map(conta => {
+          let bank = getBank(conta.banco)
+          bank.idB = conta.id
+          bank.apelido = conta.apelido
+          accounts.push(bank)
+        })
+        setContasT(accounts)
+      }
         if (contas.length > 0) {
             setAtivo(contas[0].id)
             generateJson()
@@ -92,7 +92,7 @@ export default function Contas() {
             const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
         }
     }
-
+    
     function ultimosMeses(response) {
         let gastos = []
         let receitas = []
@@ -143,22 +143,20 @@ export default function Contas() {
     return (
         <S.Contas className="animeRight">
             {modal && <ModalContas setModal={setModal} titulo={"Nova Conta"} />}
-            {modalEdit && <ModalContas idConta={ativo} setModal={setModalEdit} titulo={"Atualizar Conta"} edit />}
+            {modalEdit && <ModalContas idConta={ativo} setModal={setModalEdit} titulo={"Atualizar Conta"} edit/>}
             <Head title="Contas" />
             <G.GroupMenu>
                 <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
                 <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
                 <G.TabLayout id="TabLayout">
                     {contasT && contasT.map(conta => (
-                        <Tooltip title={conta.descricao}>
-                            <ItemTab
-                                imgItem={conta.image.default}
-                                setAtivo={setAtivo}
-                                active={ativo}
-                                key={conta.idB}
-                                idItemTab={conta.idB}
-                                nome={conta.apelido} />
-                        </Tooltip>
+                        <ItemTab
+                          imgItem={conta.image.default}
+                          setAtivo={setAtivo}
+                          active={ativo}
+                          key={conta.idB}
+                          idItemTab={conta.idB}
+                          nome={conta.apelido} />
                     ))}
                 </G.TabLayout>
                 <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
@@ -174,7 +172,7 @@ export default function Contas() {
                     <p>Gasto da Conta</p>
                     <div style={{ color: "#A23232" }}>R$<span>{detalheConta ? formatCurrency(detalheConta.totalGastos) : "0,00"}</span></div>
                 </S.GroupInfosContaCartao>
-                <img src={Edit} alt="" className="buttonEdit" onClick={() => setModalEdit(true)} />
+                <img src={Edit} alt="" className="buttonEdit" onClick={() => setModalEdit(true)}/>
             </S.InfoItemSelected>
 
             <S.UltimasAtividades>
