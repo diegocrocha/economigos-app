@@ -14,7 +14,6 @@ export default function GroupBarChart({ dataReceitas, dataGastos }) {
             }}
             labelComponent={<VictoryTooltip />}
             width={dataReceitas.length == 3 || dataGastos.length == 3 ? 600 : 900}
-        // height={dataReceitas.length == 3 ? 400 : 800}
         >
             <VictoryAxis
                 key="x-axis"
