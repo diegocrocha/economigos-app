@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MenuAcessoRapido = styled.div`
   z-index: 99;
-    width: 573px;
+    width: 70%;
     height: 15%;
     margin-top: 5%;
     margin-left: 15%;

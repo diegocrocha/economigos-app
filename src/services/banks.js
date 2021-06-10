@@ -1,5 +1,3 @@
-
-
 function generateImage(path) {
   const image = require(`../assets/${path}`)
   return image;

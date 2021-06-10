@@ -21,6 +21,7 @@ import { formatCurrency, formatDateMain } from '../../utils/utils';
 import { getBank } from '../../services/banks';
 import ModalContas from '../../components/ModalContas/ModalContas';
 import Edit from "../../assets/edit.svg"
+import Tooltip from '../../components/Helper/Tooltip/Tooltip';
 
 export default function Contas() {
 
