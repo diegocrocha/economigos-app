@@ -88,8 +88,9 @@ export default function Contas() {
     }
 
     async function fetchExport() {
-        if (ativo, dados) {
-            const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
+        if (dados) {
+            window.open(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
+            // const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
         }
     }
     

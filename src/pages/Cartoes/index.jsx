@@ -12,13 +12,16 @@ import GreyPig from '../../components/GreyPig/GreyPig';
 import Head from '../../components/Helper/Head'
 import ModalCartoes from '../../components/ModalCartoes/ModalCartoes';
 import { formatCurrency, formatDateFull } from '../../utils/utils';
+import Edit from "../../assets/edit.svg"
 
 export default function Cartoes() {
-    const [modal, setModal] = React.useState(false)
     const { dados } = React.useContext(UserContext)
     const [ativo, setAtivo] = React.useState(null)
     const [cartoes, setCartoes] = React.useState([])
-    const [detalheCartao, setDetalheCartao] = React.useState(null);
+    const [detalheCartao, setDetalheCartao] = React.useState([]);
+    const [gastosCartao, setGastosCartao] = React.useState([]);
+    const [modal, setModal] = React.useState(false)
+    const [modalEdit, setModalEdit] = React.useState(false)
     let counts = 0;
 
     React.useEffect(() => {
@@ -37,8 +40,8 @@ export default function Cartoes() {
 
     async function fetchCartoes() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-            setCartoes(response.data.cartaoDtos);
+            const response = await api.get(`/economigos/cartoes?idUsuario=${dados.usuario.id}`);
+            setCartoes(response.data);
         }
     }
 
@@ -46,124 +49,127 @@ export default function Cartoes() {
         if (ativo) {
             const response = await api.get(`/economigos/cartoes/${ativo}`);
             setDetalheCartao(response.data);
+            setGastosCartao(response.data.gastos)
         }
     }
 
     return (
-      <>
-      {!ativo && <ModalSemCartao setModal={setModal} />}
-      {modal &&
-       <ModalCartoes
-        modal={modal}
-        setModal={setModal} />
-       }
-      <S.CartoesWrapper className={!ativo ? "animeRight blur" : "animeRight"}>
-          <Head title="Cartões"/>
-            <G.GroupMenu style={{height: "23%"}}>
-                <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
-                <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
-                <G.TabLayout id="TabLayout">
-                {cartoes && cartoes.map(cartao => (
-                        <ItemTab
-                          setAtivo={setAtivo}
-                          active={ativo}
-                          key={cartao.id}
-                          idItemTab={cartao.id}
-                          nome={cartao.nome} />
-                    ))}
-                </G.TabLayout>
-                <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
-            </G.GroupMenu>
-            <S.InfoCartao>
-                <G.GroupInfosContaCartao>
-                    <p>Limite do Cartão</p>
-                    {detalheCartao ?
-                        <div style={{color:"#32A287"}}>R$<span>{formatCurrency(detalheCartao.limite)}</span></div>
-                        :
-                        <div>---------</div>
-                    }
-                </G.GroupInfosContaCartao>
-                <G.GroupInfosContaCartao>
-                    <p>Fatura Atual</p>
-                    {detalheCartao ?
-                        <div style={{color:"#A23232"}}>R$<span>{formatCurrency(detalheCartao.valor)}</span></div>
-                        :
-                        <div>---------</div>
-                    }
-                </G.GroupInfosContaCartao>
-            </S.InfoCartao>
-            <S.DetalhesCartao>
-                <div>
-                    <p>Vencimento da Fatura</p>
-                    {detalheCartao ?
-                        <p>{formatDateFull(detalheCartao.vencimento)}</p>
-                        :
-                        <p>---------</p>
-                    }
-
-                </div>
-                <div>
-                    <p>Status do mês</p>
-                    {detalheCartao ?
-                        <p style={detalheCartao.pago ? {color:"#32A287"} : {color:"#A23232"}}>{detalheCartao.pago ? "Pago" : "Não Pago"}</p>
-                        :
-                        <p>---------</p>
-                    }
-
-                </div>
-                <div>
-                    <p>Fechamento da fatura</p>
-                    {detalheCartao ?
-                        <p>{formatDateFull(detalheCartao.fechamento)}</p>
-                        :
-                        <p>---------</p>
-                    }
-                </div>
-            </S.DetalhesCartao>
-
-            <S.UltimasAtividades>
-                <p className="titulo">Últimas Atividades</p>
-
-                <div
-                  style={detalheCartao && detalheCartao.gastos.lenght > 4 ? {overflow: "hidden scroll"} : {overflow: "hidden"}}
-                  className="conjuntoItensUltimasAtividades">
-                    {
-                        detalheCartao && detalheCartao.gastos.lenght > 0 ?
-                        detalheCartao.gastos.map(gasto => (
-
-                            counts++ % 2 == 0 ?
-                            <ItemUltimasAtividades
-                              data={gasto.dataPagamento}
-                              descricao={gasto.descricao}
-                              categoria={gasto.categoria}/>
+        <>
+            {cartoes.length == 0 && <ModalSemCartao setModal={setModal} />}
+            {modal &&
+                <ModalCartoes
+                    modal={modal}
+                    setModal={setModal} />
+            }
+            {modalEdit && <ModalCartoes idCartao={ativo} setModal={setModalEdit} edit/>}
+            <S.CartoesWrapper className={!ativo ? "animeRight blur" : "animeRight"}>
+                <Head title="Cartões" />
+                <G.GroupMenu style={{ height: "23%" }}>
+                    <G.ImgBtnAdicionar src={BotaoAdicionar} onClick={() => setModal(true)} alt="" />
+                    <G.ImgBtnAnterior onClick={() => document.getElementById("TabLayout").scrollLeft -= 80} src={SetaProximo} alt="" />
+                    <G.TabLayout id="TabLayout">
+                        {cartoes && cartoes.map(cartao => (
+                            <ItemTab
+                                setAtivo={setAtivo}
+                                active={ativo}
+                                key={cartao.id}
+                                idItemTab={cartao.id}
+                                nome={cartao.nome} />
+                        ))}
+                    </G.TabLayout>
+                    <G.ImgBtnProximo onClick={() => document.getElementById("TabLayout").scrollLeft += 80} src={SetaProximo} alt="" />
+                </G.GroupMenu>
+                <S.InfoCartao>
+                    <G.GroupInfosContaCartao>
+                        <p>Limite do Cartão</p>
+                        {detalheCartao ?
+                            <div style={{ color: "#32A287" }}>R$<span>{formatCurrency(Number(detalheCartao.limite))}</span></div>
                             :
-                            <ItemUltimasAtividades
-                              data={gasto.dataPagamento}
-                              descricao={gasto.descricao}
-                              categoria={gasto.categoria} BackGrey/>
-                        ))
-                        :
-                        <GreyPig mensagem="Você não possui atividades!"/>
-                    }
-                </div>
-            </S.UltimasAtividades>
-        </S.CartoesWrapper>
+                            <div>---------</div>
+                        }
+                    </G.GroupInfosContaCartao>
+                    <G.GroupInfosContaCartao>
+                        <p>Fatura Atual</p>
+                        {detalheCartao ?
+                            <div style={{ color: "#A23232" }}>R$<span>{formatCurrency(Number(detalheCartao.valor))}</span></div>
+                            :
+                            <div>---------</div>
+                        }
+                    </G.GroupInfosContaCartao>
+                    <img src={Edit} alt="" className="buttonEdit" onClick={() => setModalEdit(true)}/>
+                </S.InfoCartao>
+                <S.DetalhesCartao>
+                    <div>
+                        <p>Vencimento da Fatura</p>
+                        {detalheCartao ?
+                            <p>{detalheCartao.vencimento}</p>
+                            :
+                            <p>---------</p>
+                        }
+
+                    </div>
+                    <div>
+                        <p>Status do mês</p>
+                        {detalheCartao ?
+                            <p style={detalheCartao.pago ? { color: "#32A287" } : { color: "#A23232" }}>{detalheCartao.pago ? "Pago" : "Não Pago"}</p>
+                            :
+                            <p>---------</p>
+                        }
+
+                    </div>
+                    <div>
+                        <p>Fechamento da fatura</p>
+                        {detalheCartao ?
+                            <p>{detalheCartao.fechamento}</p>
+                            :
+                            <p>---------</p>
+                        }
+                    </div>
+                </S.DetalhesCartao>
+
+                <S.UltimasAtividades>
+                    <p className="titulo">Últimas Atividades</p>
+
+                    <div
+                        style={gastosCartao.length > 4 ? { overflow: "hidden scroll" } : { overflow: "hidden" }}
+                        className="conjuntoItensUltimasAtividades">
+                        {
+                            detalheCartao && gastosCartao.length > 0 ?
+                                gastosCartao.map(gasto => (
+
+                                    counts++ % 2 == 0 ?
+                                        <ItemUltimasAtividades
+                                            data={gasto.dataPagamento}
+                                            descricao={gasto.descricao}
+                                            categoria={gasto.categoria} />
+                                        :
+                                        <ItemUltimasAtividades
+                                            data={gasto.dataPagamento}
+                                            descricao={gasto.descricao}
+                                            categoria={gasto.categoria} BackGrey />
+                                ))
+                                :
+                                <GreyPig mensagem="Você não possui atividades!" />
+                        }
+                    </div>
+                </S.UltimasAtividades>
+            </S.CartoesWrapper>
         </>
-      )
+    )
 }
 
 
-function ModalSemCartao({setModal}) {
+function ModalSemCartao({ setModal }) {
 
-  return (
-    <G.SemWrapper>
-        <G.ModalSem>
-          <img src={Logo}/>
-          <p>Você não possui cartão</p>
-          <p>Adicione um cartão agora mesmo!</p>
-          <G.Button onClick={() => setModal(true)} color="#32A287">Adicionar cartão</G.Button>
-        </G.ModalSem>
-    </G.SemWrapper>
-  )
+    return (
+        <G.SemWrapper>
+            <G.ModalSem>
+                <img src={Logo} />
+                <p>Você não possui cartão</p>
+                <p>Adicione um cartão agora mesmo!</p>
+                <G.Button onClick={() => setModal(true)} color="#32A287">Adicionar cartão</G.Button>
+            </G.ModalSem>
+        </G.SemWrapper>
+    )
 
 }
