@@ -29,6 +29,10 @@ export const AlinhamentoIcones = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    
+    a {
+      height: 100%;
+    }
 `;
 
 export const HeaderAppImage = styled.img`

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const HeaderIconePerfil = styled.svg`
     width: auto;
-    height: 60%;
-    margin-top: 0.5%;
+    height: 70%;
+    margin-top: 20%;
     margin-right: 1%;
     margin-left: 1%;
     cursor: pointer;

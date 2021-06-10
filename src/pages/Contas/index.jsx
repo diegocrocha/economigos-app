@@ -91,7 +91,7 @@ export default function Contas() {
             const response = await filesApi.get(`economigos/files/export/${ativo}?idUsuario=${dados.usuario.id}&csvFile=false`)
         }
     }
-    
+
     function ultimosMeses(response) {
         let gastos = []
         let receitas = []
@@ -135,7 +135,7 @@ export default function Contas() {
                 listaOrdenada.push(detalheConta.gastos[Number(gasto)]);
             }
         }
-
+        console.log(listaOrdenada.sort((a, b) => b.id - a.id))
         setListaOrdenada(listaOrdenada.sort((a, b) => b.id - a.id));
     }
 
@@ -194,7 +194,7 @@ export default function Contas() {
                                         <Lancamento
                                             key={itemList.id}
                                             urlImage={Cifrao}
-                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Renda"}
+                                            titulo={itemList.descricao !== "" ? itemList.descricao : "Receita"}
                                             data={formatDateMain(itemList.dataPagamento)}
                                             valor={formatCurrency(itemList.valor)}
                                             receita />

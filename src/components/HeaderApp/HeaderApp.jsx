@@ -16,7 +16,6 @@ export default function HeaderApp() {
                 <SearchPrincipal/>
             </S.AlinhamentoSearch>
             <S.AlinhamentoIcones>
-                <Notificacoes/>
                 <NavLink to="/app/perfil">
                   <PerfilIcon/>
                 </NavLink>

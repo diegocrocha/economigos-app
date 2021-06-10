@@ -23,6 +23,7 @@ export default function TelaLateralApp({ fechar, contas, lancamentos, gastos, re
 
     React.useEffect(() => {
         fetchSaldo()
+        console.log(lancamentos)
     }, [dados, lancamentos]);
 
     async function fetchSaldo() {
@@ -79,14 +80,14 @@ export default function TelaLateralApp({ fechar, contas, lancamentos, gastos, re
                                                 <Lancamento
                                                   key={lanc.descricao}
                                                   urlImage={Cifrao}
-                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Renda"}
+                                                  titulo={lanc.descricao !== "" ? lanc.descricao : lanc.categoria}
                                                   data={formatDateMain(lanc.data)}
                                                   valor={formatCurrency(lanc.valor)} receita />
                                                 :
                                                 <Lancamento
                                                   key={lanc.id}
                                                   urlImage={Alimentacao}
-                                                  titulo={lanc.descricao !== "" ? lanc.descricao : "Gasto"}
+                                                  titulo={lanc.descricao !== "" ? lanc.descricao : lanc.categoria}
                                                   data={formatDateMain(lanc.data)}
                                                   valor={formatCurrency(lanc.valor)} />
                                         ))
