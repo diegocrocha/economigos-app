@@ -21,7 +21,7 @@ function Institucional() {
       <Head title="Institucional" />
       <S.Home>
         <Header />
-        <S.TitleHome><span style={{color: '#44CE6C'}}>Econo</span>migos</S.TitleHome>
+        <S.TitleHome><span style={{color: '#E8AD0C'}}>Econo</span>migos</S.TitleHome>
         <S.TextHome>A facilidade, organização e melhora financeira que você precisa!</S.TextHome>
         <Link to="/cadastro">
           <ButtonMain style={{width: '196px', height: '47px'}}>Cadastre-se</ButtonMain>
@@ -64,4 +64,3 @@ function Institucional() {
 }
 
 export default Institucional;
-
