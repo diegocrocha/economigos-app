@@ -40,8 +40,15 @@ export default function ModalContabil({ type, color, modal, setModal }) {
 
   async function fetchData() {
     if (dados) {
-      const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-      const responseC = await api.get(`/economigos/categorias`)
+      const token = dados.jwt;
+      const response = await api.get(`/economigos/usuarios/this`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+      const responseC = await api.get(`/economigos/categorias`, {headers: {
+        'Authorization': `Bearer ${token}`
+    }})
       setCategorias(filterCategoria(responseC.data))
       setContas(await response.data.contaDtos);
       setCartoes(await response.data.cartaoDtos);
@@ -71,6 +78,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
 
   async function handleSubmit() {
     if (dados) {
+      const token = dados.jwt;
       switch (type) {
         case "RECEITA":
           const response = await api.post(`/economigos/rendas`, {
@@ -82,7 +90,10 @@ export default function ModalContabil({ type, color, modal, setModal }) {
             descricao: descricao.value,
             fixo: false,
             dataPagamento: data.value
-          })
+          },
+          {headers: {
+            'Authorization': `Bearer ${token}`
+          }})
           if (await response.status === 201) {
             toast.success("Receita cadastrada com sucesso")
           } else {
@@ -104,7 +115,10 @@ export default function ModalContabil({ type, color, modal, setModal }) {
             descricao: descricao.value,
             fixo: true,
             dataPagamento: data.value
-          })
+          },
+          {headers: {
+            'Authorization': `Bearer ${token}`
+          }})
           if (await responseG.status === 201) {
             toast.success("Gasto cadastrado com sucesso")
           } else {

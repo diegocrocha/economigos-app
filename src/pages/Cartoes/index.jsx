@@ -40,16 +40,22 @@ export default function Cartoes() {
 
     async function fetchCartoes() {
         if (dados) {
-            const response = await api.get(`/economigos/cartoes?idUsuario=${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/cartoes`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setCartoes(response.data);
         }
     }
 
     async function fetchData() {
         if (ativo) {
-            const response = await api.get(`/economigos/cartoes/${ativo}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/cartoes/${ativo}`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setDetalheCartao(response.data);
-            setGastosCartao(response.data.gastos)
+            setGastosCartao(response.data.gastos);
         }
     }
 

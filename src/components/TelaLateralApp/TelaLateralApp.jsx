@@ -27,7 +27,10 @@ export default function TelaLateralApp({ fechar, contas, lancamentos }) {
 
     async function fetchSaldo() {
         if (dados) {
-            const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
+            const token = dados.jwt;
+            const response = await api.get(`economigos/usuarios/this`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }})
             setSaldo(response.data.valorAtual)
         }
     }

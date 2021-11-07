@@ -26,15 +26,17 @@ export default function ModalCartoes({ modal, setModal, edit, idCartao }) {
 
   async function handleSubmit() {
     if (dados) {
+      const token = dados.jwt;
       const response = await api.post(`/economigos/cartoes`, {
-        idUsuario: dados.usuario.id,
         nome: apelido.value,
         fechamento: fechamento.value,
         vencimento: vencimento.value,
         pago: statusMes.value,
         limite: Number(limitCard.value)
-
-      })
+      },
+      {headers: {
+        'Authorization': `Bearer ${token}`
+    }})
       if (await response.status === 201) {
         toast.success("Cartão cadastrado com sucesso")
       } else {

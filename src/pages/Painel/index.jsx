@@ -23,14 +23,20 @@ function Painel() {
 
   async function fetchSaldo() {
     if (dados) {
-      const response = await api.get(`economigos/usuarios/${dados.usuario.id}`)
+      const token = dados.jwt;
+      const response = await api.get(`economigos/usuarios/this`, {headers: {
+        'Authorization': `Bearer ${token}`
+    }})
       setSaldo(response.data.valorAtual)
     }
   }
 
   async function fetchGastos() {
     if (dados) {
-      const response = await api.get(`/economigos/categorias/porcentagem-gastos?idUsuario=${dados.usuario.id}`)
+      const token = dados.jwt;
+      const response = await api.get(`/economigos/categorias/porcentagem-gastos`, {headers: {
+        'Authorization': `Bearer ${token}`
+    }})
 
       setCategorias(response.data)
     }
@@ -38,7 +44,10 @@ function Painel() {
 
   async function fetchDataDash() {
     if (dados) {
-      const response = await api.get(`economigos/usuarios/${dados.usuario.id}/ultimos-meses`);
+      const token = dados.jwt;
+      const response = await api.get(`economigos/usuarios/ultimos-meses`, {headers: {
+        'Authorization': `Bearer ${token}`
+    }});
 
       let gastos = []
       let receitas = []

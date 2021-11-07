@@ -16,7 +16,7 @@ export default function Cadastro() {
   const senha = useForm("senha")
   const confirmar = useForm("senha")
 
-  const {userLogin, loading, login} = React.useContext(UserContext);
+  const {dados, userLogin, loading, login} = React.useContext(UserContext);
 
   if (login) {
     navigate('../app/painel', { replace: true })

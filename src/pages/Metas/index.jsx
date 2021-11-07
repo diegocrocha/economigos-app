@@ -34,7 +34,10 @@ export default function Metas() {
 
     async function fetchMetas() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/usuarios/this`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setMetas(response.data.metaDtos);
         }
     }

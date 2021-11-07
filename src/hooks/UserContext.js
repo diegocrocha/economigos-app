@@ -18,7 +18,7 @@ export const UserStorage = ({ children }) => {
         window.localStorage.removeItem("autenticado")
         window.localStorage.removeItem('email')
         window.localStorage.removeItem('senha')
-        await api.get("economigos/sessao/logout")
+        window.localStorage.removeItem('token')
     }, [])
 
     async function userLogin(email, password) {
@@ -26,7 +26,7 @@ export const UserStorage = ({ children }) => {
             setError(null);
             setLoading(true);
             const userData = await api
-                .post("economigos/sessao/login", {
+                .post("economigos/sessao/authenticate", {
                     email: email,
                     senha: password
                 })
@@ -36,6 +36,7 @@ export const UserStorage = ({ children }) => {
             setLogin(true);
             localStorage.setItem("email", email);
             localStorage.setItem("senha", password);
+            localStorage.setItem("token", data.jwt);
         } catch (err) {
             setError(err.message)
             setLogin(false);
@@ -52,18 +53,19 @@ export const UserStorage = ({ children }) => {
     async function autoLogin() {
       const email = window.localStorage.getItem('email');
       const senha = window.localStorage.getItem('senha');
+      const token = window.localStorage.getItem('token');
 
-      if (email && senha) {
+      if (token) {
           try {
               setError(null);
               setLoading(true);
-              // const response = await user.get('/VALIDATE_JWT', {
-              //     headers: {
-              //         'Authorization': `Bearer ${token}`
-              //     }
-              // })
-              // if (response.status !== 200) throw new Error('Token inválido');
-              // getUser(email);
+              const response = await user.get('/economigos/sessao/verificar', {
+                   headers: {
+                       'Authorization': `Bearer ${token}`
+                   }
+               })
+               if (response.status !== 200) throw new Error('Token inválido');
+               getUser(email);
               userLogin(email,senha);
           } catch (error) {
               userLogout();

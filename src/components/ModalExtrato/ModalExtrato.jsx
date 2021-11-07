@@ -28,7 +28,10 @@ export default function ModalExtrato({ color, modal, setModal }) {
 
     async function fetchLancamentos() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/usuarios/lancamentos`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setLancamentos(response.data.contabilUltimasAtividadesDtos)
         }
     }
