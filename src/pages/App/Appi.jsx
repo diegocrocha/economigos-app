@@ -29,14 +29,20 @@ export default function Appi() {
 
     async function fetchContas() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/usuarios/this`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setContas(await response.data.contaDtos);
         }
     }
 
     async function fetchLancamentos() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/lancamentos?idUsuario=${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/usuarios/lancamentos`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setLancamentos(response.data.contabilUltimasAtividadesDtos)
         }
     }

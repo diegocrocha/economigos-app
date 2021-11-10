@@ -68,21 +68,30 @@ export default function Contas() {
 
     async function fetchContas() {
         if (dados) {
-            const response = await api.get(`/economigos/contas?idUsuario=${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/contas`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setContas(await response.data);
         }
     }
 
     async function fetchData() {
         if (ativo) {
-            const response = await api.get(`/economigos/contas/${ativo}?idUsuario=${dados.usuario.id}`);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/contas/${ativo}`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             setDetalheConta(response.data);
         }
     }
 
     async function fetchDataDash() {
         if (ativo) {
-            const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`);
+            const token = dados.jwt;
+            const response = await api.get(`economigos/contas/${ativo}/ultimos-meses`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
             ultimosMeses(response)
         }
     }

@@ -15,8 +15,11 @@ export default function MenusApp() {
 
     async function fetchNome() {
         if (dados) {
-            const response = await api.get(`/economigos/usuarios/${dados.usuario.id}`);
-            setNome(await response.data.nome);
+            const token = dados.jwt;
+            const response = await api.get(`/economigos/usuarios/this`, {headers: {
+                'Authorization': `Bearer ${token}`
+            }});
+            setNome(await response.data.email);
         }
     }
 

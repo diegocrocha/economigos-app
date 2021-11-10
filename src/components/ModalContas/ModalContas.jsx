@@ -26,7 +26,10 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
 
         async function fetchContas() {
             if (dados) {
-                const response = await api.get(`/economigos/contas/${idConta}?idUsuario=${dados.usuario.id}`);
+                const token = dados.jwt;
+                const response = await api.get(`/economigos/contas/${idConta}`, {headers: {
+                    'Authorization': `Bearer ${token}`
+                }});
                 banco.setValue(response.data.banco);
                 apelido.setValue(response.data.apelido);
                 descricao.setValue(response.data.descricao);
@@ -43,13 +46,16 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
     async function handleSubmit() {
         if (edit) {
             if (dados) {
+                const token = dados.jwt;
                 const responseG = await api.put(`/economigos/contas/${idConta}`, {
                     banco: banco.value,
                     numeroConta: 0,
                     descricao: descricao.value,
-                    apelido: apelido.value,
-                    idUsuario: dados.usuario.id,
-                })
+                    apelido: apelido.value
+                },
+                {headers: {
+                    'Authorization': `Bearer ${token}`
+                }})
                 if (await responseG.status === 200) {
                     toast.success("Conta atualizada com sucesso")
                 } else {
@@ -58,13 +64,16 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
             }
         } else {
             if (dados) {
+                const token = dados.jwt;
                 const responseG = await api.post(`/economigos/contas`, {
                     banco: banco.value,
                     numeroConta: 0,
                     descricao: descricao.value,
-                    apelido: apelido.value,
-                    idUsuario: dados.usuario.id,
-                })
+                    apelido: apelido.value
+                },
+                {headers: {
+                    'Authorization': `Bearer ${token}`
+                }})
                 if (await responseG.status === 201) {
                     toast.success("Conta cadastrada com sucesso")
                 } else {
@@ -77,7 +86,11 @@ export default function ModalContas({ titulo, setModal, edit, idConta }) {
 
     async function handleDelete() {
         if (dados) {
-            const responseG = await api.delete(`/economigos/contas/${idConta}`)
+            const token = dados.jwt;
+            const responseG = await api.delete(`/economigos/contas/${idConta}`, 
+            {headers: {
+                'Authorization': `Bearer ${token}`
+            }})
             if (await responseG.status === 200) {
                 toast.success("Conta deletada com sucesso")
             } else {

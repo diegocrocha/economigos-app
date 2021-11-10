@@ -15,6 +15,7 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
     const valorInicial = useForm()
     const valorFinal = useForm()
     const nome = useForm()
+    const dataFinal = useForm()
     const [ativa, setAtiva] = React.useState(true);
 
     if (edit) {
@@ -24,9 +25,13 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
 
         async function fetchMeta() {
             if (dados) {
-                const response = await api.get(`/economigos/metas/${idMeta}`);
+                const token = dados.jwt;
+                const response = await api.get(`/economigos/metas/${idMeta}`, {headers: {
+                    'Authorization': `Bearer ${token}`
+                }});
                 nome.setValue(response.data.nome);
                 valorFinal.setValue(response.data.valorFinal);
+                dataFinal.setValue(response.data.dataFinal);
                 if (response.data.valorAtual != null) {
                     valorInicial.setValue(response.data.valorAtual);
                 } else {
@@ -45,15 +50,19 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
 
     async function handleSubmit() {
         if (dados) {
+            const token = dados.jwt;
             if (edit) {
                 const responseG = await api.put(`/economigos/metas/${idMeta}`, {
-                    idUsuario: dados.usuario.id,
                     nome: nome.value,
                     descricao: "",
                     metaGasto: false,
                     valorAtual: Number(valorInicial.value) >= Number(valorFinal.value) ? finalizar() : Number(valorInicial.value),
-                    valorFinal: Number(valorFinal.value)
-                })
+                    valorFinal: Number(valorFinal.value),
+                    dataFinal: dataFinal.value
+                },
+                {headers: {
+                    'Authorization': `Bearer ${token}`
+                }})
                 if (await responseG.status === 200) {
                     toast.success("Meta atualizada com sucesso")
                 } else {
@@ -65,13 +74,16 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
                 }
                 else{
                     const responseG = await api.post(`/economigos/metas`, {
-                        idUsuario: dados.usuario.id,
                         nome: nome.value,
                         descricao: "",
                         metaGasto: false,
                         valorAtual: Number(valorInicial.value),
-                        valorFinal: Number(valorFinal.value)
-                    })
+                        valorFinal: Number(valorFinal.value),
+                        dataFinal: dataFinal.value
+                    },
+                    {headers: {
+                        'Authorization': `Bearer ${token}`
+                    }})
                     if (await responseG.status === 201) {
                         toast.success("Meta cadastrada com sucesso")
                     } else {
@@ -93,6 +105,7 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
         nome.value = ""
         valorInicial.value = 0.00
         valorFinal.value = 0.00
+        dataFinal.value = ""
     }
 
     function cadastar() {
@@ -179,6 +192,13 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
                                 {...valorFinal} />
                         </span>
                         <span className="divInput">
+                            <Input
+                                label="Data Final"
+                                type="date"
+                                id="dataFinal"
+                                {...dataFinal} />
+                        </span>
+                        <span className="divInput">
                         </span>
                     </div>
                 </form>
@@ -190,8 +210,8 @@ export default function ModalMetas({ titulo, edit, setModal, idMeta }) {
                     </G.GroupButtonsModal>
                     :
                     <G.GroupButtonsModal style={{ marginLeft: "2%" }}>
-                        <G.Button disabled={valorFinal.value == 0 && valorInicial.value == 0 && nome.value == "" ? true : false} onClick={cadastar} style={{ padding: "0" }} color="#32A287">Adicionar</G.Button>
-                        <G.SimpleButton disabled={valorFinal.value == 0 && valorInicial.value == 0 && nome.value == "" ? true : false} onClick={continuarCadastrando} color="#32A287">Adicionar e continuar cadastrando</G.SimpleButton>
+                        <G.Button disabled={valorFinal.value == 0 && valorInicial.value == 0 && nome.value == "" && dataFinal.value == "" ? true : false} onClick={cadastar} style={{ padding: "0" }} color="#32A287">Adicionar</G.Button>
+                        <G.SimpleButton disabled={valorFinal.value == 0 && valorInicial.value == 0 && nome.value == "" && dataFinal.value == ""  ? true : false} onClick={continuarCadastrando} color="#32A287">Adicionar e continuar cadastrando</G.SimpleButton>
                     </G.GroupButtonsModal>
                 }
             </G.Modal>
