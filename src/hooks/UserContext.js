@@ -59,7 +59,7 @@ export const UserStorage = ({ children }) => {
           try {
               setError(null);
               setLoading(true);
-              const response = await user.get('/economigos/sessao/verificar', {
+              const response = await user.get('/economigos/usuarios/this', {
                    headers: {
                        'Authorization': `Bearer ${token}`
                    }
