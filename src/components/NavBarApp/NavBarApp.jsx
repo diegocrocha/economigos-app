@@ -64,7 +64,7 @@ export default function NavBarApp({ name }) {
 
   return (
     <S.Nav>
-      <S.Ola>Olá, {name}!</S.Ola>
+      <S.Ola>Olá, Economigo!</S.Ola>
       <ul>
         <ItemNav type="painel" />
         <ItemNav type="contas" />
