@@ -55,17 +55,17 @@ export const UserStorage = ({ children }) => {
       const senha = window.localStorage.getItem('senha');
       const token = window.localStorage.getItem('token');
 
-      if (token) {
+      if (email && senha) {
           try {
               setError(null);
               setLoading(true);
-              const response = await user.get('/economigos/usuarios/this', {
-                   headers: {
-                       'Authorization': `Bearer ${token}`
-                   }
-               })
-               if (response.status !== 200) throw new Error('Token inválido');
-               getUser(email);
+              // const response = await user.get('/economigos/usuarios/this', {
+              //      headers: {
+              //          'Authorization': `Bearer ${token}`
+              //      }
+              //  })
+              //  if (response.status !== 200) throw new Error('Token inválido');
+              // getUser(email);
               userLogin(email,senha);
           } catch (error) {
               userLogout();
