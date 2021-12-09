@@ -57,8 +57,8 @@ export const WrapperModal = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
-  top: 0px;
-  left: 0px;
+  top: -235px;
+  left: -445px;
   background-color: rgba(0,0,0,.8);
   display: flex;
   z-index: 1000!important;
