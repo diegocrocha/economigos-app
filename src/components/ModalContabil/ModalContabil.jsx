@@ -150,7 +150,7 @@ export default function ModalContabil({ type, color, modal, setModal }) {
   return (
     <>
       {modal &&
-        <G.WrapperModal onClick={handleOutsideClick}>
+        <G.WrapperModal style={{top: '0px', left: '0px'}} onClick={handleOutsideClick}>
           <G.Modal type={type}>
             <G.ButtonClose onClick={() => setModal(false)}>X</G.ButtonClose>
             <h1>{type == "RECEITA" ? "Nova Renda" : "Novo Gasto"}</h1>
