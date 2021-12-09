@@ -12,7 +12,7 @@ export const AlinhamentoLogo = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: left;
 `;
 
 export const AlinhamentoSearch = styled.div`
